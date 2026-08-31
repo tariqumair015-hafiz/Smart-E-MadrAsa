@@ -1,3 +1,4 @@
+// Smart e-Madarsa Web Application - Live Production Build
 import { App as CapApp } from '@capacitor/app';
 import OfflineImage from './OfflineImage';
 import React, { useEffect, useState, useRef, useMemo } from 'react'
