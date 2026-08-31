@@ -1,0 +1,8 @@
+﻿Scraping page 1: https://besturdubooks.net/dars-e-nizami/maoqoof-alai-7th-year/maoqoof-alai-text-books/
+  Added: AL Tibyan ╪º┘ä╪¬╪¿█î╪º┘å (6 vols)
+Scraping page 2: https://besturdubooks.net/dars-e-nizami/maoqoof-alai-7th-year/maoqoof-alai-text-books/page/2/
+  Added: AL Tibyan ╪º┘ä╪¬╪¿█î╪º┘å (6 vols)
+
+Total Textbooks extracted: 2
+  Updating Supabase...
+  Γ£à Successfully saved into Database!

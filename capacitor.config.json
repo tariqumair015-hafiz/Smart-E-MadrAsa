@@ -1,0 +1,20 @@
+{
+  "appId": "com.smartemadarsa.app",
+  "appName": "Smart e-Madarsa",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "allowNavigation": [
+      "archive.org",
+      "*.archive.org",
+      "cdnjs.cloudflare.com",
+      "api.dictionaryapi.dev",
+      "api.anthropic.com"
+    ]
+  },
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": true
+    }
+  }
+}

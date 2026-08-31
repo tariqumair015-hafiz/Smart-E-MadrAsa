@@ -1,0 +1,71 @@
+Finding target books...
+Found: [13811] کتاب ابو داؤد
+Found: [13829] کتاب شمائل ترمذی
+Found: [18923] کتاب بخاری شریف
+Found: [18926] کتاب صحیح مسلم
+Found: [20124] Dars e Falkiyat درس فلکیات
+Found: [20124] Dars e Falkiyat درس فلکیات
+Found: [16978] Badr un Nujoom Urdu Sharh Sullam ul Uloom بدر النجوم
+Found: [16978] Badr un Nujoom Urdu Sharh Sullam ul Uloom بدر النجوم
+Found: [16979] Bahrul Uloom Arabic Sharh Sullam ul Uloom بحرالعلوم
+Found: [16979] Bahrul Uloom Arabic Sharh Sullam ul Uloom بحرالعلوم
+Found: [16980] Zia un Nujoom Arabic Sharh Sullam ul Uloom ضیاء النجوم
+Found: [16980] Zia un Nujoom Arabic Sharh Sullam ul Uloom ضیاء النجوم
+Found: [16996] Masdar Us Sudoor Arabic Sharh Mulla Abdul Ghafoor
+Found: [16997] Majmooa e Mantiq مجموعہ منطق
+Found: [16997] Majmooa e Mantiq مجموعہ منطق
+Found: [16969] Al Tahreer ul Misalia Urdu التحریر المثالیہ فی حل الحاشیہ الخیالیہ
+Found: [16969] Al Tahreer ul Misalia Urdu التحریر المثالیہ فی حل الحاشیہ الخیالیہ
+Found: [16983] Qazi Mubarak Arbic Sharh Sullam ul Uloom القاضی
+Found: [16983] Qazi Mubarak Arbic Sharh Sullam ul Uloom القاضی
+Found: [15903] Tohfatul Mufti wal Qazi - تحفۃ المفتی و القاضی
+Found: [16991] Ashraf ul Marzi Urdu Sharh Maibazi اشرف المرضی
+Found: [16991] Ashraf ul Marzi Urdu Sharh Maibazi اشرف المرضی
+Updating 14 books to set cover_url to null...
+Update completed.
+
+Generating final list of books with NULL covers...
+--- Total Books with Missing Covers: 43 ---
+1. [ID: 13290] Fiqhi Tahqiqat By Mufti Muhammad Saqib Qasmi فقہی تحقیقات از مفتی محمد ثاقب صاحب قاسمی فتحپوری (نامعلوم) [Cat: null]
+2. [ID: 16814] Maulana Abul Mahasin Syed Muhammad Sajjad Bahaisiyat e Bani Jamiat Ulama e Hind – مولانا ابو المحاسن سید محمد سجاد بحیثیت بانی جمعیۃ علماء ہند (Mufti Akhtar Imam Adil Qasmi) [Cat: mufti-akhtar-imam-adil]
+3. [ID: 16816] Jamiat aur Sipah me Ikhtilaf Kion? By Maulana Muhammad Ishaq Bajauri جمعیت اور سپاہ میں اختلاف کیوں؟ (نامعلوم) [Cat: null]
+4. [ID: 19839] Al Siqaya Sharh Urdu Sharh ul Wiqaya Awwalainالسقایۃ اردو شرح شرح الوقایہ اولین (BestUrduBooks) [Cat: اردو شروحات]
+5. [ID: 19891] Al Qutbi القطبی  (BestUrduBooks) [Cat: درسی کتب]
+6. [ID: 19889] Tashrihaat Urdu Sharh Maqamatتشریحات اردو شرح مقامات  (BestUrduBooks) [Cat: اردو شروحات]
+7. [ID: 16979] Bahrul Uloom Arabic Sharh Sullam ul Uloom بحرالعلوم (نامعلوم) [Cat: null]
+8. [ID: 16983] Qazi Mubarak Arbic Sharh Sullam ul Uloom القاضی (نامعلوم) [Cat: null]
+9. [ID: 16991] Ashraf ul Marzi Urdu Sharh Maibazi اشرف المرضی (نامعلوم) [Cat: null]
+10. [ID: 16996] Masdar Us Sudoor Arabic Sharh Mulla Abdul Ghafoor (نامعلوم) [Cat: null]
+11. [ID: 20270] مشکوۃ المصابیح قدیمی کتب خانہ (نامعلوم) [Cat: درسی کتب]
+12. [ID: 20271] مشکوۃ المصابیح مکتبہ رحمانیہ (نامعلوم) [Cat: درسی کتب]
+13. [ID: 16969] Al Tahreer ul Misalia Urdu التحریر المثالیہ فی حل الحاشیہ الخیالیہ (نامعلوم) [Cat: null]
+14. [ID: 20741] Maujuda Halaat Mein Musalman Kiya Karen? By Allama Abul Hasan Ali Nadwi موجودہ حالات میں مسلمان کیا کریں؟ (Maulana Abul Hasan Ali Nadvi) [Cat: maulana-abul-hasan-ali-nadvi]
+15. [ID: 20742] Musalmano kay Masail o jazbaat By Allama Abul Hasan Ali Nadwi مسلمانوں کے مسائل و جذبات کو سمجھنے کی کوشش کیجئے (Maulana Abul Hasan Ali Nadvi) [Cat: maulana-abul-hasan-ali-nadvi]
+16. [ID: 13829] کتاب شمائل ترمذی (نامعلوم) [Cat: درسی کتب]
+17. [ID: 18952] انعام المعبود لطالبات سنن ابی داؤد اردو مولانا محبوب احمد صاحب (نامعلوم) [Cat: اردو شروحات]
+18. [ID: 16978] Badr un Nujoom Urdu Sharh Sullam ul Uloom بدر النجوم (نامعلوم) [Cat: null]
+19. [ID: 20278] کتاب تیسیر مصطلح الحدیث (نامعلوم) [Cat: درسی کتب]
+20. [ID: 20604] صحیح البخاری دیگر ایڈیشنز (نامعلوم) [Cat: درسی کتب]
+21. [ID: 20269] کتاب مشکاۃ المصابیح (نامعلوم) [Cat: درسی کتب]
+22. [ID: 21431] Fatawa Usmani By Mufti Taqi Usmani فتاوی عثمانی (Mufti Muhammad Taqi Usmani) [Cat: mufti-muhammad-taqi-usmani]
+23. [ID: 16393] Islahi Waqiat By Maulana Ala ud Din Qasmi اصلاحی واقعات (Maulana Ala ud Din Qasmi) [Cat: maulana-ala-ud-din-qasmi]
+24. [ID: 19903] Tasheel ul Aasaar Urdu Sharh Aasaar us Sunanتسھیل الآثار اردو شرح آثار السنن   (BestUrduBooks) [Cat: اردو شروحات]
+25. [ID: 16997] Majmooa e Mantiq مجموعہ منطق (نامعلوم) [Cat: null]
+26. [ID: 13811] کتاب ابو داؤد (نامعلوم) [Cat: درسی کتب]
+27. [ID: 16980] Zia un Nujoom Arabic Sharh Sullam ul Uloom ضیاء النجوم (نامعلوم) [Cat: null]
+28. [ID: 18923] کتاب بخاری شریف (نامعلوم) [Cat: درسی کتب]
+29. [ID: 18926] کتاب صحیح مسلم (نامعلوم) [Cat: درسی کتب]
+30. [ID: 15805] Wifaq Parcha Hal karne ka Tariqa, Usool امتحانی پرچہ حل کرنے کا طریقہ، ہدایات اور اصول (نامعلوم) [Cat: null]
+31. [ID: 15903] Tohfatul Mufti wal Qazi - تحفۃ المفتی و القاضی (نامعلوم) [Cat: null]
+32. [ID: 15559] Muqaddima Sahih Bukhari – مقدمہ صحیح بخاری (نامعلوم) [Cat: اردو شروحات]
+33. [ID: 20472] Tasheel us Siraji Urdu Sharh Siraji By Mufti Abu Lubaba Shah Mansoor تسھیل السراجی اردو شرح سراجی (Mufti Abu Lubaba Shah Mansoor) [Cat: mufti-abu-lubaba]
+34. [ID: 18928] صحیح مسلم شریف اردو مترجم (نامعلوم) [Cat: اردو شروحات]
+35. [ID: 15655] الهداية مع حديثها و اصولها مولانا ثمیر الدین قاسمی صاحب (نامعلوم) [Cat: درسی کتب]
+36. [ID: 18944] Mahasin e Tirmizi – محاسن ترمذی (BestUrduBooks) [Cat: اردو شروحات]
+37. [ID: 20124] Dars e Falkiyat درس فلکیات (BestUrduBooks) [Cat: درسی کتب]
+38. [ID: 20739] Khutbaat e Muslim Personal Law Board By Allama Abul Hasan Ali Nadwi خطبات مسلم پرسنل لا بورڈ (Maulana Abul Hasan Ali Nadvi) [Cat: maulana-abul-hasan-ali-nadvi]
+39. [ID: 20740] Muslim Personal Law aur Muslim Mumalik By Allama Abul Hasan Ali Nadwi مسلم پرسنل لا اور مسلم ممالک (Maulana Abul Hasan Ali Nadvi) [Cat: maulana-abul-hasan-ali-nadvi]
+40. [ID: 14392] Arkan e Arba’a By Maulana Abul Hasan Ali Nadvi ارکان اربعہ (Maulana Abul Hasan Ali Nadvi) [Cat: maulana-abul-hasan-ali-nadvi]
+41. [ID: 20468] Moeen us Siraji By Maulana Ilyas Bin Abdullah Gadhvi معین السراجی اردو (Maulana Ilyas Abdullah Gadhvi) [Cat: maulana-ilyas-gadhvi]
+42. [ID: 20975] Hazrat Shah Ismail Shaheed aur Muanideen Ahle Bidat kay Ilzamaat By Maulana Manzoor Nomani حضرت شاہ اسماعیل  شہید اور معاندین اہل بدعت کے الزامات (Maulana Manzoor Nomani) [Cat: maulana-manzoor-nomani]
+43. [ID: 20950] Qamoos ul Fiqh By Maulana Khalid Saifullah Rahmani قاموس الفقہ (Maulana Khalid Saifullah Rahmani) [Cat: maulana-khalid-saifullah]

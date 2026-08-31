@@ -1,0 +1,4 @@
+--- SIZE ANALYSIS ---
+192165 bytes: found 7 times.
+Examples: Bahrul Uloom Arabic Sharh Sullam ul Uloom بحرالعلوم, Majmooa e Mantiq مجموعہ منطق, Masdar Us Sudoor Arabic Sharh Mulla Abdul Ghafoor
+

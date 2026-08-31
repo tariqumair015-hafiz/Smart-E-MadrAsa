@@ -1,0 +1,25 @@
+﻿Scraping page 1: https://besturdubooks.net/dars-e-nizami/dora-e-hadith-books/dora-e-hadith-text-books/
+  Added: Sahih ul Bukhari┬á ╪╡╪¡┘è╪¡ ╪º┘ä╪¿╪«╪º╪▒┘è (30 vols)
+  Added: Sahih ul Bukhari Urdu ╪╡╪¡█î╪¡ ╪º┘ä╪¿╪«╪º╪▒█î ╪º╪▒╪»┘ê (8 vols)
+  Added: Mukhtasar Sahih Bukhari Urdu(Tajreed e Bukhari)┘à╪«╪¬╪╡╪▒ ╪╡╪¡█î╪¡ ╪¿╪«╪º╪▒█î ╪º╪▒╪»┘ê (2 vols)
+  Added: Al Sahih Li Muslim ╪╡╪¡█î╪¡ ┘à╪│┘ä┘à (56 vols)
+  Added: Sahih Muslim Urdu ╪╡╪¡█î╪¡ ┘à╪│┘ä┘à ╪º╪▒╪»┘ê (9 vols)
+  Added: Sahih Muslim Shareef Urdu╪╡╪¡█î╪¡ ┘à╪│┘ä┘à ╪┤╪▒█î┘ü ╪º╪▒╪»┘ê (9 vols)
+Scraping page 2: https://besturdubooks.net/dars-e-nizami/dora-e-hadith-books/dora-e-hadith-text-books/page/2/
+  Added: Sahih ul Bukhari┬á ╪╡╪¡┘è╪¡ ╪º┘ä╪¿╪«╪º╪▒┘è (30 vols)
+  Added: Sahih ul Bukhari Urdu ╪╡╪¡█î╪¡ ╪º┘ä╪¿╪«╪º╪▒█î ╪º╪▒╪»┘ê (8 vols)
+  Added: Mukhtasar Sahih Bukhari Urdu(Tajreed e Bukhari)┘à╪«╪¬╪╡╪▒ ╪╡╪¡█î╪¡ ╪¿╪«╪º╪▒█î ╪º╪▒╪»┘ê (2 vols)
+  Added: Al Sahih Li Muslim ╪╡╪¡█î╪¡ ┘à╪│┘ä┘à (56 vols)
+  Added: Sahih Muslim Urdu ╪╡╪¡█î╪¡ ┘à╪│┘ä┘à ╪º╪▒╪»┘ê (9 vols)
+  Added: Sahih Muslim Shareef Urdu╪╡╪¡█î╪¡ ┘à╪│┘ä┘à ╪┤╪▒█î┘ü ╪º╪▒╪»┘ê (9 vols)
+Scraping page 3: https://besturdubooks.net/dars-e-nizami/dora-e-hadith-books/dora-e-hadith-text-books/page/3/
+  Added: Sahih ul Bukhari┬á ╪╡╪¡┘è╪¡ ╪º┘ä╪¿╪«╪º╪▒┘è (30 vols)
+  Added: Sahih ul Bukhari Urdu ╪╡╪¡█î╪¡ ╪º┘ä╪¿╪«╪º╪▒█î ╪º╪▒╪»┘ê (8 vols)
+  Added: Mukhtasar Sahih Bukhari Urdu(Tajreed e Bukhari)┘à╪«╪¬╪╡╪▒ ╪╡╪¡█î╪¡ ╪¿╪«╪º╪▒█î ╪º╪▒╪»┘ê (2 vols)
+  Added: Al Sahih Li Muslim ╪╡╪¡█î╪¡ ┘à╪│┘ä┘à (56 vols)
+  Added: Sahih Muslim Urdu ╪╡╪¡█î╪¡ ┘à╪│┘ä┘à ╪º╪▒╪»┘ê (9 vols)
+  Added: Sahih Muslim Shareef Urdu╪╡╪¡█î╪¡ ┘à╪│┘ä┘à ╪┤╪▒█î┘ü ╪º╪▒╪»┘ê (9 vols)
+
+Total Textbooks extracted: 18
+  Updating Supabase...
+  Γ£à Successfully saved into Database!

@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-color: #080d16;
+  --nav-color: #0b1220;
+  --card-color: #0f1825;
+  --gold-color: #d4af37;
+  --green-color: #1a6b3a;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --divider-color: #1e2d45;
+  --gold-light: #f8e5a7;
+  --gold-dark: #b4831f;
+  --gold-mid: #e2c062;
+}
+
+body.light-theme {
+  --bg-color: #f5f0e8;
+  --nav-color: #ffffff;
+  --card-color: #ffffff;
+  --green-color: #1a6b3a;
+  --gold-color: #c29912; /* Vibrantly Golden for light theme */
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --gold-light: #fbe28a;
+  --gold-dark: #9a7b00;
+  --gold-mid: #d4a017;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden !important;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.theme-transition {
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+/* Only transition specific heavy elements manually if needed */
+.app-container, .top-bar, .bnav-shell, .card, .book-card, .scholar-tag {
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease, opacity 150ms ease;
+}
+
+@keyframes viewFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.urdu-text {
+  font-family: 'Amiri', 'Inter', serif;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  background-color: var(--bg-color);
+  position: relative;
+  overflow-x: hidden !important;
+  display: flex;
+  flex-direction: column;
+}

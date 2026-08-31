@@ -1,0 +1,75 @@
+[IMG 1] text: 
+  HTML: <strong><img fetchpriority="high" decoding="async" class="wp-image-10263 size-full aligncenter" title="Tafseer e Baizawi تفسیر بیضاوی مکمل" src="https://besturdubooks.files.wordpress.com/2015/02/tafseer-baizawi.jpg" alt="Tafseer e Baizawi تفسیر بیضاوی مکمل" width="186" height="300"></strong>
+  [PREV] text: Tafseer e Baizawi
+تفسیر بیضاوی مکمل
+  [PREV HTML] <strong>Tafseer e Baizawi<br>
+تفسیر بیضاوی مکمل</strong>
+  [NEXT] text: Read Online
+-------
+[IMG 2] text: 
+  HTML: <strong><img decoding="async" class="size-full wp-image-36186 aligncenter" src="https://besturdubooks.net/wp-content/uploads/2020/04/Tafseer-al-Baizawi-Al-Bushra.jpg" alt="Tafseer e Baizawi Al Bushra تفسیر بیضاوی البشری" width="200" height="300"></strong>
+  [PREV] text: Tafseer e Baizawi Al Bushra
+تفسیر بیضاوی
+  [PREV HTML] <strong>Tafseer e Baizawi Al Bushra<br>
+تفسیر بیضاوی&nbsp;</strong>
+  [NEXT] text: Al Bushra Color
+-------
+[IMG 3] text: 
+  HTML: <strong><img decoding="async" class="size-full wp-image-36188 aligncenter" src="https://besturdubooks.net/wp-content/uploads/2020/04/Tafseer-al-Baizawi-Meer-Muhammad.jpg" alt="Tafseer e Baizawi Meer Muhammad تفسیر بیضاوی" width="200" height="300"></strong>
+  [PREV] text: Tafseer e Baizawi Meer Muhammad
+تفسیر بیضاوی
+  [PREV HTML] <strong>Tafseer e Baizawi Meer Muhammad<br>
+تفسیر بیضاوی&nbsp;</strong>
+  [NEXT] text: Download (11MB)
+-------
+[IMG 4] text: 
+  HTML: <strong><img loading="lazy" decoding="async" class="size-full wp-image-36191 aligncenter" src="https://besturdubooks.net/wp-content/uploads/2020/04/Tafseer-al-Baizawi-Rahmania.jpg" alt="Tafseer e Baizawi Rahmania تفسیر بیضاوی" width="200" height="300"></strong>
+  [PREV] text: Tafseer e Baizawi Rahmania
+تفسیر بیضاوی
+  [PREV HTML] <strong>Tafseer e Baizawi Rahmania<br>
+تفسیر بیضاوی&nbsp;</strong>
+  [NEXT] text: Download (12MB)
+-------
+[IMG 5] text: 
+  HTML: <strong><img loading="lazy" decoding="async" class="size-full wp-image-36193 aligncenter" src="https://besturdubooks.net/wp-content/uploads/2020/04/Tafseer-al-Baizawi-Rashedia.jpg" alt="Tafseer e Baizawi Rashidia تفسیر بیضاوی" width="200" height="300"></strong>
+  [PREV] text: Tafseer e Baizawi Rashidia
+تفسیر بیضاوی
+  [PREV HTML] <strong>Tafseer e Baizawi Rashidia<br>
+تفسیر بیضاوی&nbsp;</strong>
+  [NEXT] text: Download (12MB)
+-------
+[IMG 6] text: 
+  HTML: <img loading="lazy" decoding="async" class="alignnone size-full wp-image-36202" src="https://besturdubooks.net/wp-content/uploads/2020/04/al-tibyan.jpg" alt="AL Tibyan التبیان" width="200" height="300">
+  [PREV] text: AL Tibyan التبیان
+  [PREV HTML] <strong>AL Tibyan التبیان<span class="titleLink"><br>
+</span></strong>
+  [NEXT] text: Al Bushra
+-------
+[IMG 7] text: 
+  HTML: <strong><img loading="lazy" decoding="async" class="size-full wp-image-36253 aligncenter" src="https://besturdubooks.net/wp-content/uploads/2020/04/Mishkat-al-Masabeeh-Al-Bushra.jpg" alt="Mishkat ul Masabih Al Bushra مشکوۃ المصابیح" width="200" height="300"></strong>
+  [PREV] text: Mishkat ul Masabih Al Bushra
+مشکوۃ المصابیح
+  [PREV HTML] <strong>Mishkat ul Masabih Al Bushra<br>
+مشکوۃ المصابیح</strong>
+  [NEXT] text: Read Online
+-------
+[IMG 8] text: 
+  HTML: <strong><img loading="lazy" decoding="async" class="wp-image-20925 size-full aligncenter" src="https://besturdubooks.net/wp-content/uploads/2017/07/MishkatUlMasabeehQademi.jpg" alt="Mishkat ul Masabih مشکوۃ المصابیح" width="186" height="300"></strong>
+  [PREV] text: Mishkat ul Masabih مشکوۃ المصابیح
+  [PREV HTML] <strong>Mishkat ul Masabih مشکوۃ المصابیح</strong>
+  [NEXT] text: Download (33MB)
+-------
+[IMG 9] text: 
+  HTML: <strong><img loading="lazy" decoding="async" class="size-full wp-image-36258 aligncenter" src="https://besturdubooks.net/wp-content/uploads/2020/04/Mishkar-al-Masabeeh-Rahmania.jpg" alt="Mishkat ul Masabeeh Rahmania مشکوۃ المصابیح رحمانیہ" width="200" height="300"></strong>
+  [PREV] text: Mishkat ul Masabih مشکوۃ المصابیح
+  [PREV HTML] <strong>Mishkat ul Masabih مشکوۃ المصابیح</strong>
+  [NEXT] text: Read Online
+-------
+[IMG 10] text: 
+  HTML: <strong><img loading="lazy" decoding="async" class="wp-image-5625 size-full aligncenter" title="Mishkat ul Masabeeh Urdu" src="http://besturdubooks.files.wordpress.com/2013/09/mishkat-ul-masabeeh-urdu.jpg?resize=186%2C300" alt="Mishkat ul Masabeeh Urdu" width="186" height="300" data-pagespeed-url-hash="1824247825"></strong>
+  [PREV] text: Mishkat ul Masabeeh Urdu
+مشکوۃ المصابیح اردو
+  [PREV HTML] <strong>Mishkat ul Masabeeh Urdu<br>
+مشکوۃ المصابیح اردو</strong>
+  [NEXT] text: Download Link 1
+-------

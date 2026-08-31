@@ -1,0 +1,1333 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+  position: relative;
+  padding-bottom: 96px;
+}
+
+/* --- More Drawer Styles --- */
+.more-drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.more-drawer {
+  background: linear-gradient(180deg, var(--nav-color) 0%, var(--bg-color) 100%);
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 32px 32px 0 0;
+  padding: 24px;
+  box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--divider-color);
+}
+
+.close-drawer-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.drawer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.drawer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 22px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--divider-color);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.drawer-item:hover,
+.drawer-item.active {
+  background-color: rgba(212, 175, 55, 0.1);
+  border-color: var(--gold-color);
+  transform: translateY(-2px);
+}
+
+.drawer-icon {
+  color: var(--gold-color);
+}
+
+.drawer-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+
+/* Top bar */
+.top-bar {
+  background: var(--nav-color);
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--divider-color);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.top-bar.header-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.top-bar.scrolled {
+  padding: 4px 16px;
+  background: var(--nav-color);
+}
+
+@keyframes logoSlideIn {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes subtitleFadeIn {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+    letter-spacing: 4px;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+    letter-spacing: 2px;
+  }
+}
+
+.top-bar-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  animation: badgesSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes badgesSlideIn {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid var(--divider-color);
+  color: var(--text-primary);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.theme-btn {
+  background: transparent;
+  border: 1px solid var(--divider-color);
+  color: var(--text-primary);
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-btn svg {
+  stroke: currentColor;
+}
+
+.lang-btn:hover,
+.theme-btn:hover {
+  border-color: var(--gold-color);
+  color: var(--gold-color);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+}
+
+.lang-btn:active,
+.theme-btn:active {
+  transform: translateY(1px) scale(0.95);
+}
+
+.hero-banner {
+  background: linear-gradient(135deg, #0f2b1c, var(--green-color));
+  padding: 30px 20px;
+  text-align: center;
+  margin: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-title {
+  color: var(--gold-color);
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-subtitle {
+  color: #fff;
+  font-size: 16px;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+.search-container {
+  padding: 10px 16px;
+  position: sticky;
+  top: 60px;
+  /* Snaps exactly beneath the header when scrolled */
+  z-index: 90;
+  background-color: var(--bg-color);
+}
+
+.search-input-wrapper {
+  background-color: var(--nav-color);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid var(--divider-color);
+}
+
+.search-input-wrapper input {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  flex: 1;
+  font-size: 15px;
+  outline: none;
+  margin-left: 10px;
+}
+
+.search-input-wrapper input::placeholder {
+  color: var(--text-secondary);
+}
+
+.search-icon {
+  color: var(--text-secondary);
+}
+
+.categories-container {
+  padding: 0 16px;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.categories-container::-webkit-scrollbar {
+  display: none;
+}
+
+.category-pill {
+  background-color: var(--nav-color);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.category-pill.active {
+  background-color: var(--green-color);
+  color: #fff;
+  border-color: var(--green-color);
+}
+
+.books-section {
+  padding: 0 0 24px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: visible;
+  /* Ensure vertical effects/badges aren't clipped */
+  box-sizing: border-box;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  color: var(--gold-color);
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.see-all {
+  color: #4ade80;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.horizontal-scroll {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  /* Vertical padding to prevent clipping of shadows/badges */
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  /* Smooth snap scrolling on mobile */
+  scroll-snap-type: x proximity;
+  scroll-padding: 16px;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.featured-card {
+  width: 110px;
+  height: 155px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background-color: var(--card-color);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  background-image: linear-gradient(135deg, #0f2b1c, var(--nav-color));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: pointer;
+  scroll-snap-align: start;
+}
+
+.featured-card:hover {
+  transform: translateY(-12px) scale(1.04);
+  z-index: 10;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.featured-card:active {
+  transform: translateY(-4px) scale(0.98);
+}
+
+/* ── BookCard hover/tap animation (same feel as featured-card) ── */
+.book-card-hover {
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
+              box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Desktop hover */
+@media (hover: hover) {
+  .book-card-hover:hover {
+    transform: translateY(-10px) scale(1.04);
+    z-index: 10;
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.55), 0 0 16px rgba(212, 175, 55, 0.18);
+  }
+}
+
+/* Mobile & touch tap */
+.book-card-hover:active {
+  transform: translateY(-4px) scale(0.97);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), 0 0 10px rgba(212, 175, 55, 0.12);
+  transition-duration: 0.12s;
+}
+
+.featured-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.featured-emoji {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 64px;
+}
+
+.featured-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 10px 12px 10px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  z-index: 1;
+}
+
+.featured-title {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.book-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--gold-color);
+  color: #000;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.small-card {
+  width: 120px;
+  flex-shrink: 0;
+  background-color: var(--card-color);
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: pointer;
+}
+
+.small-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  background-color: rgba(30, 35, 45, 1);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.2);
+  z-index: 5;
+}
+
+.small-card:active {
+  transform: scale(0.95);
+}
+
+.small-cover {
+  height: 140px;
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+
+.small-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.small-author {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grid-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 0 16px;
+}
+
+.grid-card {
+  background-color: var(--card-color);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid transparent;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.grid-card:hover,
+.grid-card:active {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.grid-cover-wrapper {
+  height: 180px;
+  position: relative;
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(8, 13, 22, 1) 0%, rgba(8, 13, 22, 0) 50%);
+}
+
+.grid-info {
+  padding: 0 12px 16px 12px;
+  position: relative;
+  z-index: 2;
+  margin-top: -30px;
+}
+
+.grid-title {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow: hidden;
+}
+
+.grid-author {
+  color: var(--text-secondary);
+  font-size: 11px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grid-rating {
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.grid-action-btn {
+  width: 100%;
+  background-color: rgba(212, 175, 55, 0.1);
+  color: var(--gold-color);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.grid-action-btn:hover {
+  background-color: var(--gold-color);
+  color: #000;
+}
+
+.grid-action-btn.downloading {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+.skeleton-card {
+  height: 280px;
+  background-color: var(--card-color);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skeleton-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.05), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    left: 100%;
+  }
+}
+
+.new-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-emoji {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.empty-title {
+  color: var(--gold-color);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.empty-desc {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.section-divider-line {
+  flex: 1;
+  height: 1.5px;
+  background: linear-gradient(90deg,
+      rgba(212, 175, 55, 0) 0%,
+      rgba(212, 175, 55, 0.4) 50%,
+      rgba(212, 175, 55, 0) 100%);
+  border-radius: 2px;
+}
+
+.section-divider-text {
+  color: var(--gold-color);
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dars-section {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--divider-color);
+}
+
+.dars-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.dars-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+  margin-bottom: 12px;
+}
+
+.dars-tab-btn {
+  background: transparent;
+  border: 1px solid var(--divider-color);
+  color: var(--text-secondary);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dars-tab-btn.active {
+  background: var(--green-color);
+  color: #fff;
+  border-color: var(--green-color);
+}
+
+.dars-lang-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.dars-lang-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.dars-lang-btn {
+  background: var(--nav-color);
+  border: 1px solid var(--divider-color);
+  color: var(--text-secondary);
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.dars-lang-btn.active {
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--gold-color);
+  border-color: var(--gold-color);
+  font-weight: bold;
+}
+
+.dars-title {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.dars-arrow-btn {
+  background-color: var(--green-color);
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+
+.dars-arrow-btn:hover {
+  transform: scale(1.1);
+}
+
+.dars-card {
+  width: 120px;
+  height: 160px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background-color: var(--card-color);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid var(--divider-color);
+  transition: transform 0.2s;
+}
+
+.dars-card:hover {
+  transform: scale(1.03);
+  border-color: var(--gold-color);
+}
+
+.dars-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+.dars-fallback {
+  background: linear-gradient(135deg, #b8860b, var(--gold-color));
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+}
+
+.dars-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 8px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  text-align: center;
+}
+
+.dars-card-title {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.dars-card-author {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.feature-card {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background-color: var(--nav-color);
+  border: 1px solid var(--divider-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--green-color);
+  box-shadow: 0 8px 16px rgba(26, 107, 58, 0.3);
+}
+
+.feature-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  background: rgba(212, 175, 55, 0.1);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-title {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  padding: 0 8px;
+}
+
+/* =========================================
+   UPTCL STYLE BOTTOM NAV (MASKING TRICK + TOPO MOUNTAINS)
+========================================== */
+/* ════════════════════════════════════════════════════════════════
+   BOTTOM NAV — Floating Pill + Rich Topo Circle + Downward Trail
+   ──────────────────────────────────────────────────────────────
+   DELETE from app.css:
+     .bottom-nav, .bottom-nav-bg, .nav-item, .nav-icon-wrapper,
+     .nav-label, .nav-badge and all their sub-rules
+   KEEP: .more-drawer-overlay, .more-drawer, .drawer-* styles
+   ──────────────────────────────────────────────────────────────── */
+
+
+/* ── Shell ───────────────────────────────────────────────────── */
+.bnav-shell {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 580px;
+  height: 68px;
+  z-index: 1000;
+  overflow: visible;
+  /* backdrop-filter removed: too expensive on mobile GPU */
+}
+
+
+/* ── SVG pill background ─────────────────────────────────────── */
+.bnav-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.5));
+}
+
+
+/* ── Tab row ─────────────────────────────────────────────────── */
+.bnav-row {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+
+/* ── Tab button ──────────────────────────────────────────────── */
+.bnav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+  gap: 3px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 2;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   CIRCLE (icon wrapper)
+   Inactive: 26×26 dim icon.
+   Active:   60×60 golden medallion with topo fill + outer glow.
+
+   KEY: flex-shrink:0 prevents oval deformation inside flex row.
+════════════════════════════════════════════════════════════════ */
+.bnav-circle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  overflow: hidden;
+  /* clips topo SVG to circle boundary  */
+  transition:
+    transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+    width 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+    height 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.15s ease,
+    border 0.15s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease;
+}
+
+/* The actual Lucide icon — sits above the topo lines via z-index */
+.bnav-icon-inner {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bnav-icon-inner>svg {
+  width: 21px;
+  height: 21px;
+  flex-shrink: 0;
+  transition:
+    width 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+    height 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.15s ease;
+}
+
+
+/* ── Label ───────────────────────────────────────────────────── */
+.bnav-lbl {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1;
+  transition: color 0.15s, font-weight 0.15s, font-size 0.15s;
+}
+
+
+/* ── Badge ───────────────────────────────────────────────────── */
+.bnav-badge {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  background: #ef4444;
+  color: #fff;
+  border-radius: 50%;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  z-index: 10;
+  transition:
+    top 0.18s ease,
+    right 0.18s ease;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   ACTIVE STATE  (.bnav-item--on)
+════════════════════════════════════════════════════════════════ */
+
+/* Grow & float the circle up above the pill notch */
+.bnav-item--on .bnav-circle {
+  transform: translateY(-32px);
+  width: 60px;
+  height: 60px;
+  /* No background here — TopoCircle SVG provides the dark fill */
+  border: 2.5px solid var(--gold-color);
+  color: var(--gold-color);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 3px rgba(212, 175, 55, 0.2),
+    0 0 18px 0 rgba(212, 175, 55, 0.5);
+}
+
+/* Icon inside active circle: bigger + golden glow */
+.bnav-item--on .bnav-icon-inner>svg {
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 0 7px rgba(212, 175, 55, 0.95));
+}
+
+/* Golden label below active tab */
+.bnav-item--on .bnav-lbl {
+  color: var(--gold-color);
+  font-weight: 700;
+  font-size: 11.5px;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+/* Badge repositioned for bigger circle */
+.bnav-item--on .bnav-badge {
+  top: -2px;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--bg-color);
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   TOPO CIRCLE  (.bnav-topo)
+   The SVG fills the entire .bnav-circle (position: absolute, inset: 0).
+   .bnav-circle has overflow: hidden so it's always clipped to circle.
+   The SVG itself draws the dark background + golden wavy lines.
+   z-index: 1  → below the icon (z-index: 3 via .bnav-icon-inner)
+════════════════════════════════════════════════════════════════ */
+.bnav-topo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  /* Animation removed for performance — static is snappier on mobile */
+}
+
+@keyframes topoBreath {
+  0% {
+    transform: rotate(0deg) scale(1.05);
+  }
+
+  33% {
+    transform: rotate(6deg) scale(1.12);
+  }
+
+  66% {
+    transform: rotate(-4deg) scale(1.08);
+  }
+
+  100% {
+    transform: rotate(0deg) scale(1.05);
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   WINDING TRAIL  (.bnav-trail)
+   Positioned INSIDE .bnav-shell (overflow: visible).
+   Sits at the TOP of the shell (top: 0) so it starts at the notch
+   where the circle's bottom touches the pill.
+   'left' is set inline from JSX; transform centres it on the tab.
+════════════════════════════════════════════════════════════════ */
+.bnav-trail {
+  position: absolute;
+  top: -2px;
+  /* aligns with notch top / circle bottom  */
+  width: 120px;
+  height: 60px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 3;
+  /* above pill bg, below circle            */
+  animation: trailAppear 0.2s ease forwards;
+}
+
+.bnav-trail svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+@keyframes trailAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+
+/* ── Sparkle decoration ──────────────────────────────────────── */
+.bnav-sparkle {
+  position: absolute;
+  bottom: 6px;
+  right: 10px;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 5;
+  animation: sparklePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes sparklePulse {
+
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1.0;
+    transform: scale(1.28);
+  }
+}
+
+
+/* ── Safe area (iPhone home bar) ─────────────────────────────── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .bnav-shell {
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+}
+
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+  padding: 10px 0;
+  position: relative;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 12px;
+  animation: marquee 120s linear infinite;
+  width: max-content;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.scholar-tag {
+  background: var(--nav-color);
+  border: 1px solid var(--divider-color);
+  border-radius: 12px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.scholar-tag:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.4);
+  color: #fff;
+}
+
+/* =========================================
+   DARS-E-NIZAMI SECTION GOLDEN GLOW BORDER
+   ========================================= */
+.dars-section-glow {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 1.5px; /* Border thickness */
+  margin: 0 12px 24px 12px;
+  background: var(--divider-color);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.3s ease;
+}
+
+.dars-section-glow:hover {
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
+}
+
+.dars-section-glow::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 280deg,
+    rgba(212, 175, 55, 0.3) 300deg,
+    rgba(212, 175, 55, 1) 340deg,
+    #ffffff 360deg
+  );
+  animation: darsBorderRotate 6s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dars-section-inner {
+  position: relative;
+  z-index: 2;
+  background: var(--card-color);
+  border-radius: 15px; /* Concentric with outer radius */
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@keyframes darsBorderRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Featured books swap-in animation */
+@keyframes featuredFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

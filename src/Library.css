@@ -1,0 +1,195 @@
+.library-container {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-title {
+  color: var(--gold-color);
+  font-size: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.library-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  color: var(--text-secondary);
+  opacity: 0.5;
+  margin-bottom: 16px;
+}
+
+.library-empty h2 {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.library-empty p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.browse-btn {
+  background-color: var(--green-color);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.browse-btn:hover {
+  background-color: #143520;
+}
+
+.books-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lib-card {
+  flex-direction: column;
+  align-items: stretch;
+  cursor: pointer;
+}
+
+.lib-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #ef4444; /* Red for delete */
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  opacity: 0.7;
+}
+
+.delete-btn:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  opacity: 1;
+}
+
+/* Progress bar inside library cards */
+.progress-section {
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+.progress-text-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.progress-label {
+  color: var(--text-secondary);
+}
+
+.progress-percent {
+  font-weight: 600;
+}
+
+.gold-text {
+  color: var(--gold-color);
+}
+
+.progress-track {
+  height: 4px;
+  background-color: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--gold-color);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.lib-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Add custom layout for Library Card Content */
+.lib-card > .book-cover {
+  display: none; /* Hide default cover wrapper from generic card */
+}
+
+.lib-card .book-info {
+  /* Override default to allow vertical layout */
+}
+
+.lib-card {
+  flex-direction: row; /* Match normal card visually but custom content */
+}
+
+.lib-card > .book-cover {
+  display: flex; /* Re-enable cover */
+}
+
+.lib-card .book-info {
+  flex: 1;
+}
+
+.download-btn.downloading {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(255,255,255,0.2);
+  cursor: default;
+}
+
+.download-btn.success {
+  background-color: rgba(74, 222, 128, 0.2);
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+.download-progress-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba(74, 222, 128, 0.2);
+  border-radius: 8px;
+  transition: width 0.2s linear;
+  z-index: 0;
+}
+
+.download-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.download-btn > * {
+  position: relative;
+  z-index: 1;
+}

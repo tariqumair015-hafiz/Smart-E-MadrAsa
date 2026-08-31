@@ -1,0 +1,219 @@
+.qibla-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  padding-bottom: 80px; /* Space for bottom nav */
+}
+
+.qibla-header {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--nav-color);
+  border-bottom: 1px solid var(--divider-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.qibla-title {
+  font-size: 20px;
+  color: var(--gold-color);
+  margin: 0;
+}
+
+.qibla-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Hijri Date Box */
+.hijri-date-card {
+  background: linear-gradient(135deg, var(--card-bg), var(--nav-color));
+  border: 1px solid var(--gold-color);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.hijri-main {
+  font-size: 24px;
+  color: var(--gold-color);
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.gregorian-sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.location-text {
+  font-size: 12px;
+  color: var(--text-primary);
+  margin-top: 12px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Compass */
+.compass-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.compass-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 4px solid var(--nav-color);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 5px 15px rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.compass-dial {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1px dashed var(--divider-color);
+  transition: transform 0.1s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Kaaba icon on the dial, points to Qibla bearing relative to North */
+.kaaba-marker {
+  position: absolute;
+  top: 10px;
+  font-size: 24px;
+  filter: drop-shadow(0 0 5px var(--gold-color));
+}
+
+/* Fixed Needle pointing up (device top) */
+.compass-needle {
+  position: absolute;
+  width: 4px;
+  height: 100px;
+  background: #ef4444; /* Red tip */
+  bottom: 50%;
+  border-radius: 4px 4px 0 0;
+  z-index: 5;
+}
+
+.compass-needle::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 100px;
+  background: var(--text-secondary);
+  top: 100%;
+  border-radius: 0 0 4px 4px;
+}
+
+.compass-center-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--gold-color);
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.compass-status {
+  text-align: center;
+  font-size: 16px;
+  min-height: 24px;
+  color: var(--text-primary);
+  transition: color 0.3s;
+}
+
+.compass-status.aligned {
+  color: #4ade80;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
+}
+
+/* Prayer Times */
+.prayer-times-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prayer-time-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--divider-color);
+}
+
+.prayer-time-card.next-prayer {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--gold-color);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+.prayer-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.next-prayer .prayer-name {
+  color: var(--gold-color);
+}
+
+.prayer-time {
+  font-size: 18px;
+  color: var(--text-primary);
+  font-family: monospace;
+}
+
+.permission-btn {
+  background: var(--gold-color);
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  gap: 16px;
+  color: var(--gold-color);
+}

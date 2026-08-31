@@ -1,0 +1,137 @@
+﻿Checking scholar: maulana-sarfaraz-safdar
+Total books fetched: 27
+- ID: 21146, Title: "Tafseer Zakhira tul Janan New Version By Maulana Sarfaraz Khan Safdar ╪¬┘ü╪│█î╪▒ ╪░╪«█î╪▒█â ╪º┘ä╪¼┘å╪º┘å ╪¼╪»█î╪» ╪º╪▓ ┘à┘ê┘ä╪º┘å╪º ╪│╪▒┘ü╪▒╪º╪▓ ╪«╪º┘å ╪╡┘ü╪»╪▒", Sub: maulana-sarfaraz-safdar
+- ID: 21149, Title: "Zakhira tul Janan By Maulana Sarfaraz Khan Safdar ╪¬┘ü╪│█î╪▒ ╪░╪«█î╪▒█â ╪º┘ä╪¼┘å╪º┘å", Sub: maulana-sarfaraz-safdar
+- ID: 16288, Title: "Ibaraat e Akabir By Maulana Sarfaraz Khan Safdar ╪╣╪¿╪º╪▒╪º╪¬ ╪º┌⌐╪º╪¿╪▒", Sub: maulana-sarfaraz-safdar
+- ID: 13461, Title: "Tafseer Zakhira tul Janan By Maulana Sarfaraz Khan Safdar ╪¬┘ü╪│█î╪▒ ╪░╪«█î╪▒█â ╪º┘ä╪¼┘å╪º┘å", Sub: maulana-sarfaraz-safdar
+- ID: 13366, Title: "Ifadaat e Safdariya By Maulana Sarfaraz Khan Safdar ╪º┘ü╪º╪»╪º╪¬ ╪╡┘ü╪»╪▒█î█ü", Sub: maulana-sarfaraz-safdar
+- ID: 14422, Title: "Durood Sharif Parhne ka Shari Tariqa By Maulana Sarfaraz Khan Safdar ╪»╪▒┘ê╪» ╪┤╪▒█î┘ü ┘╛┌æ┌╛┘å█Æ ┌⌐╪º ╪┤╪▒╪╣█î ╪╖╪▒█î┘é█ü", Sub: maulana-sarfaraz-safdar
+- ID: 13924, Title: "Uloom ul Hadith Usool wa Mabadi By Maulana Sarfaraz Khan Safdar ╪╣┘ä┘ê┘à ╪º┘ä╪¡╪»█î╪½ ╪º╪╡┘ê┘ä ┘ê ┘à╪¿╪º╪»█î", Sub: maulana-sarfaraz-safdar
+- ID: 14417, Title: "Al Kalam ul Havi By Maulana Sarfaraz Khan Safdar ╪º┘ä┌⌐┘ä╪º┘à ╪º┘ä╪¡╪º┘ê█î", Sub: maulana-sarfaraz-safdar
+- ID: 15108, Title: "Raah e Hidayat By Maulana Sarfaraz Khan Safdar ╪▒╪º█ü █ü╪»╪º█î╪¬", Sub: maulana-sarfaraz-safdar
+- ID: 16218, Title: "Esaiyat ka Pas e Manzar By Maulana Sarfaraz Khan Safdar ╪╣█î╪│╪º╪ª█î╪¬ ┌⌐╪º ┘╛╪│ ┘à┘å╪╕╪▒", Sub: maulana-sarfaraz-safdar
+- ID: 16297, Title: "Aankhon ki Thandak By Maulana Sarfaraz Khan Safdar ╪ó┘å┌⌐┌╛┘ê┌║ ┌⌐█î ┘╣┌╛┘å┌ê┌⌐", Sub: maulana-sarfaraz-safdar
+- ID: 16303, Title: "Tafreeh ul Khawatir By Maulana Sarfaraz Khan Safdar ╪¬┘ü╪▒█î╪¡ ╪º┘ä╪«┘ê╪º╪╖╪▒", Sub: maulana-sarfaraz-safdar
+- ID: 16331, Title: "Irshad Ush Shia By Maulana Sarfaraz Safdar ╪º╪▒╪┤╪º╪»╪º┘ä╪┤█î╪╣█ü", Sub: maulana-sarfaraz-safdar
+- ID: 13401, Title: "Tafseer Zakhira tul Janan By Maulana Sarfaraz Khan Safdar ╪¬┘ü╪│█î╪▒ ╪░╪«█î╪▒█â ╪º┘ä╪¼┘å╪º┘å", Sub: maulana-sarfaraz-safdar
+- ID: 16305, Title: "Itmam ul Burhan By Maulana Sarfaraz Khan Safdar ╪º╪¬┘à╪º┘à ╪º┘ä╪¿╪▒┌╛╪º┘å", Sub: maulana-sarfaraz-safdar
+- ID: 16308, Title: "Noor o Bashar By Maulana Sarfaraz Khan Safdar ┘å┘ê╪▒ ┘ê ╪¿╪┤╪▒", Sub: maulana-sarfaraz-safdar
+- ID: 15124, Title: "Izalat ur Raib By Maulana Sarfaraz Safdar ╪º╪▓╪º┘ä█â ╪º┘ä╪▒█î╪¿ ╪╣┘å ╪╣┘é█î╪»█â ╪╣┘ä┘à ╪º┘ä╪║█î╪¿", Sub: maulana-sarfaraz-safdar
+- ID: 16332, Title: "Dil ka Suroor By Maulana Sarfaraz Safdar ╪»┘ä ┌⌐╪º ╪│╪▒┘ê╪▒", Sub: maulana-sarfaraz-safdar
+- ID: 15141, Title: "Al Maslak Al Mansoor fi Kitabil Mastoor By Maulana Sarfaraz Safdar ╪º┘ä┘à╪│┘ä┌⌐ ╪º┘ä┘à┘å╪╡┘ê╪▒", Sub: maulana-sarfaraz-safdar
+- ID: 15145, Title: "Rah e Sunnat By Maulana Sarfaraz Khan Safdar ╪▒╪º█ü ╪│┘å╪¬", Sub: maulana-sarfaraz-safdar
+- ID: 16341, Title: "Ahsan ul Kalam By Maulana Sarfaraz Khan Safdar ╪º╪¡╪│┘å ╪º┘ä┌⌐┘ä╪º┘à ┘ü█î ╪¬╪▒┌⌐ ╪º┘ä┘é╪▒╪º╪í█â ╪«┘ä┘ü ╪º┘ä╪º┘à╪º┘à", Sub: maulana-sarfaraz-safdar
+- ID: 16559, Title: "Chalees Doaen By Maulana Sarfaraz Khan Safdar ┌å╪º┘ä█î╪│ ╪»╪╣╪º╪ª█î┌║", Sub: maulana-sarfaraz-safdar
+- ID: 13986, Title: "Inkar e Hadith kay Nataij By Maulana Sarfaraz Khan Safdar ╪º┘å┌⌐╪º╪▒ ╪¡╪»█î╪½ ┌⌐█Æ ┘å╪¬╪º╪ª╪¼", Sub: maulana-sarfaraz-safdar
+- ID: 16307, Title: "Tanqid e Mateen By Maulana Sarfaraz Khan Safdar ╪¬┘å┘é█î╪» ┘à╪¬█î┘å", Sub: maulana-sarfaraz-safdar
+- ID: 16301, Title: "Taifa Mansoora By Maulana Sarfaraz Khan Safdar ╪╖╪º╪ª┘ü█ü ┘à┘å╪╡┘ê╪▒█ü", Sub: maulana-sarfaraz-safdar
+- ID: 16302, Title: "Bab e Jannat By Maulana Sarfaraz Khan Safdar ╪¿╪º╪¿ ╪¼┘å╪¬", Sub: maulana-sarfaraz-safdar
+- ID: 13773, Title: "Khazain us Sunan Urdu Sharha Tirmizi By Maulana Sarfaraz Khan Safdar ╪«╪▓╪º╪ª┘å ╪º┘ä╪│┘å┘å ╪º╪▒╪»┘ê ╪┤╪▒╪¡ ╪│┘å┘å ╪¬╪▒┘à╪░█î", Sub: maulana-sarfaraz-safdar
+
+Duplicate groups by fuzzy title: 1
+Fuzzy Title: "tafseer zakhira tul janan by maulana sarfaraz khan safdar ╪¬┘ü╪│█î╪▒ ╪░╪«█î╪▒█â ╪º┘ä╪¼┘å╪º┘å"
+  -> ID: 13461, Original Title: "Tafseer Zakhira tul Janan By Maulana Sarfaraz Khan Safdar ╪¬┘ü╪│█î╪▒ ╪░╪«█î╪▒█â ╪º┘ä╪¼┘å╪º┘å"
+  -> ID: 13401, Original Title: "Tafseer Zakhira tul Janan By Maulana Sarfaraz Khan Safdar ╪¬┘ü╪│█î╪▒ ╪░╪«█î╪▒█â ╪º┘ä╪¼┘å╪º┘å"
+Checking scholar: maulana-zakariyya-kandhelvi
+Total books fetched: 23
+- ID: 21203, Title: "Mery Hazrat Madni By Mufti Muhammad Musab ┘à█î╪▒█Æ ╪¡╪╢╪▒╪¬ ┘à╪»┘å█î", Sub: maulana-zakariyya-kandhelvi
+- ID: 21206, Title: "Ikhtilaf ul Aimma By Maulana Zakariya Kandhalvi ╪º╪«╪¬┘ä╪º┘ü ╪º┘ä╪º╪ª┘à█ü", Sub: maulana-zakariyya-kandhelvi
+- ID: 16676, Title: "Malfoozat e Shykh ul Hadith By Maulana Muhammad Ismail Meman ┘à┘ä┘ü┘ê╪╕╪º╪¬ ╪┤█î╪« ╪º┘ä╪¡╪»█î╪½", Sub: maulana-zakariyya-kandhelvi
+- ID: 14395, Title: "Fazail e Sadqaat Urdu By Shaykh ul Hadees Maulana Zakariya ┘ü╪╢╪º╪ª┘ä ╪╡╪»┘é╪º╪¬", Sub: maulana-zakariyya-kandhelvi
+- ID: 16587, Title: "Manzil By Shaykh ul Hadith Muhammad Zakariyya Kandhelvi ┘à┘å╪▓┘ä", Sub: maulana-zakariyya-kandhelvi
+- ID: 14226, Title: "Darhi ka Wujoob By Maulana Zakariya Kandhalvi ╪»╪º┌æ┌╛█î ┌⌐╪º ┘ê╪¼┘ê╪¿ / ╪»╪º┌æ┌╛█î ┌⌐█î ╪º╪│┘ä╪º┘à█î ╪¡█î╪½█î╪¬", Sub: maulana-zakariyya-kandhelvi
+- ID: 14231, Title: "Akabir ka Ramzan By Maulana Zakariya Kandhalvi ╪º┌⌐╪º╪¿╪▒ ┌⌐╪º ╪▒┘à╪╢╪º┘å", Sub: maulana-zakariyya-kandhelvi
+- ID: 14328, Title: "Sohbat e Ba Auliya Urdu/English By Maulana Taqiuddin Nadwi ╪╡╪¡╪¿╪¬█Æ ╪¿╪º ╪º┘ê┘ä█î╪º╪í", Sub: maulana-zakariyya-kandhelvi
+- ID: 15213, Title: "Imdad us Sulook By Maulana Rasheed Ahmad Gangohi ╪º┘à╪»╪º╪» ╪º┘ä╪│┘ä┘ê┌⌐", Sub: maulana-zakariyya-kandhelvi
+- ID: 21220, Title: "Aap Beeti - ╪ó┘╛ ╪¿█î╪¬█î", Sub: maulana-zakariyya-kandhelvi
+- ID: 13816, Title: "Al Jame ul Kabir [Sunan Al Tirmizi] ╪º┘ä╪¼╪º┘à╪╣ ╪º┘ä┌⌐╪¿█î╪▒ ╪│┘å┘å ╪º┘ä╪¬╪▒┘à╪░█î ┘à╪╣ ╪º┘ä┌⌐┘ê┌⌐╪¿ ╪º┘ä╪»╪▒█î", Sub: maulana-zakariyya-kandhelvi
+- ID: 16149, Title: "Sila Rahmi - ╪╡┘ä█ü ╪▒╪¡┘à█î", Sub: maulana-zakariyya-kandhelvi
+- ID: 21592, Title: "Mery Hazrat Madni By Mufti Muhammad Musab ┘à█î╪▒█Æ ╪¡╪╢╪▒╪¬ ┘à╪»┘å█î", Sub: maulana-zakariyya-kandhelvi
+- ID: 13788, Title: "Taqreer e Bukhari Urdu Sharha Sahih ul Bukhari ╪¬┘é╪▒█î╪▒ ╪¿╪«╪º╪▒█î ╪┤╪▒█î┘ü ╪º╪▒╪»┘ê", Sub: maulana-zakariyya-kandhelvi
+- ID: 16362, Title: "Fazail e Amaal Urdu / Arabic / English By Shaykh ul Hadith Muhammad Zakariyya Kandhelvi ┘ü╪╢╪º╪ª┘ä ╪º╪╣┘à╪º┘ä ╪º╪▒╪»┘ê / ╪╣╪▒╪¿█î / ╪º┘å┌»╪▒█î╪▓█î", Sub: maulana-zakariyya-kandhelvi
+- ID: 21607, Title: "┘ê╪¼┘ê╪¿ ╪º╪╣┘ü╪º╪í ╪º┘ä┘ä╪¡┘è╪⌐ ┘ä┘ä╪┤┘è╪« ┘à╪¡┘à╪» ╪▓┘â╪▒┘è╪º ╪º┘ä┘â╪º┘å╪»┘ç┘ä┘ê┘è", Sub: maulana-zakariyya-kandhelvi
+- ID: 16034, Title: "Masnoon Usool e Tijarat By Mufti Abubakr Jabir, Mufti Rafiud Deen Hanif ┘à╪│┘å┘ê┘å ╪º╪╡┘ê┘ä ╪¬╪¼╪º╪▒╪¬", Sub: maulana-zakariyya-kandhelvi
+- ID: 14350, Title: "Hajjat ul Wida o Umaraat un Nabi (S.A.W) By Shaykh ul Hadith Muhammad Zakariyya Kandhelvi ╪¡╪¼█â ╪º┘ä┘ê╪»╪º╪╣ ┘ê ╪╣┘à╪▒╪º╪¬ ╪º┘ä┘å╪¿█î╪É", Sub: maulana-zakariyya-kandhelvi
+- ID: 15209, Title: "Shariat o Tariqat ka Talazum By Shaykh ul Hadith Muhammad Zakariyya Kandhelvi ╪┤╪▒█î╪╣╪¬ ┘ê ╪╖╪▒█î┘é╪¬ ┌⌐╪º ╪¬┘ä╪º╪▓┘à", Sub: maulana-zakariyya-kandhelvi
+- ID: 13832, Title: "Tashrihaat e Bukhari Urdu Sharh Sahihul Bukhari ╪¬╪┤╪▒█î╪¡╪º╪¬ ╪¿╪«╪º╪▒█î ╪º╪▒╪»┘ê ╪┤╪▒╪¡ ╪¿╪«╪º╪▒█î", Sub: maulana-zakariyya-kandhelvi
+- ID: 13814, Title: "Al Abwab Wat Tarajim Sahih Bukhari By Maulana Zakariya Kandhalvi ╪º┘ä╪º╪¿┘ê╪º╪¿ ┘ê ╪º┘ä╪¬╪▒╪º╪¼┘à ┘ä╪╡╪¡█î╪¡ ╪º┘ä╪¿╪«╪º╪▒█î", Sub: maulana-zakariyya-kandhelvi
+- ID: 13828, Title: "Shamail Tirmezi with Urdu Sharha Khasail e Nabvi ╪┤┘à╪º╪ª┘ä ╪¬╪▒┘à╪░█î ┘à╪╣ ╪º╪▒╪»┘ê ╪¬╪▒╪¼┘à█ü ┘ê ╪┤╪▒╪¡ ╪«╪╡╪º╪ª┘ä ┘å╪¿┘ê█î", Sub: maulana-zakariyya-kandhelvi
+- ID: 14856, Title: "Islami Siyasat By Shaykh ul Hadith Muhammad Zakariyya Kandhelvi ╪º╪│┘ä╪º┘à█î ╪│█î╪º╪│╪¬", Sub: maulana-zakariyya-kandhelvi
+
+Duplicate groups by fuzzy title: 1
+Fuzzy Title: "mery hazrat madni by mufti muhammad musab ┘à█î╪▒█Æ ╪¡╪╢╪▒╪¬ ┘à╪»┘å█î"
+  -> ID: 21203, Original Title: "Mery Hazrat Madni By Mufti Muhammad Musab ┘à█î╪▒█Æ ╪¡╪╢╪▒╪¬ ┘à╪»┘å█î"
+  -> ID: 21592, Original Title: "Mery Hazrat Madni By Mufti Muhammad Musab ┘à█î╪▒█Æ ╪¡╪╢╪▒╪¬ ┘à╪»┘å█î"
+Checking scholar: mufti-muhammad-taqi-usmani
+Total books fetched: 57
+- ID: 14876, Title: "Islam aur Siyasi Nazriyat By Mufti Taqi Usmani ╪º╪│┘ä╪º┘à ╪º┘ê╪▒ ╪│█î╪º╪│█î ┘å╪╕╪▒█î╪º╪¬", Sub: mufti-muhammad-taqi-usmani
+- ID: 16626, Title: "Khutbat e Usmani By Mufti Muhammad Taqi Usmani ╪«╪╖╪¿╪º╪¬ ╪╣╪½┘à╪º┘å█î", Sub: mufti-muhammad-taqi-usmani
+- ID: 21382, Title: "Adalati FaislyBy Mufti Muhammad Taqi Usmani ╪╣╪»╪º┘ä╪¬█î ┘ü█î╪╡┘ä█Æ ╪º╪▓ ┘à┘ê┘ä╪º┘å╪º ┘à┘ü╪¬█î ┘à╪¡┘à╪» ╪¬┘é█î ╪╣╪½┘à╪º┘å█î", Sub: mufti-muhammad-taqi-usmani
+- ID: 21384, Title: "Maqalaat ul Usmani By Mufti Muhammad Taqi Usmani ┘à┘é╪º┘ä╪º╪¬ ╪º┘ä╪╣╪½┘à╪º┘å█î", Sub: mufti-muhammad-taqi-usmani
+- ID: 21386, Title: "Mawaiz e Usmani By Mufti Muhammad Taqi Usmani ┘à┘ê╪º╪╣╪╕ ╪╣╪½┘à╪º┘å█î", Sub: mufti-muhammad-taqi-usmani
+- ID: 16442, Title: "Islahi Khutbaat By Mufti Muhammad Taqi Usmani ╪º╪╡┘ä╪º╪¡█î ╪«╪╖╪¿╪º╪¬", Sub: mufti-muhammad-taqi-usmani
+- ID: 21408, Title: "Nuqoosh e Raftagan By Mufti Muhammad Taqi Usmani ┘å┘é┘ê╪┤ ╪▒┘ü╪¬┌»╪º┌║", Sub: mufti-muhammad-taqi-usmani
+- ID: 21395, Title: "Islam aur Daor e Hazir kay Shubhaat o Mughaltay - ╪º╪│┘ä╪º┘à ╪º┘ê╪▒ ╪»┘ê╪▒ ╪¡╪º╪╢╪▒ ┌⌐█Æ ╪┤╪¿█ü╪º╪¬ ┘ê ┘à╪║╪º┘ä╪╖█Æ", Sub: mufti-muhammad-taqi-usmani
+- ID: 21434, Title: "Jahan e Deeda By Mufti Taqi Usmani ╪¼█ü╪º┘å ╪»█î╪»█ü", Sub: mufti-muhammad-taqi-usmani
+- ID: 21435, Title: "Dunya Meray Aagay By Mufti Taqi Usmani ╪»┘å█î╪º ┘à█î╪▒█Æ ╪ó┌»█Æ", Sub: mufti-muhammad-taqi-usmani
+- ID: 21423, Title: "Safar Dar Safar By Mufti Muhammad Taqi Usmani ╪│┘ü╪▒ ╪»╪▒ ╪│┘ü╪▒", Sub: mufti-muhammad-taqi-usmani
+- ID: 16695, Title: "Islam aur Hamari Zindagi By Mufti Taqi Usmani ╪º╪│┘ä╪º┘à ╪º┘ê╪▒ █ü┘à╪º╪▒█î ╪▓┘å╪»┌»█î", Sub: mufti-muhammad-taqi-usmani
+- ID: 14450, Title: "Falsafa e Hajj wa Qurbani By Mufti Muhammad Taqi Usmani ┘ü┘ä╪│┘ü█ü ╪¡╪¼ ┘ê ┘é╪▒╪¿╪º┘å█î", Sub: mufti-muhammad-taqi-usmani
+- ID: 13847, Title: "Ilaus Sunan By Maulana Zafar Ahmad Usmani ╪º╪╣┘ä╪º╪í ╪º┘ä╪│┘å┘å", Sub: mufti-muhammad-taqi-usmani
+- ID: 13923, Title: "The Authority of Sunnah By Mufti Muhammad Taqi Usmani", Sub: mufti-muhammad-taqi-usmani
+- ID: 14356, Title: "Ahmiyat e Ramzan By Dr. Naeemullah ╪º█ü┘à█î╪¬ ╪▒┘à╪╢╪º┘å", Sub: mufti-muhammad-taqi-usmani
+- ID: 15412, Title: "Islam aur Jadeed Maeeshat wa Tijarat By Mufti Muhammad Taqi Usmani ╪º╪│┘ä╪º┘à ╪º┘ê╪▒ ╪¼╪»█î╪» ┘à╪╣█î╪┤╪¬ ┘ê ╪¬╪¼╪º╪▒╪¬", Sub: mufti-muhammad-taqi-usmani
+- ID: 15431, Title: "Islami Bankari By Mufti Muhammad Taqi Usmani ╪º╪│┘ä╪º┘à█î ╪¿█î┘å┌⌐╪º╪▒█î", Sub: mufti-muhammad-taqi-usmani
+- ID: 15443, Title: "Tauseeq ud Duyoon Urdu By Mufti Muhammad Taqi Usmani ╪¬┘ê╪½█î┘é ╪º┘ä╪»█î┘ê┘å", Sub: mufti-muhammad-taqi-usmani
+- ID: 15479, Title: "Islami Qanoon e Kharid o Farokht By Mufti Taqi Usmani ╪º╪│┘ä╪º┘à█î ┘é╪º┘å┘ê┘å ╪«╪▒█î╪» ┘ê ┘ü╪▒┘ê╪«╪¬", Sub: mufti-muhammad-taqi-usmani
+- ID: 15490, Title: "Fiqh ul Boyu By Mufti Taqi Usmani ┘ü┘é█ü ╪º┘ä╪¿█î┘ê╪╣", Sub: mufti-muhammad-taqi-usmani
+- ID: 14316, Title: "Ahkam e Itikaf Fazail o Masail By Mufti Muhammad Taqi Usmani ╪º╪¡┌⌐╪º┘à ╪º╪╣╪¬┌⌐╪º┘ü ┘ü╪╢╪º╪ª┘ä ┘ê ┘à╪│╪º╪ª┘ä", Sub: mufti-muhammad-taqi-usmani
+- ID: 13469, Title: "The Meaning of the Noble Quran with Explanatory Notes By Mufti Taqi Usmani", Sub: mufti-muhammad-taqi-usmani
+- ID: 21392, Title: "Islam ka Nizam e Kharid o Farokht - ╪º╪│┘ä╪º┘à ┌⌐╪º ┘å╪╕╪º┘à ╪«╪▒█î╪» ┘ê ┘ü╪▒┘ê╪«╪¬", Sub: mufti-muhammad-taqi-usmani
+- ID: 14842, Title: "Islam aur Daor e Hazir ke Shubhaat wa Mughaltay By Mufti Muhammad Taqi Usmani ╪º╪│┘ä╪º┘à ╪º┘ê╪▒ ╪»┘ê╪▒ ╪¡╪º╪╢╪▒ ┌⌐█Æ ╪┤╪¿█ü╪º╪¬ ┘ê ┘à╪║╪º┘ä╪╖█Æ", Sub: mufti-muhammad-taqi-usmani
+- ID: 21404, Title: "Ilaus Sunan By Maulana Zafar Ahmad Usmani ╪º╪╣┘ä╪º╪í ╪º┘ä╪│┘å┘å", Sub: mufti-muhammad-taqi-usmani
+- ID: 21416, Title: "Fiqh ul Boyu By Mufti Taqi Usmani ┘ü┘é┘ç ╪º┘ä╪¿┘è┘ê╪╣ ╪╣┘ä┘ë ╪º┘ä┘à╪░╪º┘ç╪¿ ╪º┘ä╪ú╪▒╪¿╪╣╪⌐ ┘à╪╣ ╪¬╪╖╪¿┘è┘é╪º╪¬┘ç ╪º┘ä┘à╪╣╪º╪╡╪▒╪⌐ ┘à┘é╪º╪▒┘å╪º ╪¿╪º┘ä┘é┘ê╪º┘å┘è┘å ╪º┘ä┘ê╪╢╪╣┘è╪⌐ ╪º┘ä┘à┘ü╪¬┘ë ┘à╪¡┘à╪» ╪¬┘é┘ë ╪º┘ä╪╣╪½┘à╪º┘å┘ë", Sub: mufti-muhammad-taqi-usmani
+- ID: 15114, Title: "Milad un Nabi [S.A.W] By Maulana Ashraf Ali Thanvi ┘à█î┘ä╪º╪» ╪º┘ä┘å╪¿█î ∩╖║", Sub: mufti-muhammad-taqi-usmani
+- ID: 15769, Title: "Hazrat Muawiyah aur Tarikhi Haqaiq By Mufti Taqi Usmani ╪¡╪╢╪▒╪¬ ┘à╪╣╪º┘ê█î█ü ╪º┘ê╪▒ ╪¬╪º╪▒█î╪«█î ╪¡┘é╪º╪ª┘é", Sub: mufti-muhammad-taqi-usmani
+- ID: 13581, Title: "Uloom ul Quran By Mufti Muhammad Taqi Usmani ╪╣┘ä┘ê┘à ╪º┘ä┘é╪▒╪ó┘å", Sub: mufti-muhammad-taqi-usmani
+- ID: 16473, Title: "Muasharti Huqooq o Faraiz By Mufti Taqi Usmani ┘à╪╣╪º╪┤╪▒╪¬█î ╪¡┘é┘ê┘é ┘ê ┘ü╪▒╪º╪ª╪╢", Sub: mufti-muhammad-taqi-usmani
+- ID: 15809, Title: "Adalati Faisly By Mufti Muhammad Taqi Usmani ╪╣╪»╪º┘ä╪¬█î ┘ü█î╪╡┘ä█Æ", Sub: mufti-muhammad-taqi-usmani
+- ID: 16879, Title: "Al Libas ul Mahmood By Mufti Abul Kalam Shafiq Qasmi ╪º┘ä┘ä╪¿╪º╪│ ╪º┘ä┘à╪¡┘à┘ê╪»", Sub: mufti-muhammad-taqi-usmani
+- ID: 15850, Title: "khane kay Adaab By Mufti Muhammad Taqi Usmani ┌⌐┌╛╪º┘å█Æ ┌⌐█Æ ╪ó╪»╪º╪¿", Sub: mufti-muhammad-taqi-usmani
+- ID: 16118, Title: "Zikr o Fikr By Mufti Muhammad Taqi Usmani ╪░┌⌐╪▒ ┘ê ┘ü┌⌐╪▒", Sub: mufti-muhammad-taqi-usmani
+- ID: 16145, Title: "Tarashe - ╪¬╪▒╪º╪┤█Æ", Sub: mufti-muhammad-taqi-usmani
+- ID: 16602, Title: "Khutbat e Ramzan By Mufti Muhammad Taqi Usmani ╪«╪╖╪¿╪º╪¬ ╪▒┘à╪╢╪º┘å", Sub: mufti-muhammad-taqi-usmani
+- ID: 16606, Title: "Mawaiz e Usmani By Mufti Muhammad Taqi Usmani ┘à┘ê╪º╪╣╪╕ ╪╣╪½┘à╪º┘å█î", Sub: mufti-muhammad-taqi-usmani
+- ID: 14099, Title: "Fatwa Taaruf, Usool, Adaab By Maulana Muhammad Mansoor Ahmad ┘ü╪¬┘ê█î ╪¬╪╣╪º╪▒┘ü╪î ╪º╪╡┘ê┘ä╪î ╪ó╪»╪º╪¿", Sub: mufti-muhammad-taqi-usmani
+- ID: 21758, Title: "Maqalaat ul Usmani By Mufti Muhammad Taqi Usmani ┘à┘é╪º┘ä╪º╪¬ ╪º┘ä╪╣╪½┘à╪º┘å█î", Sub: mufti-muhammad-taqi-usmani
+- ID: 15446, Title: "Islam ka Nizam e Kharid o Farokht By Mufti Taqi Usmani ╪º╪│┘ä╪º┘à ┌⌐╪º ┘å╪╕╪º┘à ╪«╪▒█î╪» ┘ê ┘ü╪▒┘ê╪«╪¬", Sub: mufti-muhammad-taqi-usmani
+- ID: 13313, Title: "Usool ul Ifta wa Adaabuh By Mufti Taqi Usmani ╪º╪╡┘ê┘ä ╪º┘ä╪º┘ü╪¬╪º╪í ┘ê ╪ó╪»╪º╪¿█ü", Sub: mufti-muhammad-taqi-usmani
+- ID: 18939, Title: "Inam ul Bari Urdu Sharh Sahihul Bukhari By Mufti Muhammad Taqi Usmani ╪º┘å╪╣╪º┘à ╪º┘ä╪¿╪º╪▒█î ╪»╪▒┘ê╪│ ╪¿╪«╪º╪▒█î ╪┤╪▒█î┘ü", Sub: mufti-muhammad-taqi-usmani
+- ID: 13834, Title: "Inam ul Bari Urdu Sharh Sahihul Bukhari By Mufti Muhammad Taqi Usmani ╪º┘å╪╣╪º┘à ╪º┘ä╪¿╪º╪▒█î ╪»╪▒┘ê╪│ ╪¿╪«╪º╪▒█î ╪┤╪▒█î┘ü", Sub: mufti-muhammad-taqi-usmani
+- ID: 14387, Title: "Masala e Sood By Mufti Muhammad Shafi ┘à╪│╪ª┘ä█ü ╪│┘ê╪»", Sub: mufti-muhammad-taqi-usmani
+- ID: 14447, Title: "Sood Par Tareekhi Faisla By Mufti Taqi Usmani ╪│┘ê╪» ┘╛╪▒ ╪¬╪º╪▒█î╪«█î ┘ü█î╪╡┘ä█ü", Sub: mufti-muhammad-taqi-usmani
+- ID: 16091, Title: "Sahafat aur uski Shari Hudood ΓÇô ╪╡╪¡╪º┘ü╪¬ ╪º┘ê╪▒ ╪º╪│┌⌐█î ╪┤╪▒╪╣█î ╪¡╪»┘ê╪»", Sub: mufti-muhammad-taqi-usmani
+- ID: 16102, Title: "Mah e Rajab By Mufti Muhammad Taqi Usmani ┘à╪º█ü ╪▒╪¼╪¿ ┌å┘å╪» ╪║┘ä╪╖ ┘ü█ü┘à█î┘ê┌║ ┌⌐╪º ╪º╪▓╪º┘ä█ü", Sub: mufti-muhammad-taqi-usmani
+- ID: 14873, Title: "Bible se Quran Tak [Izhar ul Haq Urdu] By Mufti Taqi Usmani ╪¿╪º╪ª╪¿┘ä ╪│█Æ ┘é╪▒╪º┘å ╪¬┌⌐", Sub: mufti-muhammad-taqi-usmani
+- ID: 21431, Title: "Fatawa Usmani By Mufti Taqi Usmani ┘ü╪¬╪º┘ê█î ╪╣╪½┘à╪º┘å█î", Sub: mufti-muhammad-taqi-usmani
+- ID: 13527, Title: "Asaan Tarjuma Quran By Mufti Taqi Usmani ╪ó╪│╪º┘å ╪¬╪▒╪¼┘à█ü ┘é╪▒╪º┘å", Sub: mufti-muhammad-taqi-usmani
+- ID: 13770, Title: "Taqreer e Tirmizi Urdu By Mufti Taqi Usmani ╪¬┘é╪▒█î╪▒ ╪¬╪▒┘à╪░█î", Sub: mufti-muhammad-taqi-usmani
+- ID: 13771, Title: "Dars e Tirmizi Urdu By Mufti Taqi Usmani ╪»╪▒╪│ ╪¬╪▒┘à╪░█î ╪º╪▒╪»┘ê", Sub: mufti-muhammad-taqi-usmani
+- ID: 13813, Title: "Fath ul Mulhim / Takmilah Fath ul ┬áMulhim ┘ü╪¬╪¡ ╪º┘ä┘à┘ä█ü┘à ┘à╪╣ ╪¬┌⌐┘à┘ä█ü ╪╣╪▒╪¿█î ╪┤╪▒╪¡ ╪╡╪¡█î╪¡ ┘à╪│┘ä┘à", Sub: mufti-muhammad-taqi-usmani
+- ID: 15474, Title: "Internet aur Jadeed Zarai e Iblagh By IFA India ╪º┘å┘╣╪▒┘å█î┘╣ ╪º┘ê╪▒ ╪¼╪»█î╪» ╪░╪▒╪º╪ª╪╣ ╪º╪¿┘ä╪º╪║", Sub: mufti-muhammad-taqi-usmani
+- ID: 15535, Title: "Dajjali Fitna Ke Numaya Khad o Khal By Maulana Syed Manazir Ahsan Gilani ╪»╪¼╪º┘ä█î ┘ü╪¬┘å█ü ┌⌐█Æ ┘å┘à╪º█î╪º┌║ ╪«╪» ┘ê ╪«╪º┘ä", Sub: mufti-muhammad-taqi-usmani
+- ID: 15729, Title: "Waqia e Shahadat By Mufti Abubakr Jabir, Mufti Ahmadullah Nisar ┘ê╪º┘é╪╣█ü┘ö ╪┤█ü╪º╪»╪¬", Sub: mufti-muhammad-taqi-usmani
+
+Duplicate groups by fuzzy title: 4
+Fuzzy Title: "maqalaat ul usmani by mufti muhammad taqi usmani ┘à┘é╪º┘ä╪º╪¬ ╪º┘ä╪╣╪½┘à╪º┘å█î"
+  -> ID: 21384, Original Title: "Maqalaat ul Usmani By Mufti Muhammad Taqi Usmani ┘à┘é╪º┘ä╪º╪¬ ╪º┘ä╪╣╪½┘à╪º┘å█î"
+  -> ID: 21758, Original Title: "Maqalaat ul Usmani By Mufti Muhammad Taqi Usmani ┘à┘é╪º┘ä╪º╪¬ ╪º┘ä╪╣╪½┘à╪º┘å█î"
+Fuzzy Title: "mawaiz e usmani by mufti muhammad taqi usmani ┘à┘ê╪º╪╣╪╕ ╪╣╪½┘à╪º┘å█î"
+  -> ID: 21386, Original Title: "Mawaiz e Usmani By Mufti Muhammad Taqi Usmani ┘à┘ê╪º╪╣╪╕ ╪╣╪½┘à╪º┘å█î"
+  -> ID: 16606, Original Title: "Mawaiz e Usmani By Mufti Muhammad Taqi Usmani ┘à┘ê╪º╪╣╪╕ ╪╣╪½┘à╪º┘å█î"
+Fuzzy Title: "ilaus sunan by maulana zafar ahmad usmani ╪º╪╣┘ä╪º╪í ╪º┘ä╪│┘å┘å"
+  -> ID: 13847, Original Title: "Ilaus Sunan By Maulana Zafar Ahmad Usmani ╪º╪╣┘ä╪º╪í ╪º┘ä╪│┘å┘å"
+  -> ID: 21404, Original Title: "Ilaus Sunan By Maulana Zafar Ahmad Usmani ╪º╪╣┘ä╪º╪í ╪º┘ä╪│┘å┘å"
+Fuzzy Title: "inam ul bari urdu sharh sahihul bukhari by mufti muhammad taqi usmani ╪º┘å╪╣╪º┘à ╪º┘ä╪¿╪º╪▒█î ╪»╪▒┘ê╪│ ╪¿╪«╪º╪▒█î ╪┤╪▒█î┘ü"
+  -> ID: 18939, Original Title: "Inam ul Bari Urdu Sharh Sahihul Bukhari By Mufti Muhammad Taqi Usmani ╪º┘å╪╣╪º┘à ╪º┘ä╪¿╪º╪▒█î ╪»╪▒┘ê╪│ ╪¿╪«╪º╪▒█î ╪┤╪▒█î┘ü"
+  -> ID: 13834, Original Title: "Inam ul Bari Urdu Sharh Sahihul Bukhari By Mufti Muhammad Taqi Usmani ╪º┘å╪╣╪º┘à ╪º┘ä╪¿╪º╪▒█î ╪»╪▒┘ê╪│ ╪¿╪«╪º╪▒█î ╪┤╪▒█î┘ü"

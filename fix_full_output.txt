@@ -1,0 +1,4 @@
+﻿Running full fixer: besturdubooks + variants + archive.org
+Broken count: 0
+
+Done. Updated: 0 Needs manual: 0

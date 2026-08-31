@@ -1,0 +1,85 @@
+=== Scholar Books Audit (After Palanpuri) ===
+
+Scholar: maulana-sarfaraz-safdar
+  Total Books: 25
+  Multi-Volume: 4
+  Single-Volume Only: 21
+  Sample single-vol titles: Ibaraat e Akabir عبارات اکابر | Ifadaat e Safdariya By Maulana Sarfaraz Khan Safdar افادات صفدریہ از مولانا سرفراز خان صفدر | Durood Sharif Parhne ka Shari Tariqa - درود شریف پڑھنے کا شرعی طریقہ
+
+Scholar: maulana-tariq-jameel
+  Total Books: 11
+  Multi-Volume: 0
+  Single-Volume Only: 11
+  Sample single-vol titles: Sabaq Amoz Waqiat By Maulana Tariq Jameel سبق آموز واقعات | Sabaq Amoz Karguzarian - سبق آموز کارگزاریاں | Allah ko Apna Banalo - اللہ کو اپنا بنالو
+
+Scholar: maulana-zahid-ur-rashdi
+  Total Books: 22
+  Multi-Volume: 0
+  Single-Volume Only: 22
+  Sample single-vol titles: Israel, Alam e Islam aur Pakistan By Maulana Zahid ur Rashdi اسرائیل، عالم اسلام اور پاکستان | Ghamidi ka Tasawwur Hadith wa Sunnat By Maulana Zahid ur Rashdi غامدی صاحب کا تصور حدیث و سنت | Aqwam e Muttahida ka Manshur Islami Nuqta e Nazar se By Maulana Zahid ur Rashdi اقوام متحدہ کا منشور اسلامی نقطہ نظر سے
+
+Scholar: maulana-zakariyya-kandhelvi
+  Total Books: 19
+  Multi-Volume: 0
+  Single-Volume Only: 19
+  Sample single-vol titles: Mery Hazrat Madni By Mufti Muhammad Musab میرے حضرت مدنی | Ikhtilaf ul Aimma - اختلاف الائمہ | Fazail E Sadqaat Urdu By Shaykh ul Hadees Maulana Zakariya فضائل صدقات
+
+Scholar: maulana-zulfiqar-naqshbandi
+  Total Books: 49
+  Multi-Volume: 0
+  Single-Volume Only: 49
+  Sample single-vol titles: Allah ki Muhabbat Paida karne ka Tariqa By Maulana Zulfiqar Ahmad Naqshbandi اللہ کی محبت پیدا کرنے کا طریقہ | Maghfirat ki Sharten By Maulana Zulfiqar Ahmad Naqshbandi مغفرت کی شرطیں | Ba Adab Ba Naseeb - با ادب با نصیب
+
+Scholar: mufti-abu-lubaba
+  Total Books: 15
+  Multi-Volume: 0
+  Single-Volume Only: 15
+  Sample single-vol titles: Qurani Arabi Seekhiay - قرآنی عربی سیکھیے | Likhna Sikhiye By Mufti Abu Lubaba Shah Mansoor لکھنا سیکھیے | Boltay Naqshay - بولتے نقشے
+
+Scholar: mufti-akhtar-imam-adil
+  Total Books: 45
+  Multi-Volume: 0
+  Single-Volume Only: 45
+  Sample single-vol titles: Maulana Abul Mahasin Syed Muhammad Sajjad Bahaisiyat e Bani Jamiat Ulama e Hind - مولانا ابو المحاسن سید محمد سجاد بحیثیت بانی جمعیۃ علماء ہند | Maqam e Mahmud English | Shykh Ahmad Sirhindi - شیخ احمد سرہندی
+
+Scholar: mufti-inam-ul-haq
+  Total Books: 17
+  Multi-Volume: 0
+  Single-Volume Only: 17
+  Sample single-vol titles: Tarawih kay Masail ka Encyclopedia - تراویح کے مسائل انسائیکلوپیڈیا | Tijarat kay Masail ka Encyclopedia By Mufti Inamul Haq Qasmi تجارت کے مسائل انسائیکلوپیڈیا | Al Shafi Urdu Sharh Matn ul Kafi الشافی اردو شرح متن الکافی
+
+Scholar: mufti-muhammad-shafi
+  Total Books: 26
+  Multi-Volume: 0
+  Single-Volume Only: 26
+  Sample single-vol titles: Tafsir Maariful Quran English By Mufti Muhammad Shafi, Revised by Justice Mufti Muhammad Taqi Usmani | Masail e Maarif ul Quran By Mufti Muhammad Shafi مسائل معارف القرآن از مفتی محمد شفیع - انتخاب صوفی محمد اقبال قریشی | Deen o Shariat ki Bunyaden By Mufti Muhammad Shafi دین و شریعت کی بنیادیں
+
+Scholar: mufti-muhammad-taqi-usmani
+  Total Books: 56
+  Multi-Volume: 0
+  Single-Volume Only: 56
+  Sample single-vol titles: Islam Aur Siyasi Nazriyat By Mufti Taqi Usmani اسلام اور سیاسی نظریات | Adalati FaislyBy Mufti Muhammad Taqi Usmani عدالتی فیصلے از مولانا مفتی محمد تقی عثمانی | Maqalaat ul Usmani By Mufti Muhammad Taqi Usmani مقالات العثمانی
+
+Scholar: mufti-jafar-milly
+  Total Books: 7
+  Multi-Volume: 0
+  Single-Volume Only: 7
+  Sample single-vol titles: Maqalat o Mazameen By Mufti Muhammad Jafar Milly مقالات و مضامین | Muhaqqaq o Mudallal Jadeed Masail By Mufti Muhammad Jafar Milly محقق و مدلل جدید مسائل | Kursi par Namaz By Mufti Muhammad Jafar Milly کرسی پر نماز
+
+Scholar: mufti-rasheed-ludhianvi
+  Total Books: 19
+  Multi-Volume: 0
+  Single-Volume Only: 19
+  Sample single-vol titles: Protection of Eyes from Evil Deeds By Mufti Rasheed Ahmad Ludhyanvi | Har Pareshani ka Ilaj By Mufti Rasheed Ahmad Ludhyanvi ہر پریشانی کا علاج | The Cure of All Your Problems and Worries By Mufti Rasheed Ahmad Ludhyanvi
+
+Scholar: mufti-shoaibullah-miftahi
+  Total Books: 35
+  Multi-Volume: 0
+  Single-Volume Only: 35
+  Sample single-vol titles: Anwaul Musannafat fih Hadith انواع المصنفات فى الحديث النبوى | Daleel e Namaz ba Jawab e Hadith e Namaz By Mufti Shuaibullah Khan Miftahi دلیل نماز بہ جواب حدیث نماز | Nafahaat ul Abeer By Mufti Shoaibullah Khan Miftahi نفحات العبیر فی مہمات التفسیر
+
+Scholar: muhammad-ishaq-multani
+  Total Books: 33
+  Multi-Volume: 0
+  Single-Volume Only: 33
+  Sample single-vol titles: Dars e Nizami درس نظامی | Asan Seerat un Nabi [S.A.W] – آسان سیرت النبی ﷺ | Mizaj e Nabvi By Qari Muhammad Ishaq Multani مزاج نبوی

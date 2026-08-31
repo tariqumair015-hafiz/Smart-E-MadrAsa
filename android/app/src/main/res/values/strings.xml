@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Smart e-Madarsa</string>
+    <string name="title_activity_main">Smart e-Madarsa</string>
+    <string name="package_name">com.smartemadarsa.app</string>
+    <string name="custom_url_scheme">com.smartemadarsa.app</string>
+</resources>

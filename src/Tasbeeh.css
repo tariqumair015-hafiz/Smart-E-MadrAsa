@@ -1,0 +1,458 @@
+/* ============================================================
+   TASBEEH – Premium Glassmorphic UI
+   - Fixed: progress ring track always visible
+   - Fixed: layout fits all mobile screens (no page scroll)
+   - Fixed: count display compact on mobile
+   - Fixed: ring starts at 12-o'clock position
+   ============================================================ */
+
+.tasbeeh-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: calc(100dvh - 175px);
+  padding: 10px 12px;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.tasbeeh-header {
+  width: 100%;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--nav-color);
+  border-bottom: 1px solid var(--divider-color);
+  margin-bottom: 10px;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.tasbeeh-title {
+  font-size: 17px;
+  color: var(--gold-color);
+  margin: 0;
+}
+
+/* ── Main Card ─────────────────────────────────────────────── */
+.tasbeeh-card {
+  background: rgba(30, 30, 30, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 24px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 20px rgba(212, 175, 55, 0.05);
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.tasbeeh-card:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+/* ── Count Display ─────────────────────────────────────────── */
+.tasbeeh-count-display {
+  font-size: clamp(36px, 10vw, 56px);
+  font-weight: bold;
+  color: var(--gold-color);
+  font-family: monospace;
+  background: var(--nav-color);
+  padding: 8px 32px;
+  border-radius: 16px;
+  min-width: 160px;
+  text-align: center;
+  box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);
+  letter-spacing: 2px;
+}
+
+/* ── Target & Settings Row ─────────────────────────────────── */
+.tasbeeh-target-info {
+  font-size: 15px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tasbeeh-target-select {
+  background: var(--bg-color);
+  color: var(--text-primary);
+  border: 1px solid var(--gold-color);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+}
+
+/* ── Settings Buttons ──────────────────────────────────────── */
+.tasbeeh-settings-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.tasbeeh-settings-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--nav-color);
+  color: var(--text-secondary);
+  border: 1px solid var(--divider-color);
+  padding: 7px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  font-family: inherit;
+}
+
+.tasbeeh-settings-btn:hover {
+  border-color: var(--gold-color);
+  color: var(--text-primary);
+}
+
+.tasbeeh-settings-btn.active {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--gold-color);
+  color: var(--gold-color);
+}
+
+/* ── Control Row (Target + Sound/Vibe) ─────────────────────── */
+.tasbeeh-control-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px;
+}
+
+.tasbeeh-control-info-row .tasbeeh-target-info {
+  margin-bottom: 0;
+}
+
+.tasbeeh-control-info-row .tasbeeh-settings-row {
+  width: auto;
+  gap: 8px;
+}
+
+/* ── Azkar Horizontal Scroll ───────────────────────────────── */
+.tasbeeh-azkar-scroll {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  overflow-x: auto;
+  padding: 2px 6px 10px 6px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tasbeeh-azkar-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.tasbeeh-azkar-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.tasbeeh-azkar-pill:hover {
+  background: rgba(212, 175, 55, 0.08);
+  border-color: rgba(212, 175, 55, 0.3);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.tasbeeh-azkar-pill.active {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
+  border-color: var(--gold-color);
+  color: var(--gold-color);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+  font-weight: 600;
+}
+
+/* ── Dua Display Box ───────────────────────────────────────── */
+.tasbeeh-dua-display {
+  display: block;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 12px 14px;
+  text-align: center;
+  min-height: 85px;
+  max-height: 120px;
+  overflow-y: auto;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
+  box-sizing: border-box;
+}
+
+.tasbeeh-dua-display::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tasbeeh-dua-display::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 2px;
+}
+
+.tasbeeh-dua-arabic {
+  font-size: clamp(16px, 4.2vw, 20px);
+  line-height: 2.0;
+  font-weight: bold;
+  color: var(--gold-color);
+  text-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+  margin-bottom: 6px;
+  direction: rtl;
+  font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+}
+
+.tasbeeh-dua-translation {
+  font-size: clamp(11px, 3vw, 13px);
+  color: var(--text-secondary);
+  line-height: 1.45;
+  font-weight: normal;
+  max-width: 96%;
+  margin: 0 auto;
+  display: block;
+}
+
+/* ── Reset Button ──────────────────────────────────────────── */
+.tasbeeh-reset-btn {
+  background: transparent;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.tasbeeh-reset-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* ── Circle Container ──────────────────────────────────────── */
+.tasbeeh-circle-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Main Button ───────────────────────────────────────────── */
+.tasbeeh-main-btn {
+  position: relative;
+  z-index: 2;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f5d060, #d4af37 50%, #b8860b);
+  border: none;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.5),
+    0 0 0 2px rgba(212, 175, 55, 0.3),
+    inset 0 4px 8px rgba(255,255,255,0.45),
+    inset 0 -4px 8px rgba(0,0,0,0.3);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tasbeeh-main-btn:active {
+  transform: scale(0.94);
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.5),
+    0 0 0 2px rgba(212, 175, 55, 0.3),
+    inset 0 2px 4px rgba(255,255,255,0.35),
+    inset 0 -2px 4px rgba(0,0,0,0.3);
+}
+
+.tasbeeh-main-btn-inner {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 60% 60%, #b8860b, #d4af37 60%, #f5d060);
+  box-shadow: inset 0 4px 10px rgba(0,0,0,0.4), inset 0 -2px 6px rgba(255,255,255,0.15);
+}
+
+/* ── Progress Ring ─────────────────────────────────────────── */
+.progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  /* Rotate entire SVG so progress starts at 12-o'clock */
+  transform: rotate(-90deg);
+}
+
+.progress-ring-track {
+  /* Always-visible faint background track */
+}
+
+.progress-ring-circle {
+  transition: stroke-dashoffset 0.35s ease;
+}
+
+/* ========================================================
+   RESPONSIVE — max-width: 480px (mobile portrait)
+   ======================================================== */
+@media (max-width: 480px) {
+  .tasbeeh-card {
+    border-radius: 20px;
+    padding: 10px 10px;
+    gap: 10px;
+  }
+
+  .tasbeeh-count-display {
+    padding: 6px 20px;
+    min-width: 140px;
+    border-radius: 12px;
+  }
+
+  .tasbeeh-dua-display {
+    padding: 10px 12px;
+    border-radius: 12px;
+    min-height: 76px;
+    max-height: 110px;
+  }
+}
+
+/* ========================================================
+   RESPONSIVE — max-height: 720px (short viewports)
+   ======================================================== */
+@media (max-height: 720px) {
+  .tasbeeh-container {
+    padding: 6px 10px;
+  }
+
+  .tasbeeh-header {
+    margin-bottom: 6px;
+    padding: 6px;
+  }
+
+  .tasbeeh-title {
+    font-size: 15px;
+  }
+
+  .tasbeeh-card {
+    padding: 8px 10px;
+    gap: 8px;
+    border-radius: 18px;
+  }
+
+  .tasbeeh-azkar-scroll {
+    padding: 2px 4px 6px 4px;
+  }
+
+  .tasbeeh-azkar-pill {
+    height: 30px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .tasbeeh-dua-display {
+    padding: 8px 10px;
+    min-height: 58px;
+    max-height: 82px;
+  }
+
+  .tasbeeh-dua-arabic {
+    font-size: 15px;
+    line-height: 1.85;
+    margin-bottom: 2px;
+  }
+
+  .tasbeeh-dua-translation {
+    font-size: 11px;
+  }
+
+  .tasbeeh-control-info-row {
+    padding-bottom: 6px;
+  }
+
+  .tasbeeh-count-display {
+    font-size: 34px;
+    padding: 5px 16px;
+    min-width: 130px;
+    border-radius: 10px;
+  }
+
+  .tasbeeh-circle-container {
+    transform: scale(0.85);
+    margin: -10px 0;
+  }
+
+  .tasbeeh-reset-btn {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+}
+
+/* ========================================================
+   RESPONSIVE — max-height: 600px (very short viewports)
+   ======================================================== */
+@media (max-height: 600px) {
+  .tasbeeh-circle-container {
+    transform: scale(0.72);
+    margin: -20px 0;
+  }
+
+  .tasbeeh-card {
+    gap: 5px;
+  }
+
+  .tasbeeh-dua-display {
+    max-height: 62px;
+  }
+
+  .tasbeeh-count-display {
+    font-size: 28px;
+    padding: 4px 12px;
+  }
+}

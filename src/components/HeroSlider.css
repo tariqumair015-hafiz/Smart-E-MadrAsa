@@ -1,0 +1,108 @@
+/* ====== Hero Auto Slider Styles ====== */
+.hero-slider-container {
+  margin: 16px;
+  height: 160px; /* Fixed height so the page doesn't jump */
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 30px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(1.05); /* Slight zoom-in for cross-fade */
+  transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none; /* Let clicks pass through if it's animating/hidden */
+  z-index: 1;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  z-index: 2;
+}
+
+/* Base title styles matching existing hero */
+.hero-slide .hero-title {
+  color: var(--gold-color);
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 3;
+}
+
+.hero-slide .hero-subtitle {
+  color: #fff;
+  font-size: 14px;
+  margin: 0;
+  position: relative;
+  z-index: 3;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Subtle background overlay pattern to make it premium */
+.hero-overlay-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  background-image: radial-gradient(var(--gold-color) 1px, transparent 1px);
+  background-size: 14px 14px;
+  z-index: 2;
+  mix-blend-mode: overlay;
+}
+
+/* Distinct Premium Gradient Backgrounds for the slides */
+.gradient-green-gold {
+  background: linear-gradient(135deg, #09301e 0%, #0e4c2f 50%, #15623e 100%);
+}
+
+.gradient-dark-emerald {
+  background: linear-gradient(135deg, #071f15 0%, #0d2a1d 50%, #12412c 100%);
+}
+
+.gradient-deep-teal {
+  background: linear-gradient(135deg, #062329 0%, #0c363d 50%, #17545e 100%);
+}
+
+/* Indicators */
+.hero-slider-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.slider-dot.active {
+  background-color: var(--gold-color);
+  width: 24px;
+  border-radius: 4px; /* Stretches the active dot into a pill */
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+}

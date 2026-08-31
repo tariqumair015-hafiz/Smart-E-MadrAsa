@@ -1,0 +1,287 @@
+/* ===== Ulama Profile Card Coverflow ===== */
+
+.coverflow-wrapper {
+  width: 100%;
+  padding: 8px 0 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  overflow: visible;
+}
+
+/* 3D perspective container */
+.coverflow-scene {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 950px;
+  perspective-origin: 50% 50%;
+}
+
+/* === Scholar Card === */
+.coverflow-card {
+  position: absolute;
+  width: 148px;
+  height: 218px;
+  border-radius: 22px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px 12px 12px;
+  gap: 8px;
+  background: var(--card-color);
+  border: 1px solid var(--divider-color);
+  overflow: hidden;
+  transition:
+    transform 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+    filter 0.6s ease,
+    opacity 0.6s ease,
+    box-shadow 0.6s ease;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform-style: preserve-3d;
+}
+
+/* Center card elevated + glowing — FIXED HEIGHT & SPACING */
+.coverflow-card.active {
+  height: 290px;
+  /* Thori height barha di */
+  padding-bottom: 20px;
+  /* Bottom se fasla barha diya */
+  background: var(--nav-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Button ko hamesha bottom par rakhega par faslay ke sath */
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(212, 175, 55, 0.3),
+    0 0 30px rgba(212, 175, 55, 0.08);
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .coverflow-scene {
+    height: 250px;
+    perspective: 800px;
+  }
+
+  .coverflow-card {
+    width: 140px;
+    height: 198px;
+  }
+
+  .coverflow-card.active {
+    height: 285px;
+    padding: 16px 12px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* === View Profile Button — FIXED MARGINS === */
+.scholar-profile-btn {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.22), rgba(180, 130, 20, 0.12));
+  color: #f0d080;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  text-align: center;
+  letter-spacing: 0.3px;
+  margin-top: 10px;
+  /* Fixed gap from text */
+  margin-bottom: 5px;
+  /* Fixed gap from bottom edge */
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.scholar-profile-btn:hover {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.38), rgba(180, 130, 20, 0.22));
+  transform: scale(1.03);
+}
+
+.scholar-profile-btn:active {
+  transform: scale(0.97);
+}
+
+/* === Circular Photo (Profile Style) === */
+.scholar-img-wrapper {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--nav-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+  background: var(--card-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  transition: all 0.3s;
+}
+
+.coverflow-card.active .scholar-img-wrapper {
+  width: 110px;
+  height: 110px;
+  margin-top: 16px;
+  border-color: var(--gold-color);
+}
+
+@media (max-width: 480px) {
+  .scholar-img-wrapper {
+    width: 75px;
+    height: 75px;
+  }
+
+  .coverflow-card.active .scholar-img-wrapper {
+    width: 90px;
+    height: 90px;
+    margin-top: 12px;
+  }
+}
+
+.scholar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  /* ← ye add karo */
+}
+
+.scholar-fallback {
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #1a3a2a, #0d2018);
+}
+
+/* === Info Section === */
+.card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: auto;
+  /* Content ko upar push karega */
+}
+
+.card-rating {
+  font-size: 11px;
+  color: var(--gold-color);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.card-title {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+.coverflow-card.active .card-title {
+  font-size: 14px;
+}
+
+.card-subtitle {
+  color: var(--text-secondary);
+  font-size: 10px;
+  text-align: center;
+  line-height: 1.3;
+  max-width: 100%;
+}
+
+.urdu-text .card-title {
+  font-family: 'Amiri', 'Inter', serif;
+  font-size: 17px;
+}
+
+.coverflow-card.active .urdu-text .card-title {
+  font-size: 20px;
+}
+
+.urdu-text .card-subtitle {
+  font-size: 12px;
+}
+
+@media (max-width: 480px) {
+
+  .card-title,
+  .urdu-text .card-title {
+    font-size: 14px;
+  }
+
+  .coverflow-card.active .card-title,
+  .coverflow-card.active .urdu-text .card-title {
+    font-size: 16px;
+  }
+}
+
+/* === Shine overlay === */
+.coverflow-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(155deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 55%,
+      rgba(0, 0, 0, 0.08) 100%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* === Dots === */
+.coverflow-dots {
+  display: none;
+}
+
+.coverflow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.coverflow-dot.active {
+  background: #c9973a;
+  width: 18px;
+  border-radius: 3px;
+  box-shadow: 0 0 6px rgba(201, 151, 58, 0.7);
+}

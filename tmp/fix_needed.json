@@ -1,0 +1,391 @@
+{
+  "corrupted_titles": [
+    {
+      "id": 19283,
+      "title": "Noor ul Izah نور الایضاح و نجاۃ الارواح مکتبۃ کنوز العلمExpandExpandExpandExpand",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear/NOOR-UL-AIZAH-O-NAJAT-UL-ARWAH.pdf"
+    },
+    {
+      "id": 19284,
+      "title": "Noor ul Izah  نور الایضاح مکتبۃ رحمانیہExpandExpandExpandExpandExpandExpandExpan",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear/NOOR%20UL%20EZAH%20RAHMANIA.pdf"
+    },
+    {
+      "id": 19285,
+      "title": "Noor ul Izah  نور الایضاح مکتبۃ البشریExpandExpandExpandExpandExpandExpandExpand",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear_02/NoorUlEzahAlBushraColor.pdf"
+    },
+    {
+      "id": 19286,
+      "title": "Hashia Al Tahtawi Ala Maraqi al Falah حاشیۃ الطحطاوی علی مراقی الفلاحExpandExpan",
+      "pdf_url": "https://archive.org/download/besturdubooks2/Hashia-Al-Tahtawi.pdf"
+    },
+    {
+      "id": 19287,
+      "title": "Maraqi al Falah Arabic Sharh Noor ul Izah مراقی الفلاح عربی شرح نور الایضاحExpan",
+      "pdf_url": "https://archive.org/download/besturdubooks2/Maraqil-Falah.pdf"
+    },
+    {
+      "id": 19288,
+      "title": "Shifa ul Arwah Urdu Sharh Noor ul Izah By Maulana Muhammad Rafiq Surti شفاء الار",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear/Shifa-Ul-Arwaah-Urdu-Sharah-Noor-Ezah.pdf"
+    },
+    {
+      "id": 19289,
+      "title": "Samaratun Najah Urdu Sharh Noor ul Izah By Maulana Samiruddin Qasmi ثمرۃ النجاح ",
+      "pdf_url": "https://archive.org/download/SamaratUnNajah/Samarat_Un_Najah_Vol_1.pdf"
+    },
+    {
+      "id": 19290,
+      "title": "Imdad ul Fattah Arabic Sharh Noor ul Izah امداد الفتاح عربی شرح نورالایضاحExpand",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear/IMDAD%20UL%20FATTAH%20ARABIC%20SHAR%20NOOR%20UL%20IZAH.pdf"
+    },
+    {
+      "id": 19291,
+      "title": "Anwar ul Izah Urdu Sharh Noor ul Izah By Mufti Waseem Ahmad Qasmi انوار الایضاح ",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear/AnwaarUlEizahUrduSharhNoorUlEizah.pdf"
+    },
+    {
+      "id": 19292,
+      "title": "Noor ul Isbah Urdu Sharh Noor ul Izah نور الاصباح اردو شرح نور الایضاحExpandExpa",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear/NoorUlIsbahUrduSharhNoorUlEizah.pdf"
+    },
+    {
+      "id": 19293,
+      "title": "Ashraf ul Izah Urdu Sharh Noor ul Izah By Maulana Mukhtar Ali اشرف الایضاح اردو ",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear/AshrafUlEizahUrduSharhNoorUlEizah.pdf"
+    },
+    {
+      "id": 19294,
+      "title": "Takmil ul Izah Urdu Sharh Noor ul Izah By Maulana Abul Kalam Wasim تکمیل الایضاح",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear/TakmeelUlEizahUrduSharhNoorUlEizah.pdf"
+    },
+    {
+      "id": 19295,
+      "title": "Al Fiqh ul Muyassar By Maulana Shafiq ur Rahman Nadwi الفقہ المیسرExpandExpandEx",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear/AlFiqhUlMuyassar.pdf"
+    },
+    {
+      "id": 19296,
+      "title": "Al Fiqh ul Muyassar Urdu By Muhammad Azhar ul Islam الفقہ المیسر اردوExpandExpan",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear/AL-FIQH-UL-MUYASSAR-URDU.pdf"
+    },
+    {
+      "id": 19297,
+      "title": "Untitled",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear_02/KaremaSadeeAlBushraColor.pdf"
+    },
+    {
+      "id": 19298,
+      "title": "Untitled",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear/KIMIY_URDU_SHARH_KARIMA.pdf"
+    },
+    {
+      "id": 19299,
+      "title": "Untitled",
+      "pdf_url": "https://archive.org/download/GoharBeBaha/Gohar_Be_Baha.pdf"
+    },
+    {
+      "id": 19300,
+      "title": "Untitled",
+      "pdf_url": "https://archive.org/download/feb2024/RAHEEMA_SHARH_KAREEMA.pdf"
+    },
+    {
+      "id": 19301,
+      "title": "Nahw Meer Urdu By Maulana Nazir Husain نحو میر اردوExpandExpandExpandExpandExpan",
+      "pdf_url": "https://archive.org/download/mnhbooks/NAHWMEER_URDU.pdf"
+    },
+    {
+      "id": 19302,
+      "title": "Rahnuma e Tarkeeb By Maulana Nazir Husain رہنمائے ترکیبExpandExpandExpandExpandE",
+      "pdf_url": "https://archive.org/download/mnhbooks/RAHNUMA_E_TARKEEB.pdf"
+    },
+    {
+      "id": 19303,
+      "title": "Qanooncha e Usmani By Maulana Fazal Mabood Usmani قانونچہ عثمانیExpandExpandExpa",
+      "pdf_url": "https://archive.org/download/q-e-usmani/QANOONCHA_E_USMANI.pdf"
+    },
+    {
+      "id": 19304,
+      "title": "Kshful Awamil Sharh Sharh-e-Miata Amil By Maulana Dr. Muhammad Haroon کشف العوام",
+      "pdf_url": "https://archive.org/download/DarsENizami_DarjaAula_1stYear_02/KASHF_UL_AWAMIL_SHARH_SHARH_E_MIATA_AMIL.pdf"
+    }
+  ],
+  "no_cover_ids": [
+    {
+      "id": 19283,
+      "title": "Noor ul Izah نور الایضاح و نجاۃ الارواح مکتبۃ کنوز العلمExpandExpandExpandExpand"
+    },
+    {
+      "id": 19284,
+      "title": "Noor ul Izah  نور الایضاح مکتبۃ رحمانیہExpandExpandExpandExpandExpandExpandExpan"
+    },
+    {
+      "id": 19285,
+      "title": "Noor ul Izah  نور الایضاح مکتبۃ البشریExpandExpandExpandExpandExpandExpandExpand"
+    },
+    {
+      "id": 19286,
+      "title": "Hashia Al Tahtawi Ala Maraqi al Falah حاشیۃ الطحطاوی علی مراقی الفلاحExpandExpan"
+    },
+    {
+      "id": 19287,
+      "title": "Maraqi al Falah Arabic Sharh Noor ul Izah مراقی الفلاح عربی شرح نور الایضاحExpan"
+    },
+    {
+      "id": 19288,
+      "title": "Shifa ul Arwah Urdu Sharh Noor ul Izah By Maulana Muhammad Rafiq Surti شفاء الار"
+    },
+    {
+      "id": 19289,
+      "title": "Samaratun Najah Urdu Sharh Noor ul Izah By Maulana Samiruddin Qasmi ثمرۃ النجاح "
+    },
+    {
+      "id": 19290,
+      "title": "Imdad ul Fattah Arabic Sharh Noor ul Izah امداد الفتاح عربی شرح نورالایضاحExpand"
+    },
+    {
+      "id": 19291,
+      "title": "Anwar ul Izah Urdu Sharh Noor ul Izah By Mufti Waseem Ahmad Qasmi انوار الایضاح "
+    },
+    {
+      "id": 19292,
+      "title": "Noor ul Isbah Urdu Sharh Noor ul Izah نور الاصباح اردو شرح نور الایضاحExpandExpa"
+    },
+    {
+      "id": 19293,
+      "title": "Ashraf ul Izah Urdu Sharh Noor ul Izah By Maulana Mukhtar Ali اشرف الایضاح اردو "
+    },
+    {
+      "id": 19294,
+      "title": "Takmil ul Izah Urdu Sharh Noor ul Izah By Maulana Abul Kalam Wasim تکمیل الایضاح"
+    },
+    {
+      "id": 19295,
+      "title": "Al Fiqh ul Muyassar By Maulana Shafiq ur Rahman Nadwi الفقہ المیسرExpandExpandEx"
+    },
+    {
+      "id": 19296,
+      "title": "Al Fiqh ul Muyassar Urdu By Muhammad Azhar ul Islam الفقہ المیسر اردوExpandExpan"
+    },
+    {
+      "id": 19297,
+      "title": "Untitled"
+    },
+    {
+      "id": 19298,
+      "title": "Untitled"
+    },
+    {
+      "id": 19299,
+      "title": "Untitled"
+    },
+    {
+      "id": 19300,
+      "title": "Untitled"
+    },
+    {
+      "id": 19301,
+      "title": "Nahw Meer Urdu By Maulana Nazir Husain نحو میر اردوExpandExpandExpandExpandExpan"
+    },
+    {
+      "id": 19302,
+      "title": "Rahnuma e Tarkeeb By Maulana Nazir Husain رہنمائے ترکیبExpandExpandExpandExpandE"
+    },
+    {
+      "id": 19303,
+      "title": "Qanooncha e Usmani By Maulana Fazal Mabood Usmani قانونچہ عثمانیExpandExpandExpa"
+    },
+    {
+      "id": 19304,
+      "title": "Kshful Awamil Sharh Sharh-e-Miata Amil By Maulana Dr. Muhammad Haroon کشف العوام"
+    }
+  ],
+  "sharah_misclassified": [
+    {
+      "id": 17122,
+      "title": "Tanveer Urdu Sharh Nahwmeer",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19160,
+      "title": "Ashraf un Nahw Sharah Urdu Nahw Mir By Maulana Mohsin Ranuj اشرف النحو شرح اردو ",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19161,
+      "title": "Durr e Benazir Urdu Sharh Nahw Mir By Maulana Muhammad Yunus Qasmi در بے نظیر ار",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19162,
+      "title": "Reehul Abeer Urdu Sharh Nahw mir - ریح العبیر اردو شرح نحومیر",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19163,
+      "title": "Tazkeer Urdu Sharh Nahw Meer - تذکیر اردو شرح نحومیر",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19164,
+      "title": "Badr e Muneer Urdu Sharh Nahw Meer",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19165,
+      "title": "Hadya e Sagheer Urdu Sharh Nahwmee",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19166,
+      "title": "Al Tanveer Urdu Sharh Nahwmeer",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19168,
+      "title": "Badrus Saeed Sharah e Urdu Nahwmir By Qazi Saeed Ahmad Al Hasani بدر السعید شرح ",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19170,
+      "title": "Sayul Faqeer Urdu Sharh NahwMeer",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19172,
+      "title": "Dhawul Mustanir Urdu Sharah Nahwmir By Maulana Muhammad Zahid Mazahiri ضوء المست",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19173,
+      "title": "Kaukab ul Munir Sharah Urdu Nahwmir By Maulana Abul Hasan کوکب المنیر شرح اردو ن",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19178,
+      "title": "Irshad Al Tamreen Sharh Urdu Irshad Al Sarf By Maulana Jamal ud Din Nomani ارشاد",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19179,
+      "title": "Mihaj us Sarf Urdu Sharh Irshad Us Sarf",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19180,
+      "title": "Tanweer us Sarf Urdu Sharh Irshad Us Sarf",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19181,
+      "title": "Izhar us Sadaf Urdu Sharh Irshad us Sarf",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19182,
+      "title": "Khair uz Zad Urdu Sharh Irshad us Sarf",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19184,
+      "title": "Maarif Us Sarf Urdu Sharh Irshad Us Sarf",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19185,
+      "title": "Imla Us Sarf Urdu Sharh Irshad Us Sarf",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19186,
+      "title": "Anwaar Us Sarf Urdu Sharh Irshad Us Sarf",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19191,
+      "title": "Sharh e Miata Aamil Rashidia",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19192,
+      "title": "Sharh e Miata Aamil Al Bushra",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19193,
+      "title": "Sharh e Miata Aamil شرح مائۃ عامل",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19194,
+      "title": "AL BASHEER UL KAMIL Sharh urdu Sharh e Miata Aamil",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19203,
+      "title": "Riaz Un Nahw Urdu Sharh Tasheel Un Nahw",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19209,
+      "title": "Sharh Ilm us Sarf Awwalain - شرح علم الصرف اولین",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19225,
+      "title": "Al Hadaiq ul Arabia Urdu Sharh Al Tariqat ul Asria",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19230,
+      "title": "Tafheem ul Muta'allim Sharh Taleem ul Muta'allim By Mufti Muhammad Abdul Razzaq ",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19235,
+      "title": "Ganjina e Sarf Urdu Sharah Panj Gang By Maulana Syed Fakhruddin Ahmad گنجینہ صرف",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19287,
+      "title": "Maraqi al Falah Arabic Sharh Noor ul Izah مراقی الفلاح عربی شرح نور الایضاحExpan",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19288,
+      "title": "Shifa ul Arwah Urdu Sharh Noor ul Izah By Maulana Muhammad Rafiq Surti شفاء الار",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19289,
+      "title": "Samaratun Najah Urdu Sharh Noor ul Izah By Maulana Samiruddin Qasmi ثمرۃ النجاح ",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19290,
+      "title": "Imdad ul Fattah Arabic Sharh Noor ul Izah امداد الفتاح عربی شرح نورالایضاحExpand",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19291,
+      "title": "Anwar ul Izah Urdu Sharh Noor ul Izah By Mufti Waseem Ahmad Qasmi انوار الایضاح ",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19292,
+      "title": "Noor ul Isbah Urdu Sharh Noor ul Izah نور الاصباح اردو شرح نور الایضاحExpandExpa",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19293,
+      "title": "Ashraf ul Izah Urdu Sharh Noor ul Izah By Maulana Mukhtar Ali اشرف الایضاح اردو ",
+      "sub": "درسی کتب"
+    },
+    {
+      "id": 19294,
+      "title": "Takmil ul Izah Urdu Sharh Noor ul Izah By Maulana Abul Kalam Wasim تکمیل الایضاح",
+      "sub": "درسی کتب"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+/* ====== Premium Animated Logo Styles ====== */
+
+.animated-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.animated-logo-container:hover {
+  transform: scale(1.05);
+}
+
+.premium-logo {
+  width: 100%;
+  height: 100%;
+}
+
+/* Subtle, majestic slow spin for the sunburst base layer */
+.spin-slow {
+  transform-origin: 80px 80px;
+  animation: spinSlow 40s linear infinite;
+}
+
+/* Faster reverse spin for the dashed accent rings */
+.spin-reverse {
+  transform-origin: 80px 80px;
+  animation: spinReverse 20s linear infinite;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* Elegant floating up/down and subtle tilt for the crescent/star */
+.float-tilt {
+  transform-origin: 84px 23px;
+  animation: floatTilt 4s ease-in-out infinite;
+}
+
+@keyframes floatTilt {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-4px) rotate(5deg); 
+  }
+}
+
+/* Sparkle element base setup */
+.sparkle {
+  transform-origin: center;
+}
+
+/* Different pulsing layers for sparkles */
+.pulse-1 {
+  animation: pulseSparkle 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  transform-origin: 40px 44px;
+}
+
+.pulse-2 {
+  animation: pulseSparkle 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite 0.7s;
+  transform-origin: 120px 45px;
+}
+
+.pulse-3 {
+  animation: pulseSparkle 4s cubic-bezier(0.4, 0, 0.2, 1) infinite 1.2s;
+  transform-origin: 45px 115px;
+}
+
+.pulse-4 {
+  animation: pulseSparkleSubtle 5s ease-in-out infinite 0.3s;
+}
+
+@keyframes pulseSparkle {
+  0%, 100% { 
+    opacity: 0.1; 
+    transform: scale(0.5) rotate(0deg); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.2) rotate(45deg); 
+  }
+}
+
+@keyframes pulseSparkleSubtle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+/* Text Arc hover effect */
+.logo-text-group {
+  transform-origin: 80px 80px;
+  /* Make the base text slightly smaller so when it scales up it doesn't clip the 160x160 viewBox */
+  transform: scale(0.95);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animated-logo-container:hover .logo-text-group {
+  /* Scales the text ring outwards exactly to the outer border */
+  transform: scale(1.06); /* Reduced to avoid viewBox clipping H and P */
+}
+
+.logo-text-group text {
+  transition: letter-spacing 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animated-logo-container:hover .logo-text-group text {
+  /* give it a bit more breathing room as it expands */
+  letter-spacing: 2px;
+}
+
+/* Also enlarge the whole logo container slightly on hover as requested */
+.animated-logo-container:hover {
+  transform: scale(1.12);
+}

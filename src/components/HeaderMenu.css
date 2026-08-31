@@ -1,0 +1,218 @@
+.header-menu-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Hamburger button in top bar */
+.hamburger-menu-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--divider-color);
+  color: var(--text-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.hamburger-menu-btn:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--gold-color);
+  color: var(--gold-color);
+  transform: scale(1.05);
+}
+
+.hamburger-menu-btn:active,
+.hamburger-menu-btn.active {
+  background: var(--gold-color);
+  border-color: var(--gold-color);
+  color: #000;
+  transform: scale(0.96);
+}
+
+/* Dropdown menu modal */
+.header-menu-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 270px;
+  background: var(--nav-color);
+  border: 1px solid var(--divider-color);
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(212, 175, 55, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 12px;
+  z-index: 9999;
+  animation: menuDropDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: top right;
+}
+
+.header-menu-dropdown.rtl {
+  direction: rtl;
+  text-align: right;
+  right: 0;
+  left: auto;
+  transform-origin: top right;
+}
+
+.header-menu-dropdown.ltr {
+  direction: ltr;
+  text-align: left;
+  right: 0;
+  left: auto;
+  transform-origin: top right;
+}
+
+@keyframes menuDropDown {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px 8px;
+}
+
+.menu-header-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold-color);
+  letter-spacing: 0.5px;
+}
+
+.menu-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.menu-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.menu-divider {
+  height: 1px;
+  background: var(--divider-color);
+  margin: 6px 0;
+  opacity: 0.7;
+}
+
+.menu-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-item-btn {
+  background: transparent;
+  border: none;
+  width: 100%;
+  padding: 10px 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.menu-item-btn:hover {
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.menu-item-btn:active {
+  transform: scale(0.98);
+}
+
+.menu-item-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--gold-color);
+  transition: all 0.2s ease;
+}
+
+.menu-item-btn:hover .menu-item-icon {
+  background: var(--gold-color);
+  color: #000;
+}
+
+.menu-item-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.menu-item-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-item-sub {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-badge-pill {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: var(--gold-color);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* Light Theme Adjustments */
+body.light-theme .hamburger-menu-btn {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .header-menu-dropdown {
+  background: #ffffff;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .menu-item-icon {
+  background: rgba(0, 0, 0, 0.04);
+}
