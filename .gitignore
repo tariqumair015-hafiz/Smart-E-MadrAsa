@@ -1,26 +1,92 @@
-# Logs
-logs
+# ─── Dependencies ───────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ─── Build output ───────────────────────────────────────────
+dist/
+dist-ssr/
+build/
+
+# ─── SECRETS – NEVER COMMIT THESE ───────────────────────────
+env_config.json
+.env
+.env.*
+!.env.example
+
+# ─── Android / iOS native builds ────────────────────────────
+android/
+ios/
+
+# ─── APK / AAB binary builds ─────────────────────────────────
+*.apk
+*.aab
+*.keystore
+*.jks
+
+# ─── OCR training data (large binaries) ──────────────────────
+*.traineddata
+
+# ─── Generated files (rebuilt every npm run build) ───────────
+public/books_metadata.json
+
+# ─── Large backup / temp files ───────────────────────────────
+books_metadata_backup_fresh.json
+tmp/
+scratch/
+*.tmp
+*.tmp.driveupload/
+.tmp.driveupload/
+
+# ─── Logs ────────────────────────────────────────────────────
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+*.log
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+# ─── IDE / OS ─────────────────────────────────────────────────
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-.tmp.driveupload/
-*.tmp
+Thumbs.db
+
+# ─── Wrangler (Cloudflare) local state ───────────────────────
+.wrangler/
+
+# ─── Misc generated files ────────────────────────────────────
+vite_debug.log
+vite_run.log
+build.log
+bypass.log
+npm-install.log
+inspect.out
+dom_output*.txt
+pw_html.txt
+page_dump.html
+cover_report.txt
+null_covers_list.txt
+recent_changes.txt
+repair_*.txt
+fix_*_output.txt
+missing_covers_report.txt
+size_report.txt
+failed_covers.txt
+broken_covers_report.md
+duplicates_cover_report.md
+duplicates_report_v*.md
+title_filename_mismatches.md
+hidden_books_list*.md
+full_cover_audit.txt
+TRADERS/
+playstore_screenshots/
+besturubu_tmp.html
