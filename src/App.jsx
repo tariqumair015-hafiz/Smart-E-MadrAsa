@@ -859,28 +859,27 @@ function App() {
         setBooks(cached.filter(b => b.sub_category !== 'pending' && b.sub_category !== 'pending_approval'));
       }
 
-      // 2. Data sirf Cloudflare (https://smart-e-madrasa.pakdigitalz.com/books_metadata.json) se fetch ho — koi Supabase fallback nahi
+      // 2. Data Cloudflare /books_metadata.json se fetch ho — pehle relative path try karein
       let fetchedBooks = [];
       try {
-        const resAbs = await fetch('https://smart-e-madrasa.pakdigitalz.com/books_metadata.json?v=' + Date.now());
-        if (resAbs.ok) {
-          fetchedBooks = await resAbs.json();
+        const resRel = await fetch('/books_metadata.json?v=' + Date.now());
+        if (resRel.ok) {
+          fetchedBooks = await resRel.json();
         } else {
-          // Relative path fallback (agar Cloudflare same domain par host ho)
-          const resRel = await fetch('/books_metadata.json?v=' + Date.now());
-          if (resRel.ok) {
-            fetchedBooks = await resRel.json();
+          const resAbs = await fetch('https://smart-e-madrasa.pakdigitalz.com/books_metadata.json?v=' + Date.now());
+          if (resAbs.ok) {
+            fetchedBooks = await resAbs.json();
           }
         }
       } catch (err) {
-        console.warn("Cloudflare books_metadata.json fetch error, attempting relative fetch:", err);
+        console.warn("Relative fetch error, attempting absolute Cloudflare domain fetch:", err);
         try {
-          const resRel = await fetch('/books_metadata.json?v=' + Date.now());
-          if (resRel.ok) {
-            fetchedBooks = await resRel.json();
+          const resAbs = await fetch('https://smart-e-madrasa.pakdigitalz.com/books_metadata.json?v=' + Date.now());
+          if (resAbs.ok) {
+            fetchedBooks = await resAbs.json();
           }
         } catch (e2) {
-          console.warn("Relative books fetch also failed:", e2);
+          console.warn("Absolute books fetch also failed:", e2);
         }
       }
 

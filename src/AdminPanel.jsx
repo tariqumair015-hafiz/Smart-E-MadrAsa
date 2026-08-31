@@ -460,23 +460,29 @@ const AdminPanel = () => {
   /* --------------------------------------------------------- */
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setIsAuthenticated(!!session);
-      if (session) {
-        fetchStats();
-      }
-    });
+    try {
+      supabase.auth.getSession().then(({ data }) => {
+        const session = data?.session;
+        setIsAuthenticated(!!session);
+        if (session) {
+          fetchStats();
+        }
+      }).catch(err => console.warn("Supabase auth session check warning:", err));
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsAuthenticated(!!session);
-      if (session) {
-        fetchStats();
-      } else {
-        setBooks([]);
-      }
-    });
+      const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+        setIsAuthenticated(!!session);
+        if (session) {
+          fetchStats();
+        } else {
+          setBooks([]);
+        }
+      });
+      const subscription = data?.subscription;
 
-    return () => subscription.unsubscribe();
+      return () => { if (subscription) subscription.unsubscribe(); };
+    } catch (e) {
+      console.warn("Supabase auth listener setup warning:", e);
+    }
   }, []);
 
   useEffect(() => {
