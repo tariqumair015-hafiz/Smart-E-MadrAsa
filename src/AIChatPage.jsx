@@ -7,10 +7,6 @@ const localforage = localforageModule.default || localforageModule;
 
 // ── Config ────────────────────────────────────────────────
 const GROQ_API_KEY = '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';
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
-
-// ── Config ────────────────────────────────────────────────
-const GROQ_API_KEY = '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';
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyCfQPS2TT54s6dx8HRxkThLg8ZceEQhrYI';
 
 const SYSTEM_PROMPT = `Aap Smart e-Madarsa ke AI Islamic Scholar hain.
