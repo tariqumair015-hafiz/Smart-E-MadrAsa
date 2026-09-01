@@ -851,11 +851,12 @@ function App() {
 
   async function fetchBooks() {
     try {
-      const CACHE_KEY = 'cached_books_jsondata_v2';
+      const CACHE_KEY = 'cached_books_jsondata_v3';
       
       // 1. Pehle localforage local cache se load karein (fast instant render ke liye)
       const cached = await localforage.getItem(CACHE_KEY);
       if (cached && Array.isArray(cached) && cached.length > 0) {
+        console.log('📚 Instant load from local cache:', cached.length);
         setBooks(cached.filter(b => b.sub_category !== 'pending' && b.sub_category !== 'pending_approval'));
       }
 
@@ -865,10 +866,12 @@ function App() {
         const resRel = await fetch('/books_metadata.json?v=' + Date.now());
         if (resRel.ok) {
           fetchedBooks = await resRel.json();
+          console.log('✅ Fetched books_metadata.json via relative path:', fetchedBooks.length);
         } else {
           const resAbs = await fetch('https://smart-e-madrasa.pakdigitalz.com/books_metadata.json?v=' + Date.now());
           if (resAbs.ok) {
             fetchedBooks = await resAbs.json();
+            console.log('✅ Fetched books_metadata.json via absolute domain:', fetchedBooks.length);
           }
         }
       } catch (err) {
@@ -885,16 +888,18 @@ function App() {
 
       if (fetchedBooks && fetchedBooks.length > 0) {
         const approvedBooks = fetchedBooks.filter(b => b.sub_category !== 'pending' && b.sub_category !== 'pending_approval');
+        console.log('🎉 Setting books in React state:', approvedBooks.length);
         setBooks(approvedBooks);
         await localforage.setItem(CACHE_KEY, approvedBooks);
       } else if (!cached || cached.length === 0) {
-        // Agar Cloudflare fetch fail ho jaye aur local cache bhi na ho, to empty list dikhayein
         setBooks([]);
       }
     } catch (e) { 
       console.error("Cloudflare Books Fetch failure:", e);
-      const cached = await localforage.getItem('cached_books_jsondata_v2');
-      if (!cached || cached.length === 0) {
+      const cached = await localforage.getItem('cached_books_jsondata_v3');
+      if (cached && cached.length > 0) {
+        setBooks(cached);
+      } else {
         setBooks([]);
       }
     }
