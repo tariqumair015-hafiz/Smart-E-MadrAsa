@@ -51,6 +51,12 @@ filesToMerge.forEach(file => {
       seenTitles.add(dedupeKey);
 
       let coverUrl = item.cover_url || item.cover || '';
+      
+      // Filter out known generic scraped placeholder covers that cause mismatch across books
+      if (coverUrl.includes('KHUTBAT_E_JUMA_WA_EIDAIN.jpg') && !title.includes('خطبات جمعہ') && !title.includes('Khutbat')) {
+        coverUrl = item.id ? `https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/cover_${item.id}.jpg` : '';
+      }
+
       if (coverUrl.includes('supabase.co')) {
         coverUrl = coverUrl.replace(/https:\/\/ymizqgtlnhvkqlidftiy\.supabase\.co\/storage\/v1\/object\/public\/(book-covers\/covers|books-pdfs\/covers|scholar-images)\//g, 'https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/');
         coverUrl = coverUrl.replace(/https:\/\/ymizqgtlnhvkqlidftiy\.supabase\.co\/storage\/v1\/object\/public\/[^\/]+\//g, 'https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/');
