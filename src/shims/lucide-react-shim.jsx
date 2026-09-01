@@ -92,6 +92,9 @@ const iconData = {
   Pencil: "<path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\" />\n  <path d=\"m15 5 4 4\" />",
   Loader: "<path d=\"M12 2v4\" />\n  <path d=\"m16.2 7.8 2.9-2.9\" />\n  <path d=\"M18 12h4\" />\n  <path d=\"m16.2 16.2 2.9 2.9\" />\n  <path d=\"M12 18v4\" />\n  <path d=\"m4.9 19.1 2.9-2.9\" />\n  <path d=\"M2 12h4\" />\n  <path d=\"m4.9 4.9 2.9 2.9\" />",
   X: "<path d=\"M18 6 6 18\" />\n  <path d=\"m6 6 12 12\" />",
+  Globe: "<circle cx=\"12\" cy=\"12\" r=\"10\" />\n  <path d=\"M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20\" />\n  <path d=\"M2 12h20\" />",
+  ChevronLeft: "<path d=\"m15 18-6-6 6-6\" />",
+  Minus: "<path d=\"M5 12h14\" />",
 };
 
 const make = (name) => {
@@ -209,6 +212,9 @@ export const FileText = make('FileText');
 export const Pencil = make('Pencil');
 export const Loader = make('Loader');
 export const X = make('X');
+export const Globe = make('Globe');
+export const ChevronLeft = make('ChevronLeft');
+export const Minus = make('Minus');
 
 export default {
   Search,
