@@ -11,8 +11,15 @@ const imageStore = localforage.createInstance({
 const memoryCache = {};
 
 export default function OfflineImage({ src, alt, style, onError }) {
-  const [imgSrc, setImgSrc] = useState(() => (src ? memoryCache[src] : null));
-  const [loading, setLoading] = useState(() => !(src && memoryCache[src]));
+  // 🚀 VIP FIX: Convert any remaining Supabase URLs to Cloudflare R2 bucket URLs automatically
+  let cleanSrc = src;
+  if (cleanSrc && typeof cleanSrc === 'string' && cleanSrc.includes('supabase.co')) {
+    cleanSrc = cleanSrc.replace(/https:\/\/ymizqgtlnhvkqlidftiy\.supabase\.co\/storage\/v1\/object\/public\/(book-covers\/covers|books-pdfs\/covers|scholar-images)\//g, 'https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/');
+    cleanSrc = cleanSrc.replace(/https:\/\/ymizqgtlnhvkqlidftiy\.supabase\.co\/storage\/v1\/object\/public\/[^\/]+\//g, 'https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/');
+  }
+
+  const [imgSrc, setImgSrc] = useState(() => (cleanSrc ? memoryCache[cleanSrc] : null));
+  const [loading, setLoading] = useState(() => !(cleanSrc && memoryCache[cleanSrc]));
   const [error, setError] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const imgRef = useRef(null);
@@ -33,9 +40,9 @@ export default function OfflineImage({ src, alt, style, onError }) {
   }, []);
 
   useEffect(() => {
-    if (!src) return;
-    if (memoryCache[src]) {
-      setImgSrc(memoryCache[src]);
+    if (!cleanSrc) return;
+    if (memoryCache[cleanSrc]) {
+      setImgSrc(memoryCache[cleanSrc]);
       setLoading(false);
       return;
     }
@@ -45,13 +52,13 @@ export default function OfflineImage({ src, alt, style, onError }) {
     const loadImage = async () => {
       try {
         // Step 1: Check Cache First (Hamesha check karo, visible hone se pehle bhi takay tayyar rahe)
-        const cached = await imageStore.getItem(src);
+        const cached = await imageStore.getItem(cleanSrc);
         
         if (cached) {
           // Agar Blob hai
           if (cached instanceof Blob) {
             const url = URL.createObjectURL(cached);
-            memoryCache[src] = url; // cache in memory
+            memoryCache[cleanSrc] = url; // cache in memory
             if (isMounted) {
               setImgSrc(url);
               setLoading(false);
@@ -60,7 +67,7 @@ export default function OfflineImage({ src, alt, style, onError }) {
           } 
           // Agar Base64 string/data URI hai
           else if (typeof cached === 'string') {
-            memoryCache[src] = cached; // cache in memory
+            memoryCache[cleanSrc] = cached; // cache in memory
             if (isMounted) {
               setImgSrc(cached);
               setLoading(false);
@@ -76,30 +83,25 @@ export default function OfflineImage({ src, alt, style, onError }) {
         if (Capacitor.isNativePlatform()) {
           // Mobile par CORS bypass karne ke liye CapacitorHttp use karein
           const options = {
-            url: src,
+            url: cleanSrc,
             responseType: 'blob'
           };
           const response = await CapacitorHttp.get(options);
           
           if (response.status === 200 && response.data) {
-            // Capacitor returns base64 or blob depending on version/config
-            // We'll handle it carefully
             let blob = response.data;
-            
-            // Convert to proper Blob if it's not already
-            // Convert to proper Blob if it's a base64 string
             if (typeof response.data === 'string') {
               const dataUri = response.data.startsWith('data:') ? response.data : `data:image/jpeg;base64,${response.data}`;
-              await imageStore.setItem(src, dataUri);
-              memoryCache[src] = dataUri; // cache in memory
+              await imageStore.setItem(cleanSrc, dataUri);
+              memoryCache[cleanSrc] = dataUri;
               if (isMounted) {
                 setImgSrc(dataUri);
                 setLoading(false);
               }
             } else if (response.data instanceof Blob) {
-              await imageStore.setItem(src, response.data);
+              await imageStore.setItem(cleanSrc, response.data);
               const url = URL.createObjectURL(response.data);
-              memoryCache[src] = url; // cache in memory
+              memoryCache[cleanSrc] = url;
               if (isMounted) {
                 setImgSrc(url);
                 setLoading(false);
@@ -111,18 +113,16 @@ export default function OfflineImage({ src, alt, style, onError }) {
             throw new Error('Download failed');
           }
         } else {
-          // Web/Browser par CORS issue se bachne ke liye direct load karein bina fetch fetch cache ke
-          memoryCache[src] = src;
+          memoryCache[cleanSrc] = cleanSrc;
           if (isMounted) {
-            setImgSrc(src);
+            setImgSrc(cleanSrc);
             setLoading(false);
           }
         }
       } catch (err) {
         console.warn('Offline image cache load failed:', err);
-        // Fallback to direct src if fetching/caching fails
         if (isMounted) {
-          setImgSrc(src);
+          setImgSrc(cleanSrc);
           setLoading(false);
         }
       }
@@ -130,9 +130,9 @@ export default function OfflineImage({ src, alt, style, onError }) {
 
     loadImage();
     return () => { isMounted = false; };
-  }, [src, isVisible]);
+  }, [cleanSrc, isVisible]);
 
-  if (error || !src) {
+  if (error || !cleanSrc) {
     return (
       <div style={{ 
         display: 'flex', alignItems: 'center', justifyContent: 'center', 
@@ -162,12 +162,10 @@ export default function OfflineImage({ src, alt, style, onError }) {
           referrerPolicy="no-referrer"
           onLoad={() => setLoading(false)}
           onError={() => {
-            // If the failing imgSrc was a cache/blob URL, fall back to the direct src
-            if (imgSrc !== src) {
-              console.warn('Cached image failed to load, falling back to direct URL:', src);
-              setImgSrc(src);
-              // Also try to remove the corrupted entry from cache
-              imageStore.removeItem(src).catch(() => {});
+            if (imgSrc !== cleanSrc) {
+              console.warn('Cached image failed to load, falling back to direct URL:', cleanSrc);
+              setImgSrc(cleanSrc);
+              imageStore.removeItem(cleanSrc).catch(() => {});
             } else {
               setError(true);
               if (onError) onError();

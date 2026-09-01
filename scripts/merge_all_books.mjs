@@ -50,21 +50,37 @@ filesToMerge.forEach(file => {
       if (seenTitles.has(dedupeKey)) return;
       seenTitles.add(dedupeKey);
 
+      let coverUrl = item.cover_url || item.cover || '';
+      if (coverUrl.includes('supabase.co')) {
+        coverUrl = coverUrl.replace(/https:\/\/ymizqgtlnhvkqlidftiy\.supabase\.co\/storage\/v1\/object\/public\/(book-covers\/covers|books-pdfs\/covers|scholar-images)\//g, 'https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/');
+        coverUrl = coverUrl.replace(/https:\/\/ymizqgtlnhvkqlidftiy\.supabase\.co\/storage\/v1\/object\/public\/[^\/]+\//g, 'https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/');
+      }
+
+      let pdfUrl = item.pdf_url || item.url || '';
+      if (pdfUrl.includes('supabase.co')) {
+        pdfUrl = pdfUrl.replace(/https:\/\/ymizqgtlnhvkqlidftiy\.supabase\.co\/storage\/v1\/object\/public\/books-pdfs\/pdfs\//g, 'https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/');
+      }
+
+      let description = item.description || (item.volumes ? JSON.stringify(item.volumes) : null);
+      if (description && description.includes('supabase.co')) {
+        description = description.replace(/https:\/\/ymizqgtlnhvkqlidftiy\.supabase\.co\/storage\/v1\/object\/public\/books-pdfs\/pdfs\//g, 'https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/');
+      }
+
       const bookObj = {
         id: item.id || nextId++,
         title: title,
         author: item.author || 'BestUrduBooks',
         category: category,
         sub_category: item.sub_category || 'درسی کتب',
-        cover_url: item.cover_url || item.cover || '',
-        pdf_url: item.pdf_url || item.url || '',
+        cover_url: coverUrl,
+        pdf_url: pdfUrl,
         pages: item.pages || 0,
         size_mb: item.size_mb || 0,
         is_free: 't',
         price: 0,
         downloads: item.downloads || 0,
         rating: item.rating || 0,
-        description: item.description || (item.volumes ? JSON.stringify(item.volumes) : null),
+        description: description,
         language: item.language || 'ur',
         year: item.year || null,
         created_at: item.created_at || new Date().toISOString()
