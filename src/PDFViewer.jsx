@@ -673,6 +673,7 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, title, language = 
             </div>
           </div>
         </div>
+      )}
       {/* 📄 Page Text & Copy Modal */}
       {showTextModal && (
         <div onClick={e => e.stopPropagation()} style={{ position: 'fixed', inset: 0, zIndex: 10005, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
