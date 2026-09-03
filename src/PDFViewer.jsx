@@ -387,6 +387,13 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
     }
   }, [pg, ur]);
 
+  // Auto-sync page text in Dual Split mode and Text mode
+  useEffect(() => {
+    if (viewMode === 'split' || viewMode === 'text') {
+      extractCurrentPageText();
+    }
+  }, [pg, viewMode, extractCurrentPageText]);
+
   const copyFormattedText = useCallback(() => {
     if (!pageText) return;
     const formatted = `📖 ${title || 'کتاب'}\n📄 ${ur ? 'صفحہ' : 'Page'}: ${pg}\n\n${pageText}\n\n-----------------------\n📱 Smart e-Madarsa App`;
@@ -419,7 +426,11 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
         <button style={iBtn()} onClick={e => { e.stopPropagation(); onBack(); }}><ArrowLeft size={18} /></button>
         <span style={{ color: GOLD, flex: 1, fontSize: isLandscape ? 11 : 13, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', letterSpacing: 0.2 }}>{title || 'PDF'}</span>
         <button style={iBtn()} onClick={e => { e.stopPropagation(); setShowSrch(p => !p); }}><Search size={17} /></button>
-        <button style={iBtn({ color: viewMode === 'text' ? GOLD : '#ccc', background: viewMode === 'text' ? `${GOLD}20` : 'transparent' })} title={ur ? (viewMode === 'text' ? 'پی ڈی ایف موڈ' : 'متن پڑھیں') : (viewMode === 'text' ? 'PDF Mode' : 'Text Mode')} onClick={e => { e.stopPropagation(); setViewMode(v => v === 'text' ? 'pdf' : 'text'); if (viewMode === 'pdf' && !pageText) extractCurrentPageText(); }}><BookOpen size={17} /></button>
+        <div style={{ display: 'flex', background: 'rgba(255,255,255,0.06)', border: `1px solid ${GOLD}30`, borderRadius: 8, padding: 2, gap: 2 }}>
+          <button onClick={e => { e.stopPropagation(); setViewMode('pdf'); }} style={{ background: viewMode === 'pdf' ? GOLD : 'transparent', color: viewMode === 'pdf' ? '#000' : '#ccc', border: 'none', borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}>📖 {ur ? 'پی ڈی ایف' : 'PDF'}</button>
+          <button onClick={e => { e.stopPropagation(); setViewMode('split'); if (!pageText) extractCurrentPageText(); }} style={{ background: viewMode === 'split' ? GOLD : 'transparent', color: viewMode === 'split' ? '#000' : '#ccc', border: 'none', borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}>🌗 {ur ? 'دوہرا' : 'Dual'}</button>
+          <button onClick={e => { e.stopPropagation(); setViewMode('text'); if (!pageText) extractCurrentPageText(); }} style={{ background: viewMode === 'text' ? GOLD : 'transparent', color: viewMode === 'text' ? '#000' : '#ccc', border: 'none', borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}>📄 {ur ? 'متن' : 'Text'}</button>
+        </div>
         <button style={iBtn({ color: showTextModal ? GOLD : '#ccc' })} title={ur ? 'صفحہ کی عبارت کاپی کریں' : 'Copy Page Text'} onClick={e => { e.stopPropagation(); extractCurrentPageText(); }}><Copy size={17} /></button>
         <button style={iBtn({ color: isBm ? GOLD : '#666' })} onClick={e => { e.stopPropagation(); toggleBmark(); }}><Bookmark size={17} fill={isBm ? GOLD : 'none'} /></button>
         <button style={iBtn()} onClick={e => { e.stopPropagation(); share(); }}><Share2 size={17} /></button>
@@ -558,8 +569,52 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
         </div>
       )}
 
-      {/* TEXT READER MODE AREA */}
-      {viewMode === 'text' ? (
+      {/* DUAL SPLIT MODE / TEXT READER MODE / PDF MODE */}
+      {viewMode === 'split' ? (
+        <div style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: isLandscape ? 'row' : 'column',
+          overflow: 'hidden',
+          paddingTop: bars ? (isLandscape ? 40 : 58) : 8,
+          paddingBottom: bars ? (isLandscape ? 44 : 68) : 8,
+          background: T.bg,
+        }}>
+          {/* PDF Side Panel */}
+          <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', borderRight: isLandscape ? `1px solid ${GOLD}20` : 'none', borderBottom: !isLandscape ? `1px solid ${GOLD}20` : 'none', display: 'flex', justifyContent: 'center', alignItems: 'flex-start', padding: 8 }}>
+            <Document file={pdfUrl} onLoadSuccess={onLoad} onLoadError={onErr} loading={null}>
+              <Page pageNumber={pg} width={isLandscape ? Math.min(W, 420) : Math.min(W, 360)} renderTextLayer={false} renderAnnotationLayer={false} />
+            </Document>
+          </div>
+
+          {/* Text Side Panel */}
+          <div style={{ flex: 1, overflowY: 'auto', padding: 16, background: 'rgba(0,0,0,0.2)', color: T.fg || '#e2e8f0', direction: 'rtl', fontFamily: "'Amiri', 'Jameel Noori Nastaleeq', serif" }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, borderBottom: `1px solid ${GOLD}30`, paddingBottom: 8 }}>
+              <span style={{ color: GOLD, fontWeight: 'bold', fontSize: 15 }}>📄 {ur ? `صفحہ ${pg} کا متن` : `Page ${pg} Text`}</span>
+              <div style={{ display: 'flex', gap: 6 }}>
+                <button onClick={() => setTextSize(s => Math.min(s + 2, 28))} style={{ background: 'rgba(255,255,255,0.08)', border: `1px solid ${GOLD}30`, color: GOLD, borderRadius: 8, padding: '2px 8px', cursor: 'pointer', fontSize: 11 }}>A+</button>
+                <button onClick={() => setTextSize(s => Math.max(s - 2, 12))} style={{ background: 'rgba(255,255,255,0.08)', border: `1px solid ${GOLD}30`, color: GOLD, borderRadius: 8, padding: '2px 8px', cursor: 'pointer', fontSize: 11 }}>A-</button>
+                <button onClick={copyFormattedText} style={{ background: GOLD, color: '#000', border: 'none', borderRadius: 8, padding: '2px 10px', cursor: 'pointer', fontWeight: 'bold', fontSize: 11 }}>{ur ? 'کاپی' : 'Copy'}</button>
+              </div>
+            </div>
+            <div style={{ fontSize: textSize, lineHeight: 2.1, textAlign: 'justify' }}>
+              {textLoading ? (
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 30, color: GOLD, gap: 10 }}>
+                  <Loader2 size={20} style={{ animation: 'spin 0.9s linear infinite' }} />
+                  <span>{ur ? 'متن لوڈ ہو رہا ہے...' : 'Loading...'}</span>
+                </div>
+              ) : pageText ? (
+                pageText
+              ) : (
+                <div style={{ textAlign: 'center', color: '#94a3b8', padding: '30px 10px' }}>
+                  <p style={{ fontSize: 14 }}>{ur ? 'متن تیار کریں...' : 'Extract text...'}</p>
+                  <button onClick={extractCurrentPageText} style={{ background: GOLD, color: '#000', border: 'none', borderRadius: 8, padding: '6px 16px', fontWeight: 'bold', cursor: 'pointer', fontSize: 12 }}>{ur ? 'عبارت دیکھیں' : 'View Text'}</button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : viewMode === 'text' ? (
         <div style={{
           flex: 1,
           overflowY: 'auto',
@@ -783,8 +838,23 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
       <style>{`
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+        .react-pdf__Page { position: relative !important; margin: 0 auto !important; }
         .react-pdf__Page__canvas { margin: 0 auto !important; display: block !important; }
-        .react-pdf__Page__textContent { user-select: text !important; -webkit-user-select: text !important; }
+        .react-pdf__Page__textContent {
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          transform-origin: 0 0 !important;
+          user-select: text !important;
+          -webkit-user-select: text !important;
+          line-height: 1 !important;
+        }
+        .react-pdf__Page__textContent span::selection {
+          background: rgba(212, 175, 55, 0.45) !important;
+          color: #000 !important;
+        }
         input[type=range] { -webkit-appearance: none; background: ${GOLD}15; border-radius: 4px; outline: none; }
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: ${GOLD}; cursor: pointer; }
       `}</style>
