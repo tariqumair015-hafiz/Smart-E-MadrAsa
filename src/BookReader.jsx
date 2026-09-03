@@ -480,6 +480,7 @@ const BookReader = ({ book, onBack, language, initialPage = 1 }) => {
             pdfUrl={getViewerUrl(activeVolIndex)}
             shareUrl={`${window.location.origin}/share.html?id=${book.id}`}
             bookId={`${book.id}_v${activeVolIndex}`}
+            textUrl={book.text_url}
             title={`${book.title} - ${volumes[activeVolIndex]?.title || ''}`}
             language={language}
             isOffline={!!isOfflineAvailable[activeVolIndex]}

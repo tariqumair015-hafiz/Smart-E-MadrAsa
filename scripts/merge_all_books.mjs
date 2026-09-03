@@ -72,6 +72,11 @@ filesToMerge.forEach(file => {
         description = description.replace(/https:\/\/ymizqgtlnhvkqlidftiy\.supabase\.co\/storage\/v1\/object\/public\/books-pdfs\/pdfs\//g, 'https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/');
       }
 
+      let textUrl = item.text_url || item.text || '';
+      if (!textUrl && item.id) {
+        textUrl = `https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/texts/text_${item.id}.json`;
+      }
+
       const bookObj = {
         id: item.id || nextId++,
         title: title,
@@ -80,6 +85,8 @@ filesToMerge.forEach(file => {
         sub_category: item.sub_category || 'درسی کتب',
         cover_url: coverUrl,
         pdf_url: pdfUrl,
+        text_url: textUrl,
+        has_text: Boolean(textUrl),
         pages: item.pages || 0,
         size_mb: item.size_mb || 0,
         is_free: 't',

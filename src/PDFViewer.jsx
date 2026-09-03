@@ -14,8 +14,10 @@ const BUF = 10;
 // A4 aspect ratio — placeholder height estimate
 const pageAspect = 1.414;
 
-export default function PDFViewer({ pdfUrl, shareUrl, bookId, title, language = 'ur', isOffline = false, onBack, initialPage }) {
+export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, language = 'ur', isOffline = false, onBack, initialPage }) {
   const ur = language === 'ur';
+  const [viewMode, setViewMode] = useState('pdf'); // 'pdf' | 'text'
+  const [textSize, setTextSize] = useState(16);
   const [pages, setPages] = useState(null);
   const [pg, setPg] = useState(() => {
     if (initialPage && initialPage > 1) return initialPage;
@@ -417,6 +419,7 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, title, language = 
         <button style={iBtn()} onClick={e => { e.stopPropagation(); onBack(); }}><ArrowLeft size={18} /></button>
         <span style={{ color: GOLD, flex: 1, fontSize: isLandscape ? 11 : 13, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', letterSpacing: 0.2 }}>{title || 'PDF'}</span>
         <button style={iBtn()} onClick={e => { e.stopPropagation(); setShowSrch(p => !p); }}><Search size={17} /></button>
+        <button style={iBtn({ color: viewMode === 'text' ? GOLD : '#ccc', background: viewMode === 'text' ? `${GOLD}20` : 'transparent' })} title={ur ? (viewMode === 'text' ? 'پی ڈی ایف موڈ' : 'متن پڑھیں') : (viewMode === 'text' ? 'PDF Mode' : 'Text Mode')} onClick={e => { e.stopPropagation(); setViewMode(v => v === 'text' ? 'pdf' : 'text'); if (viewMode === 'pdf' && !pageText) extractCurrentPageText(); }}><BookOpen size={17} /></button>
         <button style={iBtn({ color: showTextModal ? GOLD : '#ccc' })} title={ur ? 'صفحہ کی عبارت کاپی کریں' : 'Copy Page Text'} onClick={e => { e.stopPropagation(); extractCurrentPageText(); }}><Copy size={17} /></button>
         <button style={iBtn({ color: isBm ? GOLD : '#666' })} onClick={e => { e.stopPropagation(); toggleBmark(); }}><Bookmark size={17} fill={isBm ? GOLD : 'none'} /></button>
         <button style={iBtn()} onClick={e => { e.stopPropagation(); share(); }}><Share2 size={17} /></button>
@@ -555,7 +558,59 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, title, language = 
         </div>
       )}
 
-      {/* PDF AREA */}
+      {/* TEXT READER MODE AREA */}
+      {viewMode === 'text' ? (
+        <div style={{
+          flex: 1,
+          overflowY: 'auto',
+          paddingTop: bars ? 64 : 16,
+          paddingBottom: bars ? 70 : 16,
+          paddingLeft: 16,
+          paddingRight: 16,
+          background: T.bg,
+          color: T.fg || '#e2e8f0',
+          direction: 'rtl',
+          fontFamily: "'Amiri', 'Jameel Noori Nastaleeq', serif"
+        }}>
+          <div style={{
+            maxWidth: 680,
+            margin: '0 auto',
+            background: 'rgba(0,0,0,0.3)',
+            border: `1px solid ${GOLD}25`,
+            borderRadius: 16,
+            padding: 20,
+            boxShadow: '0 8px 30px rgba(0,0,0,0.3)'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, borderBottom: `1px solid ${GOLD}30`, paddingBottom: 10 }}>
+              <span style={{ color: GOLD, fontWeight: 'bold', fontSize: 16 }}>
+                📄 {ur ? `کتابی متن — صفحہ ${pg}` : `Book Text — Page ${pg}`}
+              </span>
+              <div style={{ display: 'flex', gap: 6 }}>
+                <button onClick={() => setTextSize(s => Math.min(s + 2, 28))} style={{ background: 'rgba(255,255,255,0.08)', border: `1px solid ${GOLD}30`, color: GOLD, borderRadius: 8, padding: '4px 10px', cursor: 'pointer', fontSize: 12 }}>A+</button>
+                <button onClick={() => setTextSize(s => Math.max(s - 2, 12))} style={{ background: 'rgba(255,255,255,0.08)', border: `1px solid ${GOLD}30`, color: GOLD, borderRadius: 8, padding: '4px 10px', cursor: 'pointer', fontSize: 12 }}>A-</button>
+                <button onClick={copyFormattedText} style={{ background: GOLD, color: '#000', border: 'none', borderRadius: 8, padding: '4px 12px', cursor: 'pointer', fontWeight: 'bold', fontSize: 12 }}>{ur ? 'کاپی' : 'Copy'}</button>
+              </div>
+            </div>
+
+            <div style={{ fontSize: textSize, lineHeight: 2.2, textAlign: 'justify', minHeight: 250 }}>
+              {textLoading ? (
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 40, color: GOLD, gap: 10 }}>
+                  <Loader2 size={22} style={{ animation: 'spin 0.9s linear infinite' }} />
+                  <span>{ur ? 'متن لوڈ ہو رہا ہے...' : 'Loading Text...'}</span>
+                </div>
+              ) : pageText ? (
+                pageText
+              ) : (
+                <div style={{ textAlign: 'center', color: '#94a3b8', padding: '40px 10px' }}>
+                  <p style={{ fontSize: 15 }}>{ur ? 'اس صفحے کی متنی عبارت تیار کی جا رہی ہے...' : 'Extracting text for this page...'}</p>
+                  <button onClick={extractCurrentPageText} style={{ background: GOLD, color: '#000', border: 'none', borderRadius: 10, padding: '8px 20px', fontWeight: 'bold', marginTop: 10, cursor: 'pointer' }}>{ur ? 'عبارت لوڈ کریں' : 'Extract Text'}</button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+      /* PDF AREA */
       <div ref={scrollRef} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}
         style={{
           flex: 1,
@@ -571,7 +626,7 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, title, language = 
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: fitMode === 'page' && isLandscape && mode === 'single' ? 'center' : 'flex-start',
+          justify: fitMode === 'page' && isLandscape && mode === 'single' ? 'center' : 'flex-start',
         }}>
         {loading && (
           <div style={{ position: 'absolute', inset: 0, background: T.bg, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
@@ -628,6 +683,7 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, title, language = 
           })}
         </Document>
       </div>
+      )}
 
       {/* Page badge */}
       {!bars && pages && (
