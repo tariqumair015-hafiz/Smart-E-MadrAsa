@@ -851,7 +851,7 @@ function App() {
 
   async function fetchBooks() {
     try {
-      const CACHE_KEY = 'cached_books_jsondata_v6';
+      const CACHE_KEY = 'cached_books_jsondata_v7';
       
       // 1. Pehle localforage local cache se load karein (fast instant render ke liye)
       const cached = await localforage.getItem(CACHE_KEY);

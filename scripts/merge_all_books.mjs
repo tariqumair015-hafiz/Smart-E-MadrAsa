@@ -51,10 +51,16 @@ filesToMerge.forEach(file => {
       seenTitles.add(dedupeKey);
 
       let coverUrl = item.cover_url || item.cover || '';
-      
-      // Filter out known generic scraped placeholder covers that cause mismatch across books
+
+      // 1. Check if an authentic Maktaba Jibreel cover thumbnail exists
+      const localJibreelCover = item.id ? path.resolve(`public/covers/cover_${item.id}.jpg`) : null;
+      if (localJibreelCover && fs.existsSync(localJibreelCover)) {
+        coverUrl = `https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/cover_${item.id}.jpg`;
+      }
+
+      // 2. Filter out known generic scraped placeholder covers that cause mismatch across books
       if (coverUrl.includes('KHUTBAT_E_JUMA_WA_EIDAIN.jpg') && !title.includes('خطبات جمعہ') && !title.includes('Khutbat')) {
-        coverUrl = item.id ? `https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/cover_${item.id}.jpg` : '';
+        coverUrl = localJibreelCover && fs.existsSync(localJibreelCover) ? `https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/cover_${item.id}.jpg` : '';
       }
 
       if (coverUrl.includes('supabase.co')) {

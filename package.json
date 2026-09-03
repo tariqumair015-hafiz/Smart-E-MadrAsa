@@ -7,7 +7,7 @@
     "start": "vite",
     "dev": "vite",
     "prebuild": "node scripts/copy_metadata.mjs",
-    "build": "node scripts/extract_text_data.mjs && node scripts/copy_metadata.mjs && vite build && node scripts/copy_metadata.mjs",
+    "build": "node scripts/copy_jibreel_covers.mjs && node scripts/extract_text_data.mjs && node scripts/copy_metadata.mjs && vite build && node scripts/copy_metadata.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
