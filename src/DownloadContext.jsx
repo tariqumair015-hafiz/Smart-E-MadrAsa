@@ -102,10 +102,14 @@ export const DownloadProvider = ({ children, language = 'ur' }) => {
       return;
     }
 
-    let fetchUrl = targetUrl;
+    let fetchUrl = targetUrl ? targetUrl.split('#')[0] : '';
 
     if (fetchUrl.includes('archive.org')) {
       fetchUrl = fetchUrl.replace('http://', 'https://');
+      if (fetchUrl.includes('/details/')) {
+        const itemID = fetchUrl.split('/details/')[1].split('/')[0].split('?')[0];
+        fetchUrl = `https://archive.org/download/${itemID}/${itemID}.pdf`;
+      }
     }
 
     if (fetchUrl.includes('archive.org/download/') && !fetchUrl.toLowerCase().split('?')[0].endsWith('.pdf')) {
@@ -123,10 +127,6 @@ export const DownloadProvider = ({ children, language = 'ur' }) => {
         window.open(targetUrl, '_blank');
       }
       return;
-    }
-
-    if (!Capacitor.isNativePlatform() && fetchUrl.includes('archive.org')) {
-      fetchUrl = fetchUrl.replace('https://archive.org', '/api/archive');
     }
 
     setActiveDownloads(prev => ({

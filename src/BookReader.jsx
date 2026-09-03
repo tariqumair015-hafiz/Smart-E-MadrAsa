@@ -247,16 +247,19 @@ const BookReader = ({ book, onBack, language, initialPage = 1 }) => {
     let url = volumes[index]?.url || book.pdf_url;
     if (!url) return null;
 
-    if (url.includes('archive.org')) {
-      if (!url.includes('/download/')) {
-        url = url.replace('/details/', '/download/').replace(/\/$/, '') + '.pdf';
-      }
-      if (!Capacitor.isNativePlatform()) {
-        url = url.replace('https://archive.org', '/api/archive').replace('http://archive.org', '/api/archive');
+    let cleanUrl = url.split('#')[0];
+
+    if (cleanUrl.includes('archive.org')) {
+      cleanUrl = cleanUrl.replace('http://', 'https://');
+      if (cleanUrl.includes('/details/')) {
+        const itemID = cleanUrl.split('/details/')[1].split('/')[0].split('?')[0];
+        cleanUrl = `https://archive.org/download/${itemID}/${itemID}.pdf`;
+      } else if (cleanUrl.includes('/download/') && !cleanUrl.toLowerCase().split('?')[0].endsWith('.pdf')) {
+        cleanUrl = cleanUrl + '.pdf';
       }
     }
 
-    return url;
+    return cleanUrl;
   };
 
   const handleRead = (index) => {
