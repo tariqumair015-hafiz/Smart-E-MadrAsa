@@ -98,7 +98,7 @@ export default function PdfCoverImage({ book, alt, style, onError }) {
     return book.pdf_url || null;
   })();
 
-  const cacheKey = `pdf_cover_${book?.id}`;
+  const cacheKey = `pdf_cover_v2_${book?.id}`;
 
   const [generatedSrc, setGeneratedSrc] = useState(() => memPdfCache[cacheKey] || null);
   const [state, setState] = useState(generatedSrc ? 'done' : 'idle'); // idle | loading | done | error
