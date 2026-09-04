@@ -233,23 +233,6 @@ export const DownloadProvider = ({ children, language = 'ur' }) => {
       setTimeout(() => {
         setActiveDownloads(prev => { const next = { ...prev }; delete next[downloadId]; return next; });
         setVisibleDownloads(prev => { const next = { ...prev }; delete next[downloadId]; return next; });
-      }, 3000);
-    }
-        }, 3000);
-        
-        return;
-      } catch (e) {}
-
-      setActiveDownloads(prev => ({
-        ...prev,
-        [downloadId]: { ...prev[downloadId], status: 'error' }
-      }));
-      
-      sendNotification(buffer.notifId + 2, isUr ? 'ڈاؤنلوڈ ناکام' : 'Download Failed', book.title);
-
-      setTimeout(() => {
-        setActiveDownloads(prev => { const next = { ...prev }; delete next[downloadId]; return next; });
-        setVisibleDownloads(prev => { const next = { ...prev }; delete next[downloadId]; return next; });
       }, 5000);
     } finally {
       if (Capacitor.isNativePlatform() && taskId !== undefined) {
