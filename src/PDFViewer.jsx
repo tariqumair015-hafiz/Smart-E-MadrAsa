@@ -5,6 +5,7 @@ import 'react-pdf/dist/Page/TextLayer.css';
 import pdfWorkerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 import { ls, THEMES, GOLD, iBtn, isArabic, fetchEnDict } from './pdfUtils';
 import { ArrowLeft, Search, Bookmark, Share2, Settings, ChevronLeft, ChevronRight, Minus, Plus, Copy, BookOpen, Globe, WifiOff, AlertCircle, X, Loader2, ZoomIn, BookMarked, List, Download } from 'lucide-react';
+import { Capacitor } from '@capacitor/core';
 
 // CDN Fallback to ensure worker loads correctly even under production bundle paths
 pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerUrl || `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
@@ -458,11 +459,13 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
         <button style={iBtn()} onClick={e => { e.stopPropagation(); onBack(); }}><ArrowLeft size={18} /></button>
         <span style={{ color: GOLD, flex: 1, fontSize: isLandscape ? 11 : 13, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', letterSpacing: 0.2 }}>{title || 'PDF'}</span>
         <button style={iBtn()} onClick={e => { e.stopPropagation(); setShowSrch(p => !p); }}><Search size={17} /></button>
-        <div style={{ display: 'flex', background: 'rgba(255,255,255,0.06)', border: `1px solid ${GOLD}30`, borderRadius: 8, padding: 2, gap: 2 }}>
-          <button onClick={e => { e.stopPropagation(); setViewMode('pdf'); }} style={{ background: viewMode === 'pdf' ? GOLD : 'transparent', color: viewMode === 'pdf' ? '#000' : '#ccc', border: 'none', borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}>📖 {ur ? 'پی ڈی ایف' : 'PDF'}</button>
-          <button onClick={e => { e.stopPropagation(); setViewMode('split'); if (!pageText) extractCurrentPageText(); }} style={{ background: viewMode === 'split' ? GOLD : 'transparent', color: viewMode === 'split' ? '#000' : '#ccc', border: 'none', borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}>🌗 {ur ? 'دوہرا' : 'Dual'}</button>
-          <button onClick={e => { e.stopPropagation(); setViewMode('text'); if (!pageText) extractCurrentPageText(); }} style={{ background: viewMode === 'text' ? GOLD : 'transparent', color: viewMode === 'text' ? '#000' : '#ccc', border: 'none', borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}>📄 {ur ? 'متن' : 'Text'}</button>
-        </div>
+        {Capacitor.isNativePlatform() && (
+          <div style={{ display: 'flex', background: 'rgba(255,255,255,0.06)', border: `1px solid ${GOLD}30`, borderRadius: 8, padding: 2, gap: 2 }}>
+            <button onClick={e => { e.stopPropagation(); setViewMode('pdf'); }} style={{ background: viewMode === 'pdf' ? GOLD : 'transparent', color: viewMode === 'pdf' ? '#000' : '#ccc', border: 'none', borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}>📖 {ur ? 'پی ڈی ایف' : 'PDF'}</button>
+            <button onClick={e => { e.stopPropagation(); setViewMode('split'); if (!pageText) extractCurrentPageText(); }} style={{ background: viewMode === 'split' ? GOLD : 'transparent', color: viewMode === 'split' ? '#000' : '#ccc', border: 'none', borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}>🌗 {ur ? 'دوہرا' : 'Dual'}</button>
+            <button onClick={e => { e.stopPropagation(); setViewMode('text'); if (!pageText) extractCurrentPageText(); }} style={{ background: viewMode === 'text' ? GOLD : 'transparent', color: viewMode === 'text' ? '#000' : '#ccc', border: 'none', borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}>📄 {ur ? 'متن' : 'Text'}</button>
+          </div>
+        )}
         <button style={iBtn({ color: showTextModal ? GOLD : '#ccc' })} title={ur ? 'صفحہ کی عبارت کاپی کریں' : 'Copy Page Text'} onClick={e => { e.stopPropagation(); extractCurrentPageText(); }}><Copy size={17} /></button>
         <button style={iBtn({ color: isBm ? GOLD : '#666' })} onClick={e => { e.stopPropagation(); toggleBmark(); }}><Bookmark size={17} fill={isBm ? GOLD : 'none'} /></button>
         <button style={iBtn()} title={ur ? 'پی ڈی ایف ڈاؤنلوڈ کریں' : 'Download PDF'} onClick={e => { e.stopPropagation(); downloadPdfDirectly(); }}><Download size={17} /></button>
