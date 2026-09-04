@@ -391,45 +391,76 @@ const BookCard = React.memo(function BookCard({ book, onBookClick, language }) {
   const activeLang = language || localStorage.getItem('smart_lang') || 'en';
   const localizedTitle = getLocalizedTitle(book.title, activeLang);
   
+  const cardRef = React.useRef(null);
+
   useEffect(() => {
     if (book.cover_url) return;
 
-    const cacheKey = `pdf_cover_v1_${book.id}`;
-    localforage.getItem(cacheKey).then((cachedVal) => {
-      if (cachedVal) {
-        setGeneratedCover(cachedVal);
-      } else if (book.pdf_url) {
-        const generate = async () => {
-          try {
-            const pdfjsLib = await import('pdfjs-dist');
-            const pdfWorker = await import('pdfjs-dist/build/pdf.worker.min.mjs?url');
-            pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker.default;
+    const cacheKey = `pdf_cover_v2_${book.id}`;
+    const CORSPROXY = 'https://corsproxy.io/?url=';
 
-            const loadingTask = pdfjsLib.getDocument(book.pdf_url);
-            const pdf = await loadingTask.promise;
-            const page = await pdf.getPage(1);
-            
-            const viewport = page.getViewport({ scale: 0.4 });
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+    const tryGenerate = async () => {
+      // 1. Try IndexedDB cache first
+      const cached = await localforage.getItem(cacheKey).catch(() => null);
+      if (cached) { setGeneratedCover(cached); return; }
 
-            await page.render({ canvasContext: context, viewport }).promise;
-            const dataUrl = canvas.toDataURL('image/jpeg', 0.6);
-            
-            setGeneratedCover(dataUrl);
-            await localforage.setItem(cacheKey, dataUrl);
-          } catch (e) {
-            console.error("Cover extraction failed for", book.pdf_url, e);
-          }
-        };
-        
-        // Delay extraction to let main UI mount smoothly
-        const timer = setTimeout(generate, 1500);
-        return () => clearTimeout(timer);
+      if (!book.pdf_url) return;
+
+      // 2. Try direct URL first, then CORS proxy fallback for archive.org
+      const urls = [book.pdf_url];
+      if (book.pdf_url.includes('archive.org')) {
+        urls.push(`${CORSPROXY}${encodeURIComponent(book.pdf_url)}`);
       }
-    });
+
+      for (const url of urls) {
+        try {
+          const pdfjsLib = await import('pdfjs-dist');
+          const pdfWorker = await import('pdfjs-dist/build/pdf.worker.min.mjs?url');
+          pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker.default;
+
+          const loadingTask = pdfjsLib.getDocument({
+            url,
+            cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/cmaps/',
+            cMapPacked: true,
+            withCredentials: false,
+            disableAutoFetch: true,
+            disableStream: false,
+          });
+          const pdf = await loadingTask.promise;
+          const page = await pdf.getPage(1);
+
+          const viewport = page.getViewport({ scale: 0.5 });
+          const canvas = document.createElement('canvas');
+          const context = canvas.getContext('2d');
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+
+          await page.render({ canvasContext: context, viewport }).promise;
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
+          pdf.destroy();
+
+          setGeneratedCover(dataUrl);
+          localforage.setItem(cacheKey, dataUrl).catch(() => {});
+          return; // success, stop loop
+        } catch (e) {
+          // try next URL variant
+        }
+      }
+    };
+
+    // Lazy: only generate when card enters viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          observer.disconnect();
+          // Slight delay so UI renders first
+          setTimeout(tryGenerate, 400);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    if (cardRef.current) observer.observe(cardRef.current);
+    return () => observer.disconnect();
   }, [book.cover_url, book.pdf_url, book.id]);
 
   const displayCover = book.cover_url || generatedCover;
@@ -490,12 +521,19 @@ const BookCard = React.memo(function BookCard({ book, onBookClick, language }) {
         scrollSnapAlign: 'start',
       }}
       className="book-card-hover"
+      ref={cardRef}
     >
       {isNew && (
         <div style={{ position: 'absolute', top: 4, left: 4, background: '#ef4444', color: '#fff', fontSize: '7px', padding: '2px 5px', borderRadius: '4px', zIndex: 10, fontWeight: 'bold', boxShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>NEW</div>
       )}
+      {/* Cover area: real cover → OfflineImage; loading PDF → shimmer; fallback → colored gradient */}
       {!showPlaceholder ? (
         <OfflineImage src={displayCover} alt={localizedTitle} onError={() => setImgError(true)} style={{ width: '100%', height: 135, objectFit: 'cover', display: 'block' }} />
+      ) : !book.cover_url && book.pdf_url && !generatedCover && !imgError ? (
+        // PDF cover being generated — show shimmer skeleton
+        <div style={{ width: '100%', height: 135, background: 'linear-gradient(90deg, #111 25%, #1a1a1a 50%, #111 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d4af3730', fontSize: 28 }}>📚</div>
+        </div>
       ) : (
         <div style={{ width: '100%', height: 135, background: `linear-gradient(160deg, ${color1} 0%, ${color2} 100%)`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', padding: '6px 5px', boxSizing: 'border-box', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 3, border: '1px solid rgba(212,175,55,0.4)', borderRadius: 6, pointerEvents: 'none' }} />

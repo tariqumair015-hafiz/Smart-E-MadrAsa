@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BookOpen, Download, Star } from 'lucide-react';
-import OfflineImage from '../OfflineImage';
+import PdfCoverImage from './PdfCoverImage';
 
 const BookCard = ({ book, onBookClick }) => {
     const [imgError, setImgError] = useState(false);
@@ -32,8 +32,8 @@ const BookCard = ({ book, onBookClick }) => {
                 position: 'relative',
                 boxShadow: '0 4px 15px rgba(0,0,0,0.4)',
             }}>
-                <OfflineImage
-                    src={book.cover_url}
+                <PdfCoverImage
+                    book={book}
                     alt={book.title}
                     onError={() => setImgError(true)}
                     style={{
