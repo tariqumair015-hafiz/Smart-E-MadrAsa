@@ -58,9 +58,20 @@ filesToMerge.forEach(file => {
         coverUrl = `https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/cover_${item.id}.jpg`;
       }
 
-      // 2. Filter out known generic scraped placeholder covers that cause mismatch across books
-      if (coverUrl.includes('KHUTBAT_E_JUMA_WA_EIDAIN.jpg') && !title.includes('خطبات جمعہ') && !title.includes('Khutbat')) {
-        coverUrl = localJibreelCover && fs.existsSync(localJibreelCover) ? `https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/cover_${item.id}.jpg` : '';
+      // 2. Filter out known generic scraped placeholder covers that cause mismatch across unrelated books
+      const genericCoverPatterns = [
+        'KHUTBAT_E_JUMA_WA_EIDAIN',
+        'AL_FAIZ_UL_HIJAZI',
+        'al_husami',
+        'MUNTAKHAL_AL_HUSAMI',
+        'FAIZ_UL_HIJAZI'
+      ];
+      
+      const isGenericScrapedCover = genericCoverPatterns.some(pattern => coverUrl.toUpperCase().includes(pattern));
+      if (isGenericScrapedCover && !title.includes('خطبات جمعہ') && !title.includes('الفیض الحجازی') && !title.includes('حسامی')) {
+        coverUrl = (localJibreelCover && fs.existsSync(localJibreelCover)) 
+          ? `https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/cover_${item.id}.jpg` 
+          : '';
       }
 
       if (coverUrl.includes('supabase.co')) {
