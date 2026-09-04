@@ -119,16 +119,6 @@ export const DownloadProvider = ({ children, language = 'ur' }) => {
     const isDirectPdf = fetchUrl.toLowerCase().split('?')[0].endsWith('.pdf');
     const isLandingPage = fetchUrl.includes('mediafire.com') || fetchUrl.includes('drive.google.com') || fetchUrl.includes('dropbox.com');
 
-    if (!isDirectPdf || isLandingPage) {
-      if (Capacitor.isNativePlatform()) {
-        const { Browser } = await import('@capacitor/browser');
-        await Browser.open({ url: targetUrl });
-      } else {
-        window.open(targetUrl, '_blank');
-      }
-      return;
-    }
-
     setActiveDownloads(prev => ({
       ...prev,
       [downloadId]: { 
@@ -178,28 +168,6 @@ export const DownloadProvider = ({ children, language = 'ur' }) => {
       });
 
       if (!response.ok) throw new Error('Network error');
-
-      const contentType = response.headers.get('Content-Type');
-      if (contentType && !contentType.includes('pdf') && !contentType.includes('octet-stream')) {
-        if (Capacitor.isNativePlatform()) {
-          const { Browser } = await import('@capacitor/browser');
-          await Browser.open({ url: targetUrl });
-        } else {
-          window.open(targetUrl, '_blank');
-        }
-        
-        setActiveDownloads(prev => ({
-          ...prev,
-          [downloadId]: { ...prev[downloadId], status: 'diverted' }
-        }));
-        
-        setTimeout(() => {
-          setActiveDownloads(prev => { const next = { ...prev }; delete next[downloadId]; return next; });
-          setVisibleDownloads(prev => { const next = { ...prev }; delete next[downloadId]; return next; });
-        }, 3000);
-        
-        return;
-      }
 
       const contentLength = response.headers.get('Content-Length');
       buffer.total = contentLength ? parseInt(contentLength, 10) : 0;
@@ -257,22 +225,16 @@ export const DownloadProvider = ({ children, language = 'ur' }) => {
         return;
       }
 
-      try {
-        if (Capacitor.isNativePlatform()) {
-          const { Browser } = await import('@capacitor/browser');
-          await Browser.open({ url: targetUrl });
-        } else {
-          window.open(targetUrl, '_blank');
-        }
-        
-        setActiveDownloads(prev => ({
-          ...prev,
-          [downloadId]: { ...prev[downloadId], status: 'diverted' }
-        }));
-        
-        setTimeout(() => {
-          setActiveDownloads(prev => { const next = { ...prev }; delete next[downloadId]; return next; });
-          setVisibleDownloads(prev => { const next = { ...prev }; delete next[downloadId]; return next; });
+      setActiveDownloads(prev => ({
+        ...prev,
+        [downloadId]: { ...prev[downloadId], status: 'error' }
+      }));
+      
+      setTimeout(() => {
+        setActiveDownloads(prev => { const next = { ...prev }; delete next[downloadId]; return next; });
+        setVisibleDownloads(prev => { const next = { ...prev }; delete next[downloadId]; return next; });
+      }, 3000);
+    }
         }, 3000);
         
         return;

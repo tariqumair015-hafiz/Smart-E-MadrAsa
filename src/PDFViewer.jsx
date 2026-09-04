@@ -16,6 +16,15 @@ const pageAspect = 1.414;
 
 export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, language = 'ur', isOffline = false, onBack, initialPage }) {
   const ur = language === 'ur';
+
+  const pdfSourceUrl = React.useMemo(() => {
+    if (!pdfUrl) return null;
+    if (pdfUrl.includes('archive.org') && !pdfUrl.includes('corsproxy.io')) {
+      return `https://corsproxy.io/?${encodeURIComponent(pdfUrl)}`;
+    }
+    return pdfUrl;
+  }, [pdfUrl]);
+
   const [viewMode, setViewMode] = useState('pdf'); // 'pdf' | 'text'
   const [textSize, setTextSize] = useState(16);
   const [pages, setPages] = useState(null);
@@ -606,7 +615,7 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
         }}>
           {/* PDF Side Panel */}
           <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', borderRight: isLandscape ? `1px solid ${GOLD}20` : 'none', borderBottom: !isLandscape ? `1px solid ${GOLD}20` : 'none', display: 'flex', justifyContent: 'center', alignItems: 'flex-start', padding: 8 }}>
-            <Document file={pdfUrl} onLoadSuccess={onLoad} onLoadError={onErr} loading={null}>
+            <Document file={pdfSourceUrl} onLoadSuccess={onLoad} onLoadError={onErr} loading={null}>
               <Page pageNumber={pg} width={isLandscape ? Math.min(W, 420) : Math.min(W, 360)} renderTextLayer={false} renderAnnotationLayer={false} />
             </Document>
           </div>
@@ -721,7 +730,7 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
             <button onClick={onBack} style={{ background: GOLD, color: '#000', border: 'none', padding: '12px 32px', borderRadius: 12, fontWeight: 'bold', marginTop: 20, cursor: 'pointer', fontSize: 14 }}>{ur ? '↩ واپس جائیں' : '↩ Go Back'}</button>
           </div>
         )}
-        <Document file={pdfUrl} onLoadSuccess={onLoad} onLoadError={onErr} loading={null}
+        <Document file={pdfSourceUrl} onLoadSuccess={onLoad} onLoadError={onErr} loading={null}
           onSourceSuccess={doc => { pdfRef.current = doc; }}>
           {pages && mode === 'cont' && Array.from({ length: pages }, (_, i) => i + 1).map(p => {
             const vis = visPages();
