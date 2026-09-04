@@ -367,7 +367,10 @@ const BookReader = ({ book, onBack, language, initialPage = 1 }) => {
                       <div style={{ display: 'flex', gap: 10 }}>
                         {!isDone && !isDownloading && !isPaused && (
                           <button
-                            onClick={() => startDownload(book, idx)}
+                            onClick={() => {
+                              startDownload(book, idx);
+                              handleRead(idx);
+                            }}
                             style={{
                               flex: 1, background: 'rgba(22, 163, 74, 0.1)',
                               color: '#4ade80', border: '1px solid currentColor',
@@ -375,7 +378,7 @@ const BookReader = ({ book, onBack, language, initialPage = 1 }) => {
                               alignItems: 'center', justifyContent: 'center', gap: 8, cursor: 'pointer'
                             }}>
                             <Download size={18} />
-                            <span className="urdu-text" style={{ fontSize: 13, whiteSpace: 'nowrap' }}>{isUr ? 'ڈاؤنلوڈ کریں' : 'Download'}</span>
+                            <span className="urdu-text" style={{ fontSize: 13, whiteSpace: 'nowrap' }}>{isUr ? 'ڈاؤنلوڈ اور مطالعہ کریں' : 'Download & Read'}</span>
                           </button>
                         )}
 

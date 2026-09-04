@@ -4,7 +4,7 @@ import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 import pdfWorkerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 import { ls, THEMES, GOLD, iBtn, isArabic, fetchEnDict } from './pdfUtils';
-import { ArrowLeft, Search, Bookmark, Share2, Settings, ChevronLeft, ChevronRight, Minus, Plus, Copy, BookOpen, Globe, WifiOff, AlertCircle, X, Loader2, ZoomIn, BookMarked, List } from 'lucide-react';
+import { ArrowLeft, Search, Bookmark, Share2, Settings, ChevronLeft, ChevronRight, Minus, Plus, Copy, BookOpen, Globe, WifiOff, AlertCircle, X, Loader2, ZoomIn, BookMarked, List, Download } from 'lucide-react';
 
 // CDN Fallback to ensure worker loads correctly even under production bundle paths
 pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerUrl || `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
@@ -413,6 +413,29 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
     }
   }, [pageText, title, pg, ur]);
 
+  const downloadPdfDirectly = useCallback(async () => {
+    if (!pdfUrl) return;
+    try {
+      const res = await fetch(pdfUrl);
+      const blob = await res.blob();
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `${title || 'book'}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(link.href), 10000);
+    } catch (e) {
+      const link = document.createElement('a');
+      link.href = pdfUrl;
+      link.download = `${title || 'book'}.pdf`;
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }, [pdfUrl, title]);
+
   const isBm = bmarks.includes(pg);
 
   return (
@@ -433,6 +456,7 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
         </div>
         <button style={iBtn({ color: showTextModal ? GOLD : '#ccc' })} title={ur ? 'صفحہ کی عبارت کاپی کریں' : 'Copy Page Text'} onClick={e => { e.stopPropagation(); extractCurrentPageText(); }}><Copy size={17} /></button>
         <button style={iBtn({ color: isBm ? GOLD : '#666' })} onClick={e => { e.stopPropagation(); toggleBmark(); }}><Bookmark size={17} fill={isBm ? GOLD : 'none'} /></button>
+        <button style={iBtn()} title={ur ? 'پی ڈی ایف ڈاؤنلوڈ کریں' : 'Download PDF'} onClick={e => { e.stopPropagation(); downloadPdfDirectly(); }}><Download size={17} /></button>
         <button style={iBtn()} onClick={e => { e.stopPropagation(); share(); }}><Share2 size={17} /></button>
         <button style={iBtn()} onClick={e => { e.stopPropagation(); setShowSet(p => !p); }}><Settings size={17} /></button>
       </div>
