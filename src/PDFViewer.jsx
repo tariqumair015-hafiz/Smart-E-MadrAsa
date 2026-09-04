@@ -18,13 +18,21 @@ const pageAspect = 1.414;
 export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, language = 'ur', isOffline = false, onBack, initialPage }) {
   const ur = language === 'ur';
 
+  const [proxyIndex, setProxyIndex] = useState(0);
+
   const pdfSourceUrl = React.useMemo(() => {
     if (!pdfUrl) return null;
-    if (pdfUrl.includes('archive.org') && !pdfUrl.includes('corsproxy.io')) {
-      return `https://corsproxy.io/?${encodeURIComponent(pdfUrl)}`;
+    let clean = pdfUrl.replace('http://', 'https://');
+    if (clean.includes('archive.org')) {
+      if (clean.includes('/details/')) {
+        const itemID = clean.split('/details/')[1].split('/')[0].split('?')[0];
+        clean = `https://archive.org/download/${itemID}/${itemID}.pdf`;
+      }
+      if (proxyIndex === 0) return `https://corsproxy.io/?${encodeURIComponent(clean)}`;
+      if (proxyIndex === 1) return `https://api.allorigins.win/raw?url=${encodeURIComponent(clean)}`;
     }
-    return pdfUrl;
-  }, [pdfUrl]);
+    return clean;
+  }, [pdfUrl, proxyIndex]);
 
   const [viewMode, setViewMode] = useState('pdf'); // 'pdf' | 'text'
   const [textSize, setTextSize] = useState(16);
@@ -257,12 +265,16 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
   }, [pg]);
 
   const onErr = useCallback((e) => {
+    if (pdfUrl && pdfUrl.includes('archive.org') && proxyIndex < 2) {
+      setProxyIndex(prev => prev + 1);
+      return;
+    }
     const m = e?.message || '';
-    setErr(m.includes('fetch') || m.includes('CORS') || m.includes('network')
+    setErr(m.includes('fetch') || m.includes('CORS') || m.includes('network') || m.includes('Failed')
       ? (ur ? 'نیٹ ورک مسئلہ — پہلے ڈاؤنلوڈ کریں' : 'Network error — Download first')
       : (ur ? `لوڈ نہیں ہوئی: ${m}` : `Failed: ${m}`));
     setLoading(false);
-  }, [ur]);
+  }, [ur, pdfUrl, proxyIndex]);
 
   const toggleBmark = useCallback(() => {
     setBmarks(prev => {
