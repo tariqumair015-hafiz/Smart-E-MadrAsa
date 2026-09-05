@@ -2,6 +2,48 @@ import React, { useState, useEffect, useRef } from 'react';
 import './FeaturesCarousel.css';
 import { User, BookOpenText, Star } from 'lucide-react';
 import { scholarsData as scholars } from '../data/scholars';
+import OfflineImage from '../OfflineImage';
+
+const ScholarAvatar = ({ scholar }) => {
+  const [imgError, setImgError] = useState(false);
+
+  const initials = scholar.nameEn
+    ? scholar.nameEn.split(' ').filter(Boolean).slice(-2).map(w => w[0]).join('')
+    : '★';
+
+  return (
+    <div className="scholar-img-wrapper">
+      {scholar.image && !imgError ? (
+        <OfflineImage
+          src={scholar.image}
+          alt={scholar.nameEn}
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          onError={() => setImgError(true)}
+        />
+      ) : (
+        <div className="scholar-fallback" style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'linear-gradient(135deg, #1a3a2a, #0d2018)',
+        }}>
+          <span style={{
+            fontSize: '24px',
+            fontWeight: '700',
+            color: '#d4af37',
+            lineHeight: 1,
+            letterSpacing: '1px',
+            textShadow: '0 2px 10px rgba(212,175,55,0.4)',
+          }}>
+            {initials}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const FeaturesCarousel = ({ language, onScholarClick }) => {
   // 🌟 VIP FIX: Ab yeh index hamesha yaad rakhega ke aakhri dafa kon sa scholar screen par tha!
@@ -114,34 +156,7 @@ const FeaturesCarousel = ({ language, onScholarClick }) => {
             >
               <div className="coverflow-shine" />
 
-              <div className="scholar-img-wrapper">
-                {scholar.image ? (
-                  <img
-                    src={`https://wsrv.nl/?url=${encodeURIComponent(scholar.image)}&w=200&h=200&fit=cover`}
-                    className="scholar-img"
-                    alt={scholar.nameEn}
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                  />
-                ) : (
-                  <div className="scholar-fallback" style={{
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: 'linear-gradient(135deg, #1a3a2a, #0d2018)',
-                  }}>
-                    <span style={{
-                      fontSize: '42px',
-                      fontWeight: '700',
-                      color: '#d4af37',
-                      textShadow: '0 2px 10px rgba(212,175,55,0.4)',
-                    }}>
-                      {scholar.nameEn.split(' ').slice(-2).map(w => w[0]).join('')}
-                    </span>
-                  </div>
-                )}
-              </div>
+              <ScholarAvatar scholar={scholar} />
 
               <div className="card-info">
                 <div className="card-rating">

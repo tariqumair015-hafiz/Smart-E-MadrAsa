@@ -6,6 +6,7 @@ import { ArrowLeft, User, BookOpen, MapPin, Calendar, Search } from 'lucide-reac
 import * as localforageModule from 'localforage';
 const localforage = localforageModule.default || localforageModule;
 import BookCard from './BookCard';
+import OfflineImage from '../OfflineImage';
 import './ScholarProfilePage.css';
 
 // Scholar bios — bilingual
@@ -257,12 +258,10 @@ const ScholarProfilePage = ({ scholarId, language, onBack, onBookClick }) => {
       <div className="scholar-hero">
         <div className="scholar-profile-img-wrap">
           {!imgError && scholar.image ? (
-            <img
+            <OfflineImage
               src={scholar.image}
               alt={scholar.nameEn}
-              className="scholar-profile-img"
-              referrerPolicy="no-referrer"
-              crossOrigin="anonymous"
+              style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
               onError={() => setImgError(true)}
             />
           ) : (
