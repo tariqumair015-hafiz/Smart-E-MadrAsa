@@ -5,10 +5,7 @@
  * - If book has cover_url → show it via OfflineImage (with Supabase→R2 rewrite)
  * - If cover_url is empty  → render the PDF's first page using pdf.js as the cover
  *   and cache it in IndexedDB so it never loads twice.
- *
- * CORS notes:
- * - R2 PDFs: served with Access-Control-Allow-Origin: * → loads fine
- * - Archive.org PDFs: uses corsproxy.io as fallback for pdf.js fetch
+ * - If no cover/PDF → render Deluxe Islamic Mihrab Book Cover Template with distinct category colors!
  */
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -27,37 +24,190 @@ const pdfCoverStore = localforage.createInstance({
   storeName: 'pdf_first_page_covers',
 });
 
-// In-memory cache for already-rendered covers (avoid repeated IndexedDB reads per session)
+// In-memory cache for already-rendered covers
 const memPdfCache = {};
 
-const BOYS_CATS = ['درجہ اولیٰ', 'درجہ ثانیہ', 'درجہ ثالثہ', 'درجہ رابعہ', 'درجہ خامسہ', 'درجہ سادسہ', 'درجہ سابعہ', 'دورہ حدیث'];
-const GIRLS_CATS = ['درجہ اولیٰ (بنات)', 'درجہ ثانیہ (بنات)', 'درجہ ثالثہ (بنات)', 'درجہ رابعہ (بنات)', 'درجہ خامسہ (بنات)'];
+/**
+ * Category-tailored 3D Leather & Gold Foil Gradient Themes
+ */
+export function getCategoryTheme(cat = '') {
+  const c = (cat || '').trim();
 
-function getCoverGradient(cat = '') {
-  if (BOYS_CATS.some(c => cat.includes(c))) {
-    return ['#064e3b', '#047857'];
+  if (c.includes('بنات') || c.includes('Girls') || c.includes('بناتی')) {
+    return { bg1: '#3b0616', bg2: '#700927', accent: '#fecdd3', label: 'شعبہ بنات' };
   }
-  if (GIRLS_CATS.some(c => cat.includes(c))) {
-    return ['#4c0519', '#881337'];
+  if (c.includes('اولیٰ') || c.includes('1st') || c.includes('اولى')) {
+    return { bg1: '#042f22', bg2: '#065f46', accent: '#a7f3d0', label: 'درجہ اولیٰ' };
   }
-  const extraGradients = [
-    ['#0f172a', '#1e3a8a'],
-    ['#3f1619', '#7f1d1d'],
-    ['#451a03', '#92400e'],
-    ['#3b0764', '#6b21a8'],
-    ['#083344', '#0e7490'],
-    ['#14532d', '#15803d'],
-    ['#4c1d95', '#6d28d9'],
-    ['#111827', '#374151'],
-    ['#7c2d12', '#9a3412'],
-    ['#0f766e', '#0d9488'],
+  if (c.includes('ثانیہ') || c.includes('2nd') || c.includes('ثانيه')) {
+    return { bg1: '#0c2340', bg2: '#1e3a8a', accent: '#bfdbfe', label: 'درجہ ثانیہ' };
+  }
+  if (c.includes('ثالثہ') || c.includes('3rd') || c.includes('ثالثه')) {
+    return { bg1: '#450a18', bg2: '#991b1b', accent: '#fca5a5', label: 'درجہ ثالثہ' };
+  }
+  if (c.includes('رابعہ') || c.includes('4th') || c.includes('رابعه')) {
+    return { bg1: '#2e0a4e', bg2: '#6b21a8', accent: '#e9d5ff', label: 'درجہ رابعہ' };
+  }
+  if (c.includes('خامسہ') || c.includes('5th') || c.includes('خامسه')) {
+    return { bg1: '#3a1705', bg2: '#92400e', accent: '#fde68a', label: 'درجہ خامسہ' };
+  }
+  if (c.includes('سادسہ') || c.includes('6th') || c.includes('سادسه')) {
+    return { bg1: '#062d3e', bg2: '#0e7490', accent: '#a5f3fc', label: 'درجہ سادسہ' };
+  }
+  if (c.includes('سابعہ') || c.includes('7th') || c.includes('سابعه')) {
+    return { bg1: '#181245', bg2: '#3730a3', accent: '#c7d2fe', label: 'درجہ سابعہ' };
+  }
+  if (c.includes('حدیث') || c.includes('دورہ') || c.includes('Hadith')) {
+    return { bg1: '#261700', bg2: '#854d0e', accent: '#fef08a', label: 'دورہ حدیث' };
+  }
+  if (c.includes('شرح') || c.includes('شروحات') || c.includes('مفاتیح')) {
+    return { bg1: '#24140c', bg2: '#5c3a21', accent: '#fed7aa', label: 'اردو شروحات' };
+  }
+  if (c.includes('اخلاق') || c.includes('تصوف') || c.includes('سلوک')) {
+    return { bg1: '#032612', bg2: '#166534', accent: '#bbf7d0', label: 'اخلاقیات و تصوف' };
+  }
+  if (c.includes('فقہ') || c.includes('فتاوی') || c.includes('Fiqh')) {
+    return { bg1: '#230a4e', bg2: '#5b21b6', accent: '#ddd6fe', label: 'فقہ و فتاویٰ' };
+  }
+  if (c.includes('تفسیر') || c.includes('قرآن') || c.includes('Tafseer')) {
+    return { bg1: '#0e2b13', bg2: '#2d6a36', accent: '#c6f6d5', label: 'تفسیر و علوم قرآن' };
+  }
+
+  const palettes = [
+    { bg1: '#0f172a', bg2: '#1e3a8a', accent: '#93c5fd', label: cat || 'کتب اسلامی' },
+    { bg1: '#310d20', bg2: '#831843', accent: '#fbcfe8', label: cat || 'کتب اسلامی' },
+    { bg1: '#361c02', bg2: '#a16207', accent: '#fef08a', label: cat || 'کتب اسلامی' },
+    { bg1: '#022c22', bg2: '#115e59', accent: '#99f6e4', label: cat || 'کتب اسلامی' },
+    { bg1: '#1e1b4b', bg2: '#4338ca', accent: '#c7d2fe', label: cat || 'کتب اسلامی' },
+    { bg1: '#431407', bg2: '#9a3412', accent: '#ffedd5', label: cat || 'کتب اسلامی' },
   ];
   let hash = 0;
-  for (let i = 0; i < cat.length; i++) {
-    hash = cat.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  const index = Math.abs(hash) % extraGradients.length;
-  return extraGradients[index];
+  for (let i = 0; i < c.length; i++) hash = c.charCodeAt(i) + ((hash << 5) - hash);
+  return palettes[Math.abs(hash) % palettes.length];
+}
+
+/**
+ * Deluxe Islamic Mihrab Book Cover Template Component
+ */
+export function IslamicBookCoverTemplate({ book, alt, style }) {
+  const cat = book?.category || '';
+  const title = alt || book?.title || '';
+  const theme = getCategoryTheme(cat);
+
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        background: `radial-gradient(ellipse at 50% 20%, ${theme.bg2} 0%, ${theme.bg1} 90%)`,
+        position: 'relative',
+        overflow: 'hidden',
+        boxSizing: 'border-box',
+        padding: '5px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        userSelect: 'none',
+        ...style,
+      }}
+    >
+      {/* 3D Book Spine Crease Shadow on Left Edge */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          bottom: 0,
+          width: '7px',
+          background: 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(255,255,255,0.12) 60%, transparent 100%)',
+          zIndex: 4,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Gold Foil Mihrab Arch Frame (محراب) */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 3,
+          border: '1.5px solid #d4af37',
+          borderTopLeftRadius: '22px',
+          borderTopRightRadius: '22px',
+          borderBottomLeftRadius: '4px',
+          borderBottomRightRadius: '4px',
+          boxShadow: 'inset 0 0 10px rgba(0,0,0,0.6)',
+          pointerEvents: 'none',
+          zIndex: 2,
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 6,
+          border: '0.5px solid rgba(212,175,55,0.4)',
+          borderTopLeftRadius: '18px',
+          borderTopRightRadius: '18px',
+          borderBottomLeftRadius: '2px',
+          borderBottomRightRadius: '2px',
+          pointerEvents: 'none',
+          zIndex: 2,
+        }}
+      />
+
+      {/* Top Bismillah Calligraphy Header */}
+      <div style={{ zIndex: 3, marginTop: 4, textAlign: 'center' }}>
+        <span style={{ color: '#d4af37', fontSize: 10, letterSpacing: 1, opacity: 0.95, textShadow: '0 1px 2px #000' }}>
+          ﷽
+        </span>
+      </div>
+
+      {/* Center Calligraphic Title Box */}
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '2px 5px',
+          zIndex: 3,
+          width: '100%',
+          boxSizing: 'border-box',
+        }}
+      >
+        <div style={{ color: '#d4af37', fontSize: 8, opacity: 0.7, marginBottom: 1 }}>❖ ✦ ❖</div>
+        <p
+          className="urdu-text"
+          style={{
+            color: '#fef3c7',
+            fontSize: title.length > 25 ? 8 : title.length > 15 ? 9 : 10.5,
+            textAlign: 'center',
+            margin: 0,
+            lineHeight: 1.45,
+            display: '-webkit-box',
+            WebkitLineClamp: 4,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+            direction: 'rtl',
+            fontWeight: 'bold',
+            textShadow: '0 2px 4px rgba(0,0,0,0.95), 0 0 8px rgba(212,175,55,0.3)',
+          }}
+        >
+          {title}
+        </p>
+        <div style={{ color: '#d4af37', fontSize: 8, opacity: 0.7, marginTop: 1 }}>❖ ✦ ❖</div>
+      </div>
+
+      {/* Bottom Foil Stamp Ribbon */}
+      <div style={{ zIndex: 3, marginBottom: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, width: '100%' }}>
+        <div style={{ width: '55%', height: '1px', background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
+        <span style={{ color: '#d4af37', fontSize: 7, opacity: 0.85, fontWeight: 'bold', letterSpacing: 0.3 }}>
+          {theme.label}
+        </span>
+      </div>
+    </div>
+  );
 }
 
 function getCandidateUrls(url) {
@@ -73,10 +223,6 @@ function getCandidateUrls(url) {
   return Array.from(new Set(urls));
 }
 
-/**
- * Render first page of a PDF URL to a JPEG data URI.
- * Returns null on failure.
- */
 async function renderFirstPageAsDataUrl(pdfUrl) {
   if (!pdfUrl) return null;
   const cleanPdf = pdfUrl.split('#')[0];
@@ -106,7 +252,7 @@ async function renderFirstPageAsDataUrl(pdfUrl) {
       const pdf = await loadingTask.promise;
       const page = await pdf.getPage(1);
 
-      const viewport = page.getViewport({ scale: 0.6 }); // small for thumbnail
+      const viewport = page.getViewport({ scale: 0.6 });
       const canvas = document.createElement('canvas');
       canvas.width = viewport.width;
       canvas.height = viewport.height;
@@ -124,12 +270,6 @@ async function renderFirstPageAsDataUrl(pdfUrl) {
 
 /**
  * PdfCoverImage — drop-in replacement for OfflineImage on BookCard.
- *
- * Props:
- *   book      – the book object (needs .cover_url, .pdf_url, .id, .volumes)
- *   alt       – img alt text
- *   style     – container style (width/height from parent)
- *   onError   – error callback
  */
 export default function PdfCoverImage({ book, alt, style, onError }) {
   const [coverError, setCoverError] = useState(false);
@@ -206,87 +346,6 @@ export default function PdfCoverImage({ book, alt, style, onError }) {
     );
   }
 
-  // Case 3: Loading PDF cover
-  if (loadingPdf) {
-    return (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          background: 'linear-gradient(90deg, #111 25%, #1a1a1a 50%, #111 75%)',
-          backgroundSize: '200% 100%',
-          animation: 'shimmer 1.5s infinite',
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          ...style,
-        }}
-      >
-        <div style={{ fontSize: 24, opacity: 0.3, color: '#d4af37' }}>📚</div>
-      </div>
-    );
-  }
-
-
-
-  // Case 4: Custom Islamic Cover Template Card
-  const [color1, color2] = getCoverGradient(book?.category || '');
-  const titleText = alt || book?.title || '';
-
-  return (
-    <div
-      style={{
-        width: '100%',
-        height: '100%',
-        background: `linear-gradient(160deg, ${color1} 0%, ${color2} 100%)`,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '8px 6px',
-        boxSizing: 'border-box',
-        position: 'relative',
-        overflow: 'hidden',
-        ...style,
-      }}
-    >
-      {/* Outer & Inner Gold Borders */}
-      <div style={{ position: 'absolute', inset: 3, border: '1px solid rgba(212,175,55,0.45)', borderRadius: 6, pointerEvents: 'none' }} />
-      <div style={{ position: 'absolute', inset: 6, border: '0.5px solid rgba(212,175,55,0.2)', borderRadius: 4, pointerEvents: 'none' }} />
-      
-      {/* Top Islamic Motif Header */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 4, zIndex: 1, marginTop: 2 }}>
-        <span style={{ color: '#d4af37', fontSize: 10, opacity: 0.85 }}>☽</span>
-        <span style={{ color: '#d4af37', fontSize: 7, opacity: 0.6 }}>✦</span>
-        <span style={{ color: '#d4af37', fontSize: 10, opacity: 0.85 }}>☾</span>
-      </div>
-
-      {/* Middle Urdu Title */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2px 4px', zIndex: 1 }}>
-        <p
-          className="urdu-text"
-          style={{
-            color: '#d4af37',
-            fontSize: titleText.length > 25 ? 8 : titleText.length > 15 ? 9 : 10,
-            textAlign: 'center',
-            margin: 0,
-            lineHeight: 1.45,
-            display: '-webkit-box',
-            WebkitLineClamp: 4,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-            direction: 'rtl',
-            fontWeight: 'bold',
-            textShadow: '0 1px 3px rgba(0,0,0,0.6)'
-          }}
-        >
-          {titleText}
-        </p>
-      </div>
-
-      {/* Bottom Gold Line */}
-      <div style={{ width: '65%', height: 1, background: 'rgba(212,175,55,0.45)', marginBottom: 2, zIndex: 1 }} />
-    </div>
-  );
+  // Case 3 & 4: Deluxe Islamic Mihrab Book Cover Template
+  return <IslamicBookCoverTemplate book={book} alt={alt} style={style} />;
 }
