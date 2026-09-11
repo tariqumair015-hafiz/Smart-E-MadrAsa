@@ -99,28 +99,29 @@ export function IslamicBookCoverTemplate({ book, alt, style }) {
       style={{
         width: '100%',
         height: '100%',
-        background: `radial-gradient(ellipse at 50% 20%, ${theme.bg2} 0%, ${theme.bg1} 90%)`,
+        background: `radial-gradient(circle at 50% 30%, ${theme.bg2} 0%, ${theme.bg1} 90%)`,
         position: 'relative',
         overflow: 'hidden',
         boxSizing: 'border-box',
-        padding: '5px',
+        padding: '6px 5px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
         userSelect: 'none',
+        boxShadow: 'inset 0 0 15px rgba(0,0,0,0.7)',
         ...style,
       }}
     >
-      {/* 3D Book Spine Crease Shadow on Left Edge */}
+      {/* 3D Book Spine Shadow on Left Edge */}
       <div
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
           bottom: 0,
-          width: '7px',
-          background: 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(255,255,255,0.12) 60%, transparent 100%)',
+          width: '8px',
+          background: 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(255,255,255,0.12) 55%, transparent 100%)',
           zIndex: 4,
           pointerEvents: 'none',
         }}
@@ -136,7 +137,7 @@ export function IslamicBookCoverTemplate({ book, alt, style }) {
           borderTopRightRadius: '22px',
           borderBottomLeftRadius: '4px',
           borderBottomRightRadius: '4px',
-          boxShadow: 'inset 0 0 10px rgba(0,0,0,0.6)',
+          boxShadow: 'inset 0 0 8px rgba(0,0,0,0.5)',
           pointerEvents: 'none',
           zIndex: 2,
         }}
@@ -156,13 +157,13 @@ export function IslamicBookCoverTemplate({ book, alt, style }) {
       />
 
       {/* Top Bismillah Calligraphy Header */}
-      <div style={{ zIndex: 3, marginTop: 4, textAlign: 'center' }}>
-        <span style={{ color: '#d4af37', fontSize: 10, letterSpacing: 1, opacity: 0.95, textShadow: '0 1px 2px #000' }}>
+      <div style={{ zIndex: 3, marginTop: 4, textAlign: 'center', width: '100%' }}>
+        <div style={{ color: '#d4af37', fontSize: 11, letterSpacing: 1, opacity: 0.95, textShadow: '0 1px 3px #000' }}>
           ﷽
-        </span>
+        </div>
       </div>
 
-      {/* Center Calligraphic Title Box */}
+      {/* Central Gold Shamse Medallion (شمسة ذهبية) with Title */}
       <div
         style={{
           flex: 1,
@@ -170,17 +171,17 @@ export function IslamicBookCoverTemplate({ book, alt, style }) {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '2px 5px',
+          padding: '2px 6px',
           zIndex: 3,
           width: '100%',
           boxSizing: 'border-box',
         }}
       >
-        <div style={{ color: '#d4af37', fontSize: 8, opacity: 0.7, marginBottom: 1 }}>❖ ✦ ❖</div>
+        <div style={{ color: '#d4af37', fontSize: 7, opacity: 0.8, marginBottom: 2 }}>❖ ✦ ❖</div>
         <p
           className="urdu-text"
           style={{
-            color: '#fef3c7',
+            color: '#fff8dc',
             fontSize: title.length > 25 ? 8 : title.length > 15 ? 9 : 10.5,
             textAlign: 'center',
             margin: 0,
@@ -191,18 +192,18 @@ export function IslamicBookCoverTemplate({ book, alt, style }) {
             overflow: 'hidden',
             direction: 'rtl',
             fontWeight: 'bold',
-            textShadow: '0 2px 4px rgba(0,0,0,0.95), 0 0 8px rgba(212,175,55,0.3)',
+            textShadow: '0 2px 4px rgba(0,0,0,0.95), 0 0 8px rgba(212,175,55,0.4)',
           }}
         >
           {title}
         </p>
-        <div style={{ color: '#d4af37', fontSize: 8, opacity: 0.7, marginTop: 1 }}>❖ ✦ ❖</div>
+        <div style={{ color: '#d4af37', fontSize: 7, opacity: 0.8, marginTop: 2 }}>❖ ✦ ❖</div>
       </div>
 
-      {/* Bottom Foil Stamp Ribbon */}
-      <div style={{ zIndex: 3, marginBottom: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, width: '100%' }}>
+      {/* Bottom Gold Foil Category Seal */}
+      <div style={{ zIndex: 3, marginBottom: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, width: '100%' }}>
         <div style={{ width: '55%', height: '1px', background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
-        <span style={{ color: '#d4af37', fontSize: 7, opacity: 0.85, fontWeight: 'bold', letterSpacing: 0.3 }}>
+        <span style={{ color: '#d4af37', fontSize: 7.5, opacity: 0.9, fontWeight: 'bold', letterSpacing: 0.3, textShadow: '0 1px 2px #000' }}>
           {theme.label}
         </span>
       </div>
