@@ -30,12 +30,18 @@ const pdfCoverStore = localforage.createInstance({
 // In-memory cache for already-rendered covers (avoid repeated IndexedDB reads per session)
 const memPdfCache = {};
 
-const CORSPROXY = 'https://corsproxy.io/?url=';
-
-function getProxiedUrl(url) {
-  if (!url) return url;
-  if (url.includes('archive.org')) return `${CORSPROXY}${encodeURIComponent(url)}`;
-  return url;
+function getCandidateUrls(url) {
+  if (!url) return [];
+  let clean = url.replace('http://', 'https://');
+  const urls = [];
+  if (clean.includes('archive.org') && typeof window !== 'undefined' && window.location.protocol.startsWith('http')) {
+    urls.push(clean.replace('https://archive.org', `${window.location.origin}/api/archive`));
+  }
+  urls.push(`https://corsproxy.io/?url=${encodeURIComponent(clean)}`);
+  urls.push(`https://api.allorigins.win/raw?url=${encodeURIComponent(clean)}`);
+  urls.push(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(clean)}`);
+  urls.push(clean);
+  return Array.from(new Set(urls));
 }
 
 /**
@@ -43,7 +49,7 @@ function getProxiedUrl(url) {
  * Returns null on failure.
  */
 async function renderFirstPageAsDataUrl(pdfUrl) {
-  const urls = [pdfUrl, getProxiedUrl(pdfUrl)];
+  const urls = getCandidateUrls(pdfUrl);
   for (const url of urls) {
     try {
       const loadingTask = getDocument({

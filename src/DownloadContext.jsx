@@ -19,6 +19,39 @@ const blobToBase64 = (blob) => new Promise((resolve, reject) => {
   reader.readAsDataURL(blob);
 });
 
+const getCandidateDownloadUrls = (targetUrl) => {
+  if (!targetUrl) return [];
+  let clean = targetUrl.replace('http://', 'https://');
+  if (clean.includes('archive.org')) {
+    if (clean.includes('/details/')) {
+      const itemID = clean.split('/details/')[1].split('/')[0].split('?')[0];
+      clean = `https://archive.org/download/${itemID}/${itemID}.pdf`;
+    }
+    if (clean.includes('archive.org/download/') && !clean.toLowerCase().split('?')[0].endsWith('.pdf')) {
+      clean = clean + '.pdf';
+    }
+  }
+
+  const urls = [];
+
+  // 1. Same-origin Cloudflare/Vercel/Netlify proxy (/api/archive) when running in web browser
+  if (!Capacitor.isNativePlatform() && clean.includes('archive.org') && typeof window !== 'undefined' && window.location.protocol.startsWith('http')) {
+    urls.push(clean.replace('https://archive.org', `${window.location.origin}/api/archive`));
+  }
+
+  // 2. Direct URL
+  urls.push(clean);
+
+  // 3. Fallback public CORS proxies for archive.org or cross-origin URLs on web
+  if (clean.includes('archive.org') || !Capacitor.isNativePlatform()) {
+    urls.push(`https://corsproxy.io/?url=${encodeURIComponent(clean)}`);
+    urls.push(`https://api.allorigins.win/raw?url=${encodeURIComponent(clean)}`);
+    urls.push(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(clean)}`);
+  }
+
+  return Array.from(new Set(urls));
+};
+
 export const DownloadProvider = ({ children, language = 'ur' }) => {
   const [activeDownloads, setActiveDownloads] = useState({});
   const [visibleDownloads, setVisibleDownloads] = useState({}); // Tracking UI visibility
@@ -161,13 +194,29 @@ export const DownloadProvider = ({ children, language = 'ur' }) => {
     }
 
     try {
-      const response = await fetch(fetchUrl, {
-        method: 'GET',
-        headers: { 'Accept': 'application/pdf,application/octet-stream,*/*' },
-        signal: controller.signal
-      });
+      const candidateUrls = getCandidateDownloadUrls(fetchUrl);
+      let response = null;
+      let lastErr = null;
 
-      if (!response.ok) throw new Error('Network error');
+      for (const url of candidateUrls) {
+        try {
+          const res = await fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/pdf,application/octet-stream,*/*' },
+            signal: controller.signal
+          });
+          if (res.ok) {
+            response = res;
+            buffer.fetchUrl = url;
+            break;
+          }
+        } catch (e) {
+          if (e.name === 'AbortError' || controller.signal?.aborted) throw e;
+          lastErr = e;
+        }
+      }
+
+      if (!response || !response.ok) throw lastErr || new Error('Network error');
 
       const contentLength = response.headers.get('Content-Length');
       buffer.total = contentLength ? parseInt(contentLength, 10) : 0;
@@ -283,13 +332,29 @@ export const DownloadProvider = ({ children, language = 'ur' }) => {
         headers['Range'] = `bytes=${buffer.loaded}-`;
       }
 
-      const response = await fetch(buffer.fetchUrl, {
-        method: 'GET',
-        headers,
-        signal: controller.signal
-      });
+      const candidateUrls = getCandidateDownloadUrls(buffer.fetchUrl || fetchUrl);
+      let response = null;
+      let lastErr = null;
 
-      if (!response.ok && response.status !== 206) throw new Error('Network error on resume');
+      for (const url of candidateUrls) {
+        try {
+          const res = await fetch(url, {
+            method: 'GET',
+            headers,
+            signal: controller.signal
+          });
+          if (res.ok || res.status === 206) {
+            response = res;
+            buffer.fetchUrl = url;
+            break;
+          }
+        } catch (e) {
+          if (e.name === 'AbortError' || controller.signal?.aborted) throw e;
+          lastErr = e;
+        }
+      }
+
+      if (!response || (!response.ok && response.status !== 206)) throw lastErr || new Error('Network error on resume');
 
       if (response.status === 200 && buffer.loaded > 0) {
         // Server doesn't support HTTP Range header, restart stream from byte 0

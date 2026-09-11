@@ -20,19 +20,27 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
 
   const [proxyIndex, setProxyIndex] = useState(0);
 
-  const pdfSourceUrl = React.useMemo(() => {
-    if (!pdfUrl) return null;
+  const candidatePdfUrls = React.useMemo(() => {
+    if (!pdfUrl) return [];
     let clean = pdfUrl.replace('http://', 'https://');
     if (clean.includes('archive.org')) {
       if (clean.includes('/details/')) {
         const itemID = clean.split('/details/')[1].split('/')[0].split('?')[0];
         clean = `https://archive.org/download/${itemID}/${itemID}.pdf`;
       }
-      if (proxyIndex === 0) return `https://corsproxy.io/?${encodeURIComponent(clean)}`;
-      if (proxyIndex === 1) return `https://api.allorigins.win/raw?url=${encodeURIComponent(clean)}`;
     }
-    return clean;
-  }, [pdfUrl, proxyIndex]);
+    const list = [];
+    if (!Capacitor.isNativePlatform() && clean.includes('archive.org') && typeof window !== 'undefined' && window.location.protocol.startsWith('http')) {
+      list.push(clean.replace('https://archive.org', `${window.location.origin}/api/archive`));
+    }
+    list.push(`https://corsproxy.io/?url=${encodeURIComponent(clean)}`);
+    list.push(`https://api.allorigins.win/raw?url=${encodeURIComponent(clean)}`);
+    list.push(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(clean)}`);
+    list.push(clean);
+    return Array.from(new Set(list));
+  }, [pdfUrl]);
+
+  const pdfSourceUrl = candidatePdfUrls[proxyIndex] || candidatePdfUrls[0] || pdfUrl;
 
   const [viewMode, setViewMode] = useState('pdf'); // 'pdf' | 'text'
   const [textSize, setTextSize] = useState(16);
@@ -265,7 +273,7 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
   }, [pg]);
 
   const onErr = useCallback((e) => {
-    if (pdfUrl && pdfUrl.includes('archive.org') && proxyIndex < 2) {
+    if (candidatePdfUrls.length > 0 && proxyIndex < candidatePdfUrls.length - 1) {
       setProxyIndex(prev => prev + 1);
       return;
     }
@@ -274,7 +282,7 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
       ? (ur ? 'نیٹ ورک مسئلہ — پہلے ڈاؤنلوڈ کریں' : 'Network error — Download first')
       : (ur ? `لوڈ نہیں ہوئی: ${m}` : `Failed: ${m}`));
     setLoading(false);
-  }, [ur, pdfUrl, proxyIndex]);
+  }, [ur, candidatePdfUrls, proxyIndex]);
 
   const toggleBmark = useCallback(() => {
     setBmarks(prev => {

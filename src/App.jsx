@@ -397,7 +397,19 @@ const BookCard = React.memo(function BookCard({ book, onBookClick, language }) {
     if (book.cover_url) return;
 
     const cacheKey = `pdf_cover_v2_${book.id}`;
-    const CORSPROXY = 'https://corsproxy.io/?url=';
+    const getCandidateCoverUrls = (url) => {
+      if (!url) return [];
+      let clean = url.replace('http://', 'https://');
+      const urls = [];
+      if (clean.includes('archive.org') && typeof window !== 'undefined' && window.location.protocol.startsWith('http')) {
+        urls.push(clean.replace('https://archive.org', `${window.location.origin}/api/archive`));
+      }
+      urls.push(`https://corsproxy.io/?url=${encodeURIComponent(clean)}`);
+      urls.push(`https://api.allorigins.win/raw?url=${encodeURIComponent(clean)}`);
+      urls.push(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(clean)}`);
+      urls.push(clean);
+      return Array.from(new Set(urls));
+    };
 
     const tryGenerate = async () => {
       // 1. Try IndexedDB cache first
@@ -406,11 +418,8 @@ const BookCard = React.memo(function BookCard({ book, onBookClick, language }) {
 
       if (!book.pdf_url) return;
 
-      // 2. Try direct URL first, then CORS proxy fallback for archive.org
-      const urls = [book.pdf_url];
-      if (book.pdf_url.includes('archive.org')) {
-        urls.push(`${CORSPROXY}${encodeURIComponent(book.pdf_url)}`);
-      }
+      // 2. Try direct & candidate proxy URLs
+      const urls = getCandidateCoverUrls(book.pdf_url);
 
       for (const url of urls) {
         try {
