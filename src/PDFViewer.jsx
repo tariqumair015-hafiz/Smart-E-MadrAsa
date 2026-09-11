@@ -33,10 +33,10 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
     if (!Capacitor.isNativePlatform() && clean.includes('archive.org') && typeof window !== 'undefined' && window.location.protocol.startsWith('http')) {
       list.push(clean.replace('https://archive.org', `${window.location.origin}/api/archive`));
     }
+    list.push(clean);
     list.push(`https://corsproxy.io/?url=${encodeURIComponent(clean)}`);
     list.push(`https://api.allorigins.win/raw?url=${encodeURIComponent(clean)}`);
     list.push(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(clean)}`);
-    list.push(clean);
     return Array.from(new Set(list));
   }, [pdfUrl]);
 

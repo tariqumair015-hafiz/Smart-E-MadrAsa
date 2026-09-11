@@ -1,9 +1,11 @@
 import fs from 'fs';
 import crypto from 'crypto';
 
+const CONCURRENCY = 4; // 4 parallel workers (optimal speed without Archive.org HTTP 429 rate-limit)
+
 // Load credentials from env_config.json
 const env = JSON.parse(fs.readFileSync('./env_config.json', 'utf8'));
-const SUPABASE_URL = env.SUPABASE_URL.replace(/\/$/, '');
+const SUPABASE_URL = (env.SUPABASE_URL || '').replace(/\/$/, '');
 const SERVICE_KEY = env.SUPABASE_SERVICE_ROLE_KEY;
 
 const ACCOUNT_ID = env.CLOUDFLARE_ACCOUNT_ID;
@@ -16,7 +18,6 @@ const supabaseHeaders = {
   'apikey': SERVICE_KEY,
   'Authorization': `Bearer ${SERVICE_KEY}`,
   'Content-Type': 'application/json',
-  'Prefer': 'return=representation',
 };
 
 function getR2Signature(method, path, bodyBuffer, contentType, dateStr, region = 'auto') {
@@ -61,158 +62,224 @@ async function uploadToR2(key, buffer, contentType = 'application/pdf') {
     });
     if (res.status === 200 || res.status === 204) {
       return `${PUBLIC_DOMAIN}/${key}`;
+    } else {
+      const txt = await res.text();
+      console.error(` ❌ R2 PUT Error ${res.status}: ${txt.slice(0, 100)}`);
     }
   } catch (err) {
-    console.error(` ❌ R2 Upload error (${key}): ${err.message}`);
+    console.error(` ❌ R2 Exception: ${err.message}`);
   }
   return null;
 }
 
-async function downloadPdf(url) {
-  let cleanUrl = url.replace('http://', 'https://');
-  if (cleanUrl.includes('archive.org')) {
+async function resolveArchiveUrl(targetUrl) {
+  let cleanUrl = targetUrl.replace('http://', 'https://');
+  if (!cleanUrl.includes('archive.org')) return cleanUrl;
+
+  let itemID = null;
+  if (cleanUrl.includes('/details/')) {
+    itemID = cleanUrl.split('/details/')[1].split('/')[0].split('?')[0];
+  } else if (cleanUrl.includes('/download/')) {
+    const parts = cleanUrl.split('/download/')[1].split('/');
+    if (parts.length > 0) itemID = parts[0].split('?')[0];
+  }
+
+  if (itemID) {
+    try {
+      const metaRes = await fetch(`https://archive.org/metadata/${itemID}`, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+        signal: AbortSignal.timeout(10000)
+      });
+      if (metaRes.ok) {
+        const meta = await metaRes.json();
+        if (meta && Array.isArray(meta.files)) {
+          const pdfFile = meta.files.find(f => f.name && f.name.toLowerCase().endsWith('.pdf') && !f.name.toLowerCase().includes('_text'));
+          if (pdfFile) {
+            return `https://archive.org/download/${itemID}/${encodeURIComponent(pdfFile.name)}`;
+          }
+        }
+      }
+    } catch (e) {}
+
     if (cleanUrl.includes('/details/')) {
-      const itemID = cleanUrl.split('/details/')[1].split('/')[0].split('?')[0];
-      cleanUrl = `https://archive.org/download/${itemID}/${itemID}.pdf`;
+      return `https://archive.org/download/${itemID}/${itemID}.pdf`;
     }
   }
-  const res = await fetch(cleanUrl, {
-    headers: { 'User-Agent': 'Mozilla/5.0' },
-    signal: AbortSignal.timeout(180000),
-    redirect: 'follow'
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const arrayBuffer = await res.arrayBuffer();
-  return Buffer.from(arrayBuffer);
+
+  return cleanUrl;
+}
+
+async function downloadPdfWithRetry(url, retries = 3) {
+  const resolvedUrl = await resolveArchiveUrl(url);
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(resolvedUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+        signal: AbortSignal.timeout(180000),
+        redirect: 'follow'
+      });
+      if (res.status === 429 || res.status === 503) {
+        console.warn(`   ⚠️ Archive.org HTTP ${res.status} Rate-Limited (Attempt ${attempt}/${retries}). Waiting...`);
+        await new Promise(r => setTimeout(r, attempt * 3000));
+        continue;
+      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const arrayBuffer = await res.arrayBuffer();
+      return Buffer.from(arrayBuffer);
+    } catch (err) {
+      if (attempt === retries) throw err;
+      await new Promise(r => setTimeout(r, attempt * 2000));
+    }
+  }
+  throw new Error('Max retries exceeded');
+}
+
+async function updateSupabaseBook(bookId, patchData) {
+  if (!SUPABASE_URL) return;
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/Books?id=eq.${encodeURIComponent(bookId)}`, {
+      method: 'PATCH',
+      headers: supabaseHeaders,
+      body: JSON.stringify(patchData),
+      signal: AbortSignal.timeout(5000)
+    });
+  } catch (e) {}
 }
 
 async function startMigration() {
   console.log('==================================================');
-  console.log('🚀 Transferring Archive.org PDFs to Cloudflare R2');
+  console.log(`⚡ HIGH-SUCCESS ARCHIVE TO R2 MIGRATOR (${CONCURRENCY} WORKERS)`);
   console.log('==================================================\n');
 
-  // Fetch pending books from Supabase
-  let pendingBooks = [];
-  let offset = 0;
-  const pageSize = 1000;
-
-  while (true) {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/Books?select=id,title,pdf_url,description&or=(pdf_url.ilike.*archive.org*,description.ilike.*archive.org*)&offset=${offset}&limit=${pageSize}`, {
-      headers: supabaseHeaders
-    });
-    if (!res.ok) break;
-    const chunk = await res.json();
-    if (!chunk || chunk.length === 0) break;
-    pendingBooks.push(...chunk);
-    offset += pageSize;
-  }
-
-  console.log(`📌 Found ${pendingBooks.length} books with Archive.org links needing migration to R2.\n`);
-
-  if (pendingBooks.length === 0) {
-    console.log('🎉 All books are already on Cloudflare R2!');
+  const metadataPath = './books_metadata.json';
+  if (!fs.existsSync(metadataPath)) {
+    console.error('❌ books_metadata.json not found!');
     return;
   }
 
-  let migratedCount = 0;
+  const books = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
 
-  for (let i = 0; i < pendingBooks.length; i++) {
-    const book = pendingBooks[i];
-    console.log(`\n[${i + 1}/${pendingBooks.length}] Processing Book #${book.id}: "${book.title?.slice(0, 35)}"...`);
-
-    let modified = false;
-    let updatedPdfUrl = book.pdf_url;
-    let updatedDescription = book.description;
-
-    // 1. Root pdf_url
-    if (book.pdf_url && book.pdf_url.includes('archive.org')) {
-      try {
-        const buffer = await downloadPdf(book.pdf_url);
-        const mbSize = (buffer.length / (1024 * 1024)).toFixed(2);
-        console.log(` 📦 Downloaded ${mbSize} MB. Uploading to R2...`);
-        const key = `pdfs/book_${book.id}.pdf`;
-        const r2Url = await uploadToR2(key, buffer, 'application/pdf');
-        if (r2Url) {
-          updatedPdfUrl = r2Url;
-          modified = true;
-          console.log(` ⚡ [SUCCESS] Synced main PDF: ${r2Url}`);
-        }
-      } catch (e) {
-        console.warn(` ⚠️ Skip main PDF for Book #${book.id}: ${e.message}`);
-      }
-    }
-
-    // 2. Volumes inside description
-    if (book.description && book.description.includes('archive.org')) {
-      try {
-        let parsed = JSON.parse(book.description);
-        if (Array.isArray(parsed)) {
-          for (let vIdx = 0; vIdx < parsed.length; vIdx++) {
-            const item = parsed[vIdx];
-            const itemUrl = typeof item === 'string' ? item : item.url;
-            if (itemUrl && itemUrl.includes('archive.org')) {
-              try {
-                console.log(` 📥 Volume ${vIdx + 1}/${parsed.length}: Downloading...`);
-                const buf = await downloadPdf(itemUrl);
-                const mbSize = (buf.length / (1024 * 1024)).toFixed(2);
-                console.log(`   📦 Downloaded ${mbSize} MB. Uploading to R2...`);
-                const key = `pdfs/book_${book.id}_v${vIdx}.pdf`;
-                const r2Url = await uploadToR2(key, buf, 'application/pdf');
-                if (r2Url) {
-                  if (typeof item === 'string') parsed[vIdx] = r2Url;
-                  else parsed[vIdx].url = r2Url;
-                  modified = true;
-                  console.log(`   ⚡ [SUCCESS] Vol ${vIdx + 1} Synced: ${r2Url}`);
-                }
-              } catch (ve) {
-                console.warn(`   ⚠️ Skip Vol ${vIdx + 1}: ${ve.message}`);
-              }
-            }
-          }
-          if (modified) {
-            updatedDescription = JSON.stringify(parsed);
-          }
-        }
-      } catch (de) {
-        // Not JSON
-      }
-    }
-
-    // Save to Supabase
-    if (modified) {
-      const patchData = {};
-      if (updatedPdfUrl !== book.pdf_url) patchData.pdf_url = updatedPdfUrl;
-      if (updatedDescription !== book.description) patchData.description = updatedDescription;
-
-      const patchRes = await fetch(`${SUPABASE_URL}/rest/v1/Books?id=eq.${encodeURIComponent(book.id)}`, {
-        method: 'PATCH',
-        headers: supabaseHeaders,
-        body: JSON.stringify(patchData)
-      });
-
-      if (patchRes.ok) {
-        migratedCount++;
-        console.log(` ✅ Updated Book #${book.id} in Supabase!`);
-      }
+  const pendingQueue = [];
+  for (let i = 0; i < books.length; i++) {
+    const b = books[i];
+    const hasArchivePdf = b.pdf_url && b.pdf_url.includes('archive.org');
+    const hasArchiveDesc = b.description && b.description.includes('archive.org');
+    if (hasArchivePdf || hasArchiveDesc) {
+      pendingQueue.push({ index: i, book: b });
     }
   }
 
-  // Update local books_metadata.json
-  console.log('\n🔄 Updating local books_metadata.json...');
-  try {
-    const metaRes = await fetch(`${SUPABASE_URL}/rest/v1/Books?select=*`, { headers: supabaseHeaders });
-    if (metaRes.ok) {
-      const allBooks = await metaRes.json();
-      fs.writeFileSync('./books_metadata.json', JSON.stringify(allBooks, null, 2), 'utf8');
-      fs.writeFileSync('./public/books_metadata.json', JSON.stringify(allBooks, null, 2), 'utf8');
-      console.log(' ✅ books_metadata.json synced successfully!');
+  const totalToMigrate = pendingQueue.length;
+  console.log(`📌 Found ${totalToMigrate} books with Archive.org links needing Cloudflare R2 upload.\n`);
+
+  if (totalToMigrate === 0) {
+    console.log('🎉 All books in metadata are already on Cloudflare R2!');
+    return;
+  }
+
+  let completed = 0;
+  let successCount = 0;
+  let saveCounter = 0;
+
+  async function worker(workerId) {
+    while (pendingQueue.length > 0) {
+      const item = pendingQueue.shift();
+      if (!item) break;
+
+      const { index, book } = item;
+      let modified = false;
+      let updatedPdfUrl = book.pdf_url;
+      let updatedDescription = book.description;
+      let lastErrMsg = '';
+
+      // 1. Root PDF
+      if (book.pdf_url && book.pdf_url.includes('archive.org')) {
+        try {
+          const buffer = await downloadPdfWithRetry(book.pdf_url);
+          const mbSize = (buffer.length / (1024 * 1024)).toFixed(1);
+          const key = `pdfs/book_${book.id}.pdf`;
+          const r2Url = await uploadToR2(key, buffer, 'application/pdf');
+          if (r2Url) {
+            updatedPdfUrl = r2Url;
+            modified = true;
+          }
+        } catch (e) {
+          lastErrMsg = e.message;
+        }
+      }
+
+      // 2. Multi-volume description
+      if (book.description && book.description.includes('archive.org')) {
+        try {
+          let parsed = JSON.parse(book.description);
+          if (Array.isArray(parsed)) {
+            for (let vIdx = 0; vIdx < parsed.length; vIdx++) {
+              const vItem = parsed[vIdx];
+              const vUrl = typeof vItem === 'string' ? vItem : vItem.url;
+              if (vUrl && vUrl.includes('archive.org')) {
+                try {
+                  const buf = await downloadPdfWithRetry(vUrl);
+                  const key = `pdfs/book_${book.id}_v${vIdx}.pdf`;
+                  const r2Url = await uploadToR2(key, buf, 'application/pdf');
+                  if (r2Url) {
+                    if (typeof vItem === 'string') parsed[vIdx] = r2Url;
+                    else parsed[vIdx].url = r2Url;
+                    modified = true;
+                  }
+                } catch (ve) {
+                  lastErrMsg = ve.message;
+                }
+              }
+            }
+            if (modified) updatedDescription = JSON.stringify(parsed);
+          }
+        } catch (de) {}
+      }
+
+      completed++;
+
+      if (modified) {
+        successCount++;
+        books[index].pdf_url = updatedPdfUrl;
+        books[index].description = updatedDescription;
+
+        saveCounter++;
+        if (saveCounter % 3 === 0 || pendingQueue.length === 0) {
+          fs.writeFileSync('./books_metadata.json', JSON.stringify(books, null, 2), 'utf8');
+          if (fs.existsSync('./public/books_metadata.json')) {
+            fs.writeFileSync('./public/books_metadata.json', JSON.stringify(books, null, 2), 'utf8');
+          }
+        }
+
+        updateSupabaseBook(book.id, { pdf_url: updatedPdfUrl, description: updatedDescription });
+
+        console.log(`⚡ [Worker ${workerId}] (${completed}/${totalToMigrate}) Transferred Book #${book.id}: "${book.title?.slice(0, 25)}"`);
+      } else {
+        console.warn(`❌ [Worker ${workerId}] (${completed}/${totalToMigrate}) Failed Book #${book.id}: ${lastErrMsg || 'File not found or unreachable'}`);
+      }
+
+      // Small delay between downloads to prevent Archive.org IP block
+      await new Promise(r => setTimeout(r, 400));
     }
-  } catch (err) {
-    console.warn(' ⚠️ Failed to refresh books_metadata.json automatically:', err.message);
+  }
+
+  // Start parallel workers
+  console.log(`🚀 Launching ${CONCURRENCY} smart workers with Archive.org API resolution...\n`);
+  const workers = [];
+  for (let w = 1; w <= CONCURRENCY; w++) {
+    workers.push(worker(w));
+  }
+
+  await Promise.all(workers);
+
+  // Final save
+  fs.writeFileSync('./books_metadata.json', JSON.stringify(books, null, 2), 'utf8');
+  if (fs.existsSync('./public/books_metadata.json')) {
+    fs.writeFileSync('./public/books_metadata.json', JSON.stringify(books, null, 2), 'utf8');
   }
 
   console.log('\n==================================================');
-  console.log(`🎉 MIGRATION COMPLETE! Migrated ${migratedCount} books to Cloudflare R2.`);
+  console.log(`🎉 HIGH-SUCCESS MIGRATION COMPLETE! Total Books Transferred: ${successCount}`);
   console.log('==================================================\n');
 }
 
