@@ -1,6 +1,7 @@
 // Smart e-Madarsa Web Application - Live Production Build
 import { App as CapApp } from '@capacitor/app';
 import OfflineImage from './OfflineImage';
+import PdfCoverImage from './components/PdfCoverImage';
 import React, { useEffect, useState, useRef, useMemo } from 'react'
 import * as localforageModule from 'localforage'
 const localforage = localforageModule.default || localforageModule
@@ -460,28 +461,8 @@ const BookCard = React.memo(function BookCard({ book, onBookClick, language }) {
       {isNew && (
         <div style={{ position: 'absolute', top: 4, left: 4, background: '#ef4444', color: '#fff', fontSize: '7px', padding: '2px 5px', borderRadius: '4px', zIndex: 10, fontWeight: 'bold', boxShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>NEW</div>
       )}
-      {/* Cover area: real cover → OfflineImage; loading PDF → shimmer; fallback → colored gradient */}
-      {!showPlaceholder ? (
-        <OfflineImage src={displayCover} alt={localizedTitle} onError={() => setImgError(true)} style={{ width: '100%', height: 135, objectFit: 'cover', display: 'block' }} />
-      ) : !book.cover_url && book.pdf_url && !generatedCover && !imgError ? (
-        // PDF cover being generated — show shimmer skeleton
-        <div style={{ width: '100%', height: 135, background: 'linear-gradient(90deg, #111 25%, #1a1a1a 50%, #111 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d4af3730', fontSize: 28 }}>📚</div>
-        </div>
-      ) : (
-        <div style={{ width: '100%', height: 135, background: `linear-gradient(160deg, ${color1} 0%, ${color2} 100%)`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', padding: '6px 5px', boxSizing: 'border-box', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 3, border: '1px solid rgba(212,175,55,0.4)', borderRadius: 6, pointerEvents: 'none' }} />
-          <div style={{ position: 'absolute', inset: 6, border: '0.5px solid rgba(212,175,55,0.15)', borderRadius: 4, pointerEvents: 'none' }} />
-          <div style={{ display: 'flex', alignItems: 'center', gap: 3, zIndex: 1, marginTop: 3 }}>
-            <span style={{ color: '#d4af37', fontSize: 10, opacity: 0.8 }}>☽</span>
-            <span style={{ color: '#d4af37', fontSize: 7, opacity: 0.5 }}>✦</span>
-          </div>
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '3px 5px', zIndex: 1 }}>
-            <p className="urdu-text" style={{ color: '#d4af37', fontSize: localizedTitle?.length > 20 ? 8 : 10, textAlign: 'center', margin: 0, lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden', direction: 'rtl', fontWeight: 'bold' }}>{localizedTitle}</p>
-          </div>
-          <div style={{ width: '70%', height: 1, background: 'rgba(212,175,55,0.4)', marginBottom: 3, zIndex: 1 }} />
-        </div>
-      )}
+      {/* Cover area: real cover → OfflineImage/PdfCoverImage; loading PDF → shimmer; fallback → colored gradient */}
+      <PdfCoverImage book={book} alt={localizedTitle} style={{ width: '100%', height: 135, objectFit: 'cover', display: 'block' }} />
       <div style={{ padding: '6px 7px', flex: 1, display: 'flex', flexDirection: 'column', gap: '3px', backgroundColor: 'var(--card-color)' }}>
         <p className="urdu-text" style={{ color: 'var(--text-primary)', fontSize: 12, margin: 0, lineHeight: 1.3, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', direction: 'rtl', textAlign: 'right' }}>{localizedTitle}</p>
         {book.author && (

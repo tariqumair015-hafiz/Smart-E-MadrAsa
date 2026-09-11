@@ -18,13 +18,13 @@ export default function OfflineImage({ src, alt, style, onError }) {
     cleanSrc = cleanSrc.replace(/https:\/\/ymizqgtlnhvkqlidftiy\.supabase\.co\/storage\/v1\/object\/public\/[^\/]+\//g, 'https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/');
   }
 
-  const [imgSrc, setImgSrc] = useState(() => (cleanSrc ? memoryCache[cleanSrc] : null));
+  const [imgSrc, setImgSrc] = useState(() => (cleanSrc ? memoryCache[cleanSrc] : cleanSrc));
   const [loading, setLoading] = useState(() => !(cleanSrc && memoryCache[cleanSrc]));
   const [error, setError] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const imgRef = useRef(null);
 
-  // Intersection Observer for performance
+  // Intersection Observer for preloading performance
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -33,14 +33,16 @@ export default function OfflineImage({ src, alt, style, onError }) {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { rootMargin: '300px', threshold: 0.01 }
     );
     if (imgRef.current) observer.observe(imgRef.current);
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
+    setError(false);
     if (!cleanSrc) return;
+    
     if (memoryCache[cleanSrc]) {
       setImgSrc(memoryCache[cleanSrc]);
       setLoading(false);
@@ -51,23 +53,21 @@ export default function OfflineImage({ src, alt, style, onError }) {
 
     const loadImage = async () => {
       try {
-        // Step 1: Check Cache First (Hamesha check karo, visible hone se pehle bhi takay tayyar rahe)
+        // Step 1: Check Cache First
         const cached = await imageStore.getItem(cleanSrc);
         
         if (cached) {
-          // Agar Blob hai
           if (cached instanceof Blob) {
             const url = URL.createObjectURL(cached);
-            memoryCache[cleanSrc] = url; // cache in memory
+            memoryCache[cleanSrc] = url;
             if (isMounted) {
               setImgSrc(url);
               setLoading(false);
               return;
             }
           } 
-          // Agar Base64 string/data URI hai
           else if (typeof cached === 'string') {
-            memoryCache[cleanSrc] = cached; // cache in memory
+            memoryCache[cleanSrc] = cached;
             if (isMounted) {
               setImgSrc(cached);
               setLoading(false);
@@ -76,12 +76,9 @@ export default function OfflineImage({ src, alt, style, onError }) {
           }
         }
 
-        // Agar cache mein nahi hai, aur visible hai, tab download karo
-        if (!isVisible) return;
-
-        // Step 2: Download Image
+        // Step 2: Download Image if native or direct
         if (Capacitor.isNativePlatform()) {
-          // Mobile par CORS bypass karne ke liye CapacitorHttp use karein
+          if (!isVisible) return;
           const options = {
             url: cleanSrc,
             responseType: 'blob'
@@ -89,7 +86,6 @@ export default function OfflineImage({ src, alt, style, onError }) {
           const response = await CapacitorHttp.get(options);
           
           if (response.status === 200 && response.data) {
-            let blob = response.data;
             if (typeof response.data === 'string') {
               const dataUri = response.data.startsWith('data:') ? response.data : `data:image/jpeg;base64,${response.data}`;
               await imageStore.setItem(cleanSrc, dataUri);
@@ -120,7 +116,7 @@ export default function OfflineImage({ src, alt, style, onError }) {
           }
         }
       } catch (err) {
-        console.warn('Offline image cache load failed:', err);
+        console.warn('Offline image cache load failed, falling back to direct:', err);
         if (isMounted) {
           setImgSrc(cleanSrc);
           setLoading(false);

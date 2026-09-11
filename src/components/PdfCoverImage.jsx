@@ -91,12 +91,102 @@ async function renderFirstPageAsDataUrl(pdfUrl) {
  *   onError   – error callback
  */
 export default function PdfCoverImage({ book, alt, style, onError }) {
-  const hasCover = book?.cover_url && typeof book.cover_url === 'string' && book.cover_url.trim() !== '';
+  const [coverError, setCoverError] = useState(false);
+  const [generatedUrl, setGeneratedUrl] = useState(() => (book?.id ? memPdfCache[book.id] : null));
+  const [loadingPdf, setLoadingPdf] = useState(false);
 
-  if (hasCover) {
-    return <OfflineImage src={book.cover_url} alt={alt} style={style} onError={onError} />;
+  const hasExplicitCover = book?.cover_url && typeof book.cover_url === 'string' && book.cover_url.trim() !== '' && !coverError;
+
+  const pdfUrl = book?.pdf_url || (Array.isArray(book?.volumes) && book.volumes.length > 0 ? book.volumes[0].url : null);
+
+  useEffect(() => {
+    if (hasExplicitCover || generatedUrl || !pdfUrl || !book?.id) return;
+
+    let isMounted = true;
+    const fetchOrRenderPdfCover = async () => {
+      try {
+        setLoadingPdf(true);
+        // 1. Check IndexedDB
+        const cached = await pdfCoverStore.getItem(String(book.id));
+        if (cached && typeof cached === 'string') {
+          memPdfCache[book.id] = cached;
+          if (isMounted) {
+            setGeneratedUrl(cached);
+            setLoadingPdf(false);
+          }
+          return;
+        }
+
+        // 2. Render first page of PDF as Data URL
+        const dataUrl = await renderFirstPageAsDataUrl(pdfUrl);
+        if (dataUrl && isMounted) {
+          memPdfCache[book.id] = dataUrl;
+          await pdfCoverStore.setItem(String(book.id), dataUrl).catch(() => {});
+          setGeneratedUrl(dataUrl);
+        }
+      } catch (err) {
+        console.warn(`PDF cover generation failed for book ${book.id}:`, err);
+      } finally {
+        if (isMounted) setLoadingPdf(false);
+      }
+    };
+
+    fetchOrRenderPdfCover();
+    return () => { isMounted = false; };
+  }, [book?.id, pdfUrl, hasExplicitCover, generatedUrl]);
+
+  // Case 1: Explicit cover_url exists and hasn't errored out
+  if (hasExplicitCover) {
+    return (
+      <OfflineImage
+        src={book.cover_url}
+        alt={alt}
+        style={style}
+        onError={() => setCoverError(true)}
+      />
+    );
   }
 
+  // Case 2: PDF first-page cover generated
+  if (generatedUrl) {
+    return (
+      <img
+        src={generatedUrl}
+        alt={alt}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          display: 'block',
+          ...style,
+        }}
+      />
+    );
+  }
+
+  // Case 3: Loading PDF cover
+  if (loadingPdf) {
+    return (
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          background: 'linear-gradient(90deg, #111 25%, #1a1a1a 50%, #111 75%)',
+          backgroundSize: '200% 100%',
+          animation: 'shimmer 1.5s infinite',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          ...style,
+        }}
+      >
+        <div style={{ fontSize: 24, opacity: 0.3, color: '#d4af37' }}>📚</div>
+      </div>
+    );
+  }
+
+  // Case 4: Default Emblem Gradient
   return (
     <div
       style={{
