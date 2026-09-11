@@ -427,9 +427,16 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
           } catch (e) {}
         }
         if (textJsonCache.current) {
-          const cachedText = textJsonCache.current[pg] || textJsonCache.current[String(pg)] || textJsonCache.current?.pages?.[pg];
+          const data = textJsonCache.current;
+          let cachedText = null;
+          if (Array.isArray(data)) {
+            cachedText = data[pg] || data[pg - 1];
+          } else if (data && typeof data === 'object') {
+            cachedText = data[pg] || data[String(pg)] || data?.pages?.[pg] || data?.pages?.[String(pg)] || data?.text?.[pg] || data?.text?.[String(pg)];
+          }
           if (cachedText) {
-            setPageText(typeof cachedText === 'string' ? cachedText : JSON.stringify(cachedText));
+            const finalStr = typeof cachedText === 'string' ? cachedText : (cachedText.text || cachedText.content || JSON.stringify(cachedText));
+            setPageText(finalStr.trim());
             return;
           }
         }

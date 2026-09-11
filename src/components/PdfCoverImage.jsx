@@ -78,7 +78,20 @@ function getCandidateUrls(url) {
  * Returns null on failure.
  */
 async function renderFirstPageAsDataUrl(pdfUrl) {
-  const urls = getCandidateUrls(pdfUrl);
+  if (!pdfUrl) return null;
+  const cleanPdf = pdfUrl.split('#')[0];
+
+  // Step A: Archive.org Page 1 JPEG thumbnail (Instant & High Resolution)
+  if (cleanPdf.includes('archive.org')) {
+    const match = cleanPdf.match(/archive\.org\/(?:download|details|stream)\/([^\/]+)/i);
+    if (match && match[1]) {
+      const identifier = match[1];
+      return `https://archive.org/download/${identifier}/page/n1_w500.jpg`;
+    }
+  }
+
+  // Step B: pdfjs-dist Canvas Renderer for R2 & Custom PDFs
+  const urls = getCandidateUrls(cleanPdf);
   for (const url of urls) {
     try {
       const loadingTask = getDocument({
@@ -103,7 +116,6 @@ async function renderFirstPageAsDataUrl(pdfUrl) {
       pdf.destroy();
       return dataUrl;
     } catch (e) {
-      // Try next URL variant
       continue;
     }
   }
@@ -146,7 +158,7 @@ export default function PdfCoverImage({ book, alt, style, onError }) {
           return;
         }
 
-        // 2. Render first page of PDF as Data URL
+        // 2. Render first page of PDF as Data URL or Archive.org page 1 thumbnail
         const dataUrl = await renderFirstPageAsDataUrl(pdfUrl);
         if (dataUrl && isMounted) {
           memPdfCache[book.id] = dataUrl;
@@ -176,12 +188,13 @@ export default function PdfCoverImage({ book, alt, style, onError }) {
     );
   }
 
-  // Case 2: PDF first-page cover generated
+  // Case 2: PDF first-page cover generated / fetched
   if (generatedUrl) {
     return (
       <img
         src={generatedUrl}
         alt={alt}
+        onError={() => setGeneratedUrl(null)}
         style={{
           width: '100%',
           height: '100%',
