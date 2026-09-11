@@ -394,85 +394,10 @@ const BookCard = React.memo(function BookCard({ book, onBookClick, language }) {
   const cardRef = React.useRef(null);
 
   useEffect(() => {
-    if (book.cover_url) return;
+    return; // Don't auto-generate PDF page covers when cover_url is null
+  }, []);
 
-    const cacheKey = `pdf_cover_v2_${book.id}`;
-    const getCandidateCoverUrls = (url) => {
-      if (!url) return [];
-      let clean = url.replace('http://', 'https://');
-      const urls = [];
-      if (clean.includes('archive.org') && typeof window !== 'undefined' && window.location.protocol.startsWith('http')) {
-        urls.push(clean.replace('https://archive.org', `${window.location.origin}/api/archive`));
-      }
-      urls.push(`https://corsproxy.io/?url=${encodeURIComponent(clean)}`);
-      urls.push(`https://api.allorigins.win/raw?url=${encodeURIComponent(clean)}`);
-      urls.push(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(clean)}`);
-      urls.push(clean);
-      return Array.from(new Set(urls));
-    };
-
-    const tryGenerate = async () => {
-      // 1. Try IndexedDB cache first
-      const cached = await localforage.getItem(cacheKey).catch(() => null);
-      if (cached) { setGeneratedCover(cached); return; }
-
-      if (!book.pdf_url) return;
-
-      // 2. Try direct & candidate proxy URLs
-      const urls = getCandidateCoverUrls(book.pdf_url);
-
-      for (const url of urls) {
-        try {
-          const pdfjsLib = await import('pdfjs-dist');
-          const pdfWorker = await import('pdfjs-dist/build/pdf.worker.min.mjs?url');
-          pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker.default;
-
-          const loadingTask = pdfjsLib.getDocument({
-            url,
-            cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/cmaps/',
-            cMapPacked: true,
-            withCredentials: false,
-            disableAutoFetch: true,
-            disableStream: false,
-          });
-          const pdf = await loadingTask.promise;
-          const page = await pdf.getPage(1);
-
-          const viewport = page.getViewport({ scale: 0.5 });
-          const canvas = document.createElement('canvas');
-          const context = canvas.getContext('2d');
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-
-          await page.render({ canvasContext: context, viewport }).promise;
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
-          pdf.destroy();
-
-          setGeneratedCover(dataUrl);
-          localforage.setItem(cacheKey, dataUrl).catch(() => {});
-          return; // success, stop loop
-        } catch (e) {
-          // try next URL variant
-        }
-      }
-    };
-
-    // Lazy: only generate when card enters viewport
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          observer.disconnect();
-          // Slight delay so UI renders first
-          setTimeout(tryGenerate, 400);
-        }
-      },
-      { threshold: 0.05 }
-    );
-    if (cardRef.current) observer.observe(cardRef.current);
-    return () => observer.disconnect();
-  }, [book.cover_url, book.pdf_url, book.id]);
-
-  const displayCover = book.cover_url || generatedCover;
+  const displayCover = book.cover_url;
   const showPlaceholder = !displayCover || imgError;
   const isNew = isNewBook(book.created_at);
 
