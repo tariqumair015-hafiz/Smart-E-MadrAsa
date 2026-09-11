@@ -99,7 +99,7 @@
     "price": 0,
     "downloads": 0,
     "rating": 0,
-    "description": "[{\"title\":\"Vol 1(20MB)\",\"url\":\"https://archive.org/download/DarsENizamiDarjaRabea4thYear/AL_SIQAYAH_VOL_01.pdf\"},{\"title\":\"Vol 2(16MB)\",\"url\":\"https://archive.org/download/DarsENizamiDarjaRabea4thYear/AL_SIQAYAH_VOL_02.pdf\"},{\"title\":\"Vol 1(20MB)\",\"url\":\"http://www.mediafire.com/file/2g43gsfw80l031l/AL_SIQAYAH_VOL_01.pdf/file\"},{\"title\":\"Vol 2(16MB)\",\"url\":\"http://www.mediafire.com/file/gqrw7dy9fvs4548/AL_SIQAYAH_VOL_02.pdf/file\"}]",
+    "description": "[{\"title\":\"Vol 1(20MB)\",\"url\":\"https://archive.org/download/DarsENizamiDarjaRabea4thYear/AL_SIQAYAH_VOL_01.pdf\"},{\"title\":\"Vol 2(16MB)\",\"url\":\"https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/book_19839_v1.pdf\"},{\"title\":\"Vol 1(20MB)\",\"url\":\"http://www.mediafire.com/file/2g43gsfw80l031l/AL_SIQAYAH_VOL_01.pdf/file\"},{\"title\":\"Vol 2(16MB)\",\"url\":\"http://www.mediafire.com/file/gqrw7dy9fvs4548/AL_SIQAYAH_VOL_02.pdf/file\"}]",
     "language": "Urdu",
     "year": null,
     "created_at": "2026-03-31 06:39:54.702937+00"
@@ -120,7 +120,7 @@
     "price": 0,
     "downloads": 0,
     "rating": 0,
-    "description": "[{\"title\":\"Link 1\",\"url\":\"https://archive.org/download/DarsENizamiDarjaRabea4thYear/AlQutbiAlBushraColor.pdf\"},{\"title\":\"Link 2\",\"url\":\"http://www.mediafire.com/file/0hvmeeuclkk1zt5/AlQutbiAlBushraColor.pdf/file\"},{\"title\":\"Link 1\",\"url\":\"https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/book_19891_v2.pdf\"},{\"title\":\"Link 2\",\"url\":\"http://www.mediafire.com/file/dzj18kgbojzwalp/AlQutbiAlBushra.pdf/file\"},{\"title\":\"Link 1\",\"url\":\"https://archive.org/download/AlQutbi/Al-Qutbi.pdf\"},{\"title\":\"Link 2\",\"url\":\"http://www.mediafire.com/file/xialdelfbctccig/Al-Qutbi.pdf/file\"}]",
+    "description": "[{\"title\":\"Link 1\",\"url\":\"https://archive.org/download/DarsENizamiDarjaRabea4thYear/AlQutbiAlBushraColor.pdf\"},{\"title\":\"Link 2\",\"url\":\"http://www.mediafire.com/file/0hvmeeuclkk1zt5/AlQutbiAlBushraColor.pdf/file\"},{\"title\":\"Link 1\",\"url\":\"https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/book_19891_v2.pdf\"},{\"title\":\"Link 2\",\"url\":\"http://www.mediafire.com/file/dzj18kgbojzwalp/AlQutbiAlBushra.pdf/file\"},{\"title\":\"Link 1\",\"url\":\"https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/book_19891_v4.pdf\"},{\"title\":\"Link 2\",\"url\":\"http://www.mediafire.com/file/xialdelfbctccig/Al-Qutbi.pdf/file\"}]",
     "language": "Urdu",
     "year": null,
     "created_at": "2026-03-31 06:40:10.262387+00"
@@ -447,7 +447,7 @@
     "category": "سیرت و تاریخ",
     "sub_category": "درسی کتب",
     "cover_url": "https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/cover_14902.jpg",
-    "pdf_url": "https://archive.org/download/bmar26/QISAS_UL_QURAN_VOL_01.pdf",
+    "pdf_url": "https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/book_14902.pdf",
     "text_url": "https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/texts/text_14902.json",
     "has_text": true,
     "pages": 0,
@@ -456,7 +456,7 @@
     "price": 0,
     "downloads": 0,
     "rating": 0,
-    "description": "[{\"title\":\"Vol 01 (14MB)\",\"url\":\"https://archive.org/download/bmar26/QISAS_UL_QURAN_VOL_01.pdf\"},{\"title\":\"Vol 02 (7MB)\",\"url\":\"https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/book_14902_v1.pdf\"},{\"title\":\"Vol 03 (10MB)\",\"url\":\"https://archive.org/download/bmar26/QISAS_UL_QURAN_VOL_03.pdf\"},{\"title\":\"Vol 04 (12MB)\",\"url\":\"https://archive.org/download/bmar26/QISAS_UL_QURAN_VOL_04.pdf\"},{\"title\":\"Vol 01 (14MB)\",\"url\":\"https://www.mediafire.com/file/xf4lahs1frivv0k/QISAS_UL_QURAN_VOL_01.pdf/file\"},{\"title\":\"Vol 02 (7MB)\",\"url\":\"https://www.mediafire.com/file/x16owgkpqn0gci9/QISAS_UL_QURAN_VOL_02.pdf/file\"},{\"title\":\"Vol 03 (10MB)\",\"url\":\"https://www.mediafire.com/file/ia13zco2gjyuh2h/QISAS_UL_QURAN_VOL_03.pdf/file\"},{\"title\":\"Vol 04 (12MB)\",\"url\":\"https://www.mediafire.com/file/963vrjrgibjm4z6/QISAS_UL_QURAN_VOL_04.pdf/file\"}]",
+    "description": "[{\"title\":\"Vol 01 (14MB)\",\"url\":\"https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/book_14902_v0.pdf\"},{\"title\":\"Vol 02 (7MB)\",\"url\":\"https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/book_14902_v1.pdf\"},{\"title\":\"Vol 03 (10MB)\",\"url\":\"https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/book_14902_v2.pdf\"},{\"title\":\"Vol 04 (12MB)\",\"url\":\"https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/pdfs/book_14902_v3.pdf\"},{\"title\":\"Vol 01 (14MB)\",\"url\":\"https://www.mediafire.com/file/xf4lahs1frivv0k/QISAS_UL_QURAN_VOL_01.pdf/file\"},{\"title\":\"Vol 02 (7MB)\",\"url\":\"https://www.mediafire.com/file/x16owgkpqn0gci9/QISAS_UL_QURAN_VOL_02.pdf/file\"},{\"title\":\"Vol 03 (10MB)\",\"url\":\"https://www.mediafire.com/file/ia13zco2gjyuh2h/QISAS_UL_QURAN_VOL_03.pdf/file\"},{\"title\":\"Vol 04 (12MB)\",\"url\":\"https://www.mediafire.com/file/963vrjrgibjm4z6/QISAS_UL_QURAN_VOL_04.pdf/file\"}]",
     "language": "ur",
     "year": null,
     "created_at": "2026-03-25 16:41:37.375287+00"

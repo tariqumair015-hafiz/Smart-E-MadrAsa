@@ -238,7 +238,9 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
     }, 150);
   }, [pages, mode]);
 
-  const onLoad = useCallback(async ({ numPages: n }) => {
+  const onLoad = useCallback(async (pdfDoc) => {
+    pdfRef.current = pdfDoc;
+    const n = pdfDoc?.numPages || 0;
     setPages(n); setLoading(false);
     if (pg <= 1) return; // page 1 pe already hain
     isJumping.current = true;
@@ -400,22 +402,46 @@ export default function PDFViewer({ pdfUrl, shareUrl, bookId, textUrl, title, la
     } catch { }
   }, [title, shareUrl, ur]);
 
+  const textJsonCache = useRef(null);
+
   const extractCurrentPageText = useCallback(async () => {
-    if (!pdfRef.current || !pg) return;
     setShowTextModal(true);
     setTextLoading(true);
     setCopySuccess(false);
     try {
-      const page = await pdfRef.current.getPage(pg);
-      const content = await page.getTextContent();
-      const text = content.items.map(item => item.str).join(' ');
-      setPageText(text.trim() || (ur ? 'اس صفحے سے متنی عبارت حاصل نہیں ہو سکی۔' : 'No text content available on this page.'));
+      if (pdfRef.current && pg) {
+        const page = await pdfRef.current.getPage(pg);
+        const content = await page.getTextContent();
+        const text = content.items.map(item => item.str).join(' ').trim();
+        if (text.length > 5) {
+          setPageText(text);
+          return;
+        }
+      }
+
+      if (textUrl) {
+        if (!textJsonCache.current) {
+          try {
+            const r = await fetch(textUrl);
+            if (r.ok) textJsonCache.current = await r.json();
+          } catch (e) {}
+        }
+        if (textJsonCache.current) {
+          const cachedText = textJsonCache.current[pg] || textJsonCache.current[String(pg)] || textJsonCache.current?.pages?.[pg];
+          if (cachedText) {
+            setPageText(typeof cachedText === 'string' ? cachedText : JSON.stringify(cachedText));
+            return;
+          }
+        }
+      }
+
+      setPageText(ur ? 'اس صفحے سے متنی عبارت حاصل نہیں ہو سکی۔' : 'No text content available on this page.');
     } catch (e) {
       setPageText(ur ? 'عبارت لوڈ کرنے میں خطا ہوئی۔' : 'Error loading page text.');
     } finally {
       setTextLoading(false);
     }
-  }, [pg, ur]);
+  }, [pg, ur, textUrl]);
 
   // Auto-sync page text in Dual Split mode and Text mode
   useEffect(() => {
