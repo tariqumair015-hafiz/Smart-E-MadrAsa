@@ -14,8 +14,8 @@ export default function OfflineImage({ src, alt, style, onError }) {
   // 🚀 VIP FIX: Convert any remaining Supabase URLs to Cloudflare R2 bucket URLs automatically
   let cleanSrc = src;
   if (cleanSrc && typeof cleanSrc === 'string' && cleanSrc.includes('supabase.co')) {
-    cleanSrc = cleanSrc.replace(/https:\/\/ymizqgtlnhvkqlidftiy\.supabase\.co\/storage\/v1\/object\/public\/(book-covers\/covers|books-pdfs\/covers|scholar-images)\//g, 'https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/');
-    cleanSrc = cleanSrc.replace(/https:\/\/ymizqgtlnhvkqlidftiy\.supabase\.co\/storage\/v1\/object\/public\/[^\/]+\//g, 'https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/');
+    const filename = cleanSrc.split('/').pop();
+    cleanSrc = `https://pub-99997f399a834420a9f9f20722cd9bb9.r2.dev/covers/${filename}`;
   }
 
   const [imgSrc, setImgSrc] = useState(() => (cleanSrc ? memoryCache[cleanSrc] : cleanSrc));

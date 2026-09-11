@@ -30,17 +30,46 @@ const pdfCoverStore = localforage.createInstance({
 // In-memory cache for already-rendered covers (avoid repeated IndexedDB reads per session)
 const memPdfCache = {};
 
+const BOYS_CATS = ['درجہ اولیٰ', 'درجہ ثانیہ', 'درجہ ثالثہ', 'درجہ رابعہ', 'درجہ خامسہ', 'درجہ سادسہ', 'درجہ سابعہ', 'دورہ حدیث'];
+const GIRLS_CATS = ['درجہ اولیٰ (بنات)', 'درجہ ثانیہ (بنات)', 'درجہ ثالثہ (بنات)', 'درجہ رابعہ (بنات)', 'درجہ خامسہ (بنات)'];
+
+function getCoverGradient(cat = '') {
+  if (BOYS_CATS.some(c => cat.includes(c))) {
+    return ['#064e3b', '#047857'];
+  }
+  if (GIRLS_CATS.some(c => cat.includes(c))) {
+    return ['#4c0519', '#881337'];
+  }
+  const extraGradients = [
+    ['#0f172a', '#1e3a8a'],
+    ['#3f1619', '#7f1d1d'],
+    ['#451a03', '#92400e'],
+    ['#3b0764', '#6b21a8'],
+    ['#083344', '#0e7490'],
+    ['#14532d', '#15803d'],
+    ['#4c1d95', '#6d28d9'],
+    ['#111827', '#374151'],
+    ['#7c2d12', '#9a3412'],
+    ['#0f766e', '#0d9488'],
+  ];
+  let hash = 0;
+  for (let i = 0; i < cat.length; i++) {
+    hash = cat.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const index = Math.abs(hash) % extraGradients.length;
+  return extraGradients[index];
+}
+
 function getCandidateUrls(url) {
   if (!url) return [];
   let clean = url.replace('http://', 'https://');
-  const urls = [];
+  const urls = [clean];
   if (clean.includes('archive.org') && typeof window !== 'undefined' && window.location.protocol.startsWith('http')) {
     urls.push(clean.replace('https://archive.org', `${window.location.origin}/api/archive`));
   }
   urls.push(`https://corsproxy.io/?url=${encodeURIComponent(clean)}`);
   urls.push(`https://api.allorigins.win/raw?url=${encodeURIComponent(clean)}`);
   urls.push(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(clean)}`);
-  urls.push(clean);
   return Array.from(new Set(urls));
 }
 
@@ -186,22 +215,65 @@ export default function PdfCoverImage({ book, alt, style, onError }) {
     );
   }
 
-  // Case 4: Default Emblem Gradient
+
+
+  // Case 4: Custom Islamic Cover Template Card
+  const [color1, color2] = getCoverGradient(book?.category || '');
+  const titleText = alt || book?.title || '';
+
   return (
     <div
       style={{
         width: '100%',
         height: '100%',
+        background: `linear-gradient(160deg, ${color1} 0%, ${color2} 100%)`,
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        background: 'linear-gradient(145deg, #1a3a2a, #0d2018)',
+        justifyContent: 'space-between',
+        padding: '8px 6px',
+        boxSizing: 'border-box',
         position: 'relative',
         overflow: 'hidden',
         ...style,
       }}
     >
-      <div style={{ fontSize: 28, opacity: 0.6, color: '#d4af37' }}>📚</div>
+      {/* Outer & Inner Gold Borders */}
+      <div style={{ position: 'absolute', inset: 3, border: '1px solid rgba(212,175,55,0.45)', borderRadius: 6, pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', inset: 6, border: '0.5px solid rgba(212,175,55,0.2)', borderRadius: 4, pointerEvents: 'none' }} />
+      
+      {/* Top Islamic Motif Header */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 4, zIndex: 1, marginTop: 2 }}>
+        <span style={{ color: '#d4af37', fontSize: 10, opacity: 0.85 }}>☽</span>
+        <span style={{ color: '#d4af37', fontSize: 7, opacity: 0.6 }}>✦</span>
+        <span style={{ color: '#d4af37', fontSize: 10, opacity: 0.85 }}>☾</span>
+      </div>
+
+      {/* Middle Urdu Title */}
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2px 4px', zIndex: 1 }}>
+        <p
+          className="urdu-text"
+          style={{
+            color: '#d4af37',
+            fontSize: titleText.length > 25 ? 8 : titleText.length > 15 ? 9 : 10,
+            textAlign: 'center',
+            margin: 0,
+            lineHeight: 1.45,
+            display: '-webkit-box',
+            WebkitLineClamp: 4,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+            direction: 'rtl',
+            fontWeight: 'bold',
+            textShadow: '0 1px 3px rgba(0,0,0,0.6)'
+          }}
+        >
+          {titleText}
+        </p>
+      </div>
+
+      {/* Bottom Gold Line */}
+      <div style={{ width: '65%', height: 1, background: 'rgba(212,175,55,0.45)', marginBottom: 2, zIndex: 1 }} />
     </div>
   );
 }
